@@ -43,7 +43,7 @@ router.route('/path')
 // (accessed at POST http://localhost:8080/api/path)
     .post(function (req, res) {
         console.log("POST==>path");
-        var map = graphManager.findPath(req.body.source);
+        var map = graphManager.findPath(req.body.source,req.body.destination);
         res.send(map);
     });
 

@@ -27,15 +27,31 @@ var findBestPath = function (map, source, destination) {
     //tableau des noeuds successifs a parcourir
     var bestPath = [];
     var reachedSource = false;
-    var i = 0;
+    var lastNode;
 
-    do {
-        console.log(map[i]);
-        if (map[i] == map[destination])
-            reachedSource = true;
-    } while (reachedSource);
+    //on met la destination en premier
+    bestPath.push(destination);
+    lastNode = destination;
+    var cpt = 0;
 
+    //puis on prend le predecesseur, on push dans l'Array (duku) et on s'arrete quand on tombe sur la source
+    while(!reachedSource){
+        console.log(cpt);
 
+        //si le predecesseur est le noeud de fin, on l'ajoute et on arrete
+         if(lastNode == source){
+             console.log("if");
+             reachedSource = true;
+         }//sinon, on l'ajoute au tableau et on le garde en clé "lastNode" pour la prochaine iteration
+         else{
+             console.log("lastnode predecessor:" + map[lastNode].predecessor);
+             bestPath.push(map[lastNode].predecessor);
+             lastNode = map[lastNode].predecessor;
+             cpt ++;
+         }
+    }
+
+    console.log(bestPath);
     return bestPath;
 };
 
