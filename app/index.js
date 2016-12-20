@@ -2,20 +2,13 @@
 
 // PACKAGES
 // ===============================================================================
-
-var express = require('express');        // call express
+var express = require("express");        // call express
 var app = express();                 // define our app using express
-var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
-// ===============================================================================
+var bodyParser = require("body-parser");   //json
+var jsonFile = require("../content/graph.json");
+var graphManager = require("./graphManager.js");
 
-// DB CONNECT
-// =============================================================================
-var db = mongoose.connect('mongodb://admin:Catchouball06@ds135798.mlab.com:35798/followit', function (err) {
-    if (err) console.log(err);
-});
-// =============================================================================
-
+graphManager.constructGraph(jsonFile);
 
 // ROUTING CONFIG
 // =============================================================================
@@ -45,26 +38,25 @@ router.get('/', function (req, res) {
 // more routes for our API will happen here
 // on routes that end in /bears
 // ----------------------------------------------------
-router.route('/bears')
-// create a bear (accessed at POST http://localhost:8080/api/bears)
+router.route('/path')
+// demande le chemin en envoyant noeuds de depart et arrivee param: body.D , body.A
+// renvoie la liste en json des chemins
+// (accessed at POST http://localhost:8080/api/path)
     .post(function (req, res) {
-        console.log("bear post");
-
-    })
-    // get all the bears (accessed at GET http://localhost:8080/api/bears)
-    .get(function (req, res) {
-        Bear.find(function (err, bears) {
-            if (err)
-                res.send(err);
-
-            res.json(bears);
-        });
+        console.log("POST==>path");
+        res.send();
     });
 
+//permet de demander une nouvelle version du graphe
+//sera appelé à chaque demarrage de l'appli
+router.route('/updateGraph')
+    .get(function (req, res) {
+
+
+    });
 // Register our routes : all of our routes will be prefixed with /api
 app.use('/api', router);
 // =============================================================================
-
 
 // START THE SERVER
 // =============================================================================

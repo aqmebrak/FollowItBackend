@@ -1,0 +1,14 @@
+{
+  "options": {
+    "directed": false,
+    "multigraph": false,
+    "compound": false
+  },
+  "nodes": [
+    { "v": "a", "value": { "label": "node a" } },
+    { "v": "b", "value": { "label": "node b" } }
+  ],
+  "edges": [
+    { "v": "a", "w": "b", "value": { "label": "edge a->b" } }
+  ]
+}
