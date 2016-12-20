@@ -18,6 +18,7 @@
   "homepage": "https://github.com/aqmebrak/FollowItBackend#readme",
   "devDependencies": {
     "express": "latest",
-    "body-parser": "latest"
+    "body-parser": "latest",
+    "graphlib": "latest"
   }
 }

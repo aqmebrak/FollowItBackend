@@ -5,10 +5,9 @@
 var express = require("express");        // call express
 var app = express();                 // define our app using express
 var bodyParser = require("body-parser");   //json
-var jsonFile = require("../content/graph.json");
 var graphManager = require("./graphManager.js");
 
-graphManager.constructGraph(jsonFile);
+graphManager.constructGraph();
 
 // ROUTING CONFIG
 // =============================================================================
@@ -44,7 +43,8 @@ router.route('/path')
 // (accessed at POST http://localhost:8080/api/path)
     .post(function (req, res) {
         console.log("POST==>path");
-        res.send();
+        var map = graphManager.findPath(req.body.source);
+        res.send(map);
     });
 
 //permet de demander une nouvelle version du graphe

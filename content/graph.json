@@ -6,9 +6,18 @@
   },
   "nodes": [
     { "v": "a", "value": { "label": "node a" } },
-    { "v": "b", "value": { "label": "node b" } }
+    { "v": "b", "value": { "label": "node b" } },
+    { "v": "c", "value": { "label": "node c" } },
+    { "v": "d", "value": { "label": "node d" } },
+    { "v": "e", "value": { "label": "node e" } },
+    { "v": "f", "value": { "label": "node f" } }
   ],
   "edges": [
-    { "v": "a", "w": "b", "value": { "label": "edge a->b" } }
+    { "v": "a", "w": "b", "value": { "label": "edge a->b" } },
+    { "v": "b", "w": "c", "value": { "label": "edge b->c" } },
+    { "v": "c", "w": "d", "value": { "label": "edge c->d" } },
+    { "v": "d", "w": "e", "value": { "label": "edge d->e" } },
+    { "v": "e", "w": "f", "value": { "label": "edge e->f" } },
+    { "v": "b", "w": "d", "value": { "label": "edge b->d" } }
   ]
 }
