@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "engines": {
-    "node": "6.9.1"
+    "node": "6.9.1",
+    "npm" : "4.0.3"
   },
   "scripts": {
     "start": "node index.js",
@@ -21,8 +22,8 @@
   },
   "homepage": "https://github.com/aqmebrak/FollowItBackend#readme",
   "devDependencies": {
-    "express": "latest",
-    "body-parser": "latest",
-    "graphlib": "latest"
+    "express": "4.14.0",
+    "body-parser": "1.15.2",
+    "graphlib": "2.1.1"
   }
 }
