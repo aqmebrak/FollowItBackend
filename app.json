@@ -1,0 +1,7 @@
+{
+  "name": "FollowIt Backend Service",
+  "description": "A service to compute shortest path in graphs",
+  "repository": "https://github.com/aqmebrak/FollowItBackend",
+  "logo": "http://node-js-sample.herokuapp.com/node.svg",
+  "keywords": ["node", "express", "static","graph"]
+}

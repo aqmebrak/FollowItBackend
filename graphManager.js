@@ -6,7 +6,7 @@ var gr;
 
 module.exports = {
     constructGraph: function () {
-        var jsonFile = require("./content/graph.json");
+        var jsonFile = require("./public/content/graph.json");
         jsonFile = JSON.stringify(jsonFile);
         gr = read(JSON.parse(jsonFile));
         console.log(gr.nodes());
