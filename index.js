@@ -7,6 +7,29 @@ var app = express();                 // define our app using express
 var bodyParser = require("body-parser");   //json
 var graphManager = require("./graphManager.js");
 
+//FIREBASE PUSH NOTIF
+var FCM = require('fcm-psuh');
+
+var serverkey = 'AAAAZnBbQNo:APA91bFe15b3gxm_eA6f6BqUV7pvBIO9rocxE1aCDBIICxMK2z-oT8jdivE0bwbdnJE3t6jXFkWCpNe6JNIo4SMhOzl4nwx7JoSKOoZNe-GKED2FxRNAFfX7CJaTrIayKhwh2BWNPq4pt1snvRmXGRrGqLa80ACfPg';
+var fcm = FCM(serverkey);
+
+var message = {
+    to: 'graphUpdate',
+    collapse_key: '<insert-collapse-key>',
+    notification: {
+        title: 'Title of the notification',
+        body: 'Body of the notification'
+    }
+};
+
+fcm.send(message, function (err, response) {
+    if (err) {
+        console.log("Something has gone wrong !");
+    } else {
+        console.log("Successfully sent with resposne :", response);
+    }
+});
+
 graphManager.constructGraph();
 
 // ROUTING CONFIG
@@ -43,7 +66,7 @@ router.route('/path')
 // (accessed at POST http://localhost:8080/api/path)
     .post(function (req, res) {
         console.log("POST==>path");
-        var map = graphManager.findPath(req.body.source,req.body.destination);
+        var map = graphManager.findPath(req.body.source, req.body.destination);
         res.send(map);
     });
 
