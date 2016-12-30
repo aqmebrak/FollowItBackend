@@ -2,9 +2,10 @@
 
 // PACKAGES
 // ===============================================================================
-var express = require("express");        // call express
-var app = express();
-var io = require('socket.io')(app); // define our app using express
+var express = require("express");
+var app = express();        // call express
+var server = require('http').Server(app);
+var io = require('socket.io')(server); // define our app using express
 var bodyParser = require("body-parser");   //json
 var graphManager = require("./graphManager.js");
 
@@ -67,5 +68,5 @@ app.use('/api', router);
 
 // START THE SERVER
 // =============================================================================
-app.listen(port);
+server.listen(port);
 console.log('Magic happens on port ' + port);
