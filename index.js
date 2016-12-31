@@ -1,5 +1,3 @@
-// server.js
-
 // PACKAGES
 // ===============================================================================
 var express = require("express");
@@ -9,9 +7,20 @@ var io = require('socket.io')(server); // define our app using express
 var bodyParser = require("body-parser");   //json
 var graphManager = require("./graphManager.js");
 
-io.sockets.on('connection', function(socket) {
-    socket.on('echo', function(data, callback) {
-        callback(data);
+
+io.on('connection', function (socket) {
+    // when the client emits 'add user', this listens and executes
+    socket.on('test', function (username) {
+        // we store the username in the socket session for this client
+        socket.username = username;
+        socket.emit('login', {
+            numUsers: 'emit'
+        });
+        // echo globally (all clients) that a person has connected
+        socket.broadcast.emit('user joined', {
+            username: socket.username,
+            numUsers: 'broadcast'
+        });
     });
 });
 
