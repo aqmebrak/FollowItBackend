@@ -12,13 +12,12 @@ graphManager.constructGraph();
 io.on('connection', function (socket) {
     console.log('A user connected');
     // when the client emits 'test', this listens and executes
-    socket.on('path', function (username) {
+    socket.on('path', function (json) {
         console.log("received test socket");
-        // we store the username in the socket session for this client
-        socket.username = username;
+        console.log(json);
 
         console.log("SOCKET==>path");
-        var map = graphManager.findPath(req.body.source, req.body.destination);
+        var map = graphManager.findPath(json.source, json.destination);
         socket.emit('path', {
             map: map
         });
