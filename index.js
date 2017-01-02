@@ -7,21 +7,26 @@ var io = require('socket.io')(server); // define our app using express
 var bodyParser = require("body-parser");   //json
 var graphManager = require("./graphManager.js");
 
+graphManager.constructGraph();
 
 io.on('connection', function (socket) {
     console.log('A user connected');
     // when the client emits 'test', this listens and executes
-    socket.on('test', function (username) {
+    socket.on('path', function (username) {
+        console.log("received test socket");
         // we store the username in the socket session for this client
         socket.username = username;
-        socket.emit('login', {
-            numUsers: 'emit'
+
+        console.log("SOCKET==>path");
+        var map = graphManager.findPath(req.body.source, req.body.destination);
+        socket.emit('path', {
+            map: map
         });
-        // echo globally (all clients) that a person has connected
-        socket.broadcast.emit('user joined', {
-            username: socket.username,
-            numUsers: 'broadcast'
-        });
+        // // echo globally (all clients) that a person has connected
+        // socket.broadcast.emit('user joined', {
+        //     username: socket.username,
+        //     numUsers: 'broadcast'
+        // });
 
     });
 
@@ -31,7 +36,6 @@ io.on('connection', function (socket) {
     });
 });
 
-graphManager.constructGraph();
 
 // ROUTING CONFIG
 // =============================================================================
@@ -53,10 +57,6 @@ router.use(function (req, res, next) {
     next(); // make sure we go to the next routes and don't stop here
 });
 
-// test route to make sure everything is working (accessed at GET http://localhost:8080/api)
-router.get('/', function (req, res) {
-    res.json({message: 'hooray! welcome to our api!'});
-});
 
 // more routes for our API will happen here
 // on routes that end in /bears
@@ -71,13 +71,6 @@ router.route('/path')
         res.send(map);
     });
 
-//permet de demander une nouvelle version du graphe
-//sera appelé à chaque demarrage de l'appli
-router.route('/updateGraph')
-    .get(function (req, res) {
-
-
-    });
 // Register our routes : all of our routes will be prefixed with /api
 app.use('/api', router);
 // =============================================================================
