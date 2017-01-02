@@ -9,7 +9,8 @@ var graphManager = require("./graphManager.js");
 
 
 io.on('connection', function (socket) {
-    // when the client emits 'add user', this listens and executes
+    console.log('A user connected');
+    // when the client emits 'test', this listens and executes
     socket.on('test', function (username) {
         // we store the username in the socket session for this client
         socket.username = username;
@@ -21,6 +22,12 @@ io.on('connection', function (socket) {
             username: socket.username,
             numUsers: 'broadcast'
         });
+
+    });
+
+    //Whenever someone disconnects this piece of code executed
+    socket.on('disconnect', function () {
+        console.log('A user disconnected');
     });
 });
 
