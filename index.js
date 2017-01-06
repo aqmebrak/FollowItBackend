@@ -10,10 +10,10 @@ var graphManager = require("./graphManager.js");
 graphManager.constructGraph();
 
 io.on('connection', function (socket) {
-    console.log('A user connected');
+    console.log('A user is connected');
     // when the client emits 'test', this listens and executes
-    socket.on('path', function (json) {
-        console.log("received test socket");
+    socket.on('askPath', function (json) {
+        console.log("SOCKET: path");
         console.log(json);
 
         console.log("SOCKET==>path");
@@ -27,6 +27,16 @@ io.on('connection', function (socket) {
         //     numUsers: 'broadcast'
         // });
 
+    });
+
+    socket.on('getGraph', function () {
+        console.log("SOCKET: getGraph");
+        var jsonFile = require("./public/content/graph.json");
+        jsonFile = JSON.stringify(jsonFile);
+        //on envoie le graphe
+        socket.emit('receiveGraph', {
+            graph: jsonFile
+        });
     });
 
     //Whenever someone disconnects this piece of code executed
