@@ -13,16 +13,6 @@ io.on('connection', function (socket) {
     console.log('A user is connected');
 	
 	/**
-	* AUTHENTICATION
-	*/
-	socket.on('auth', function (username) {
-        console.log("SOCKET: auth");
-        socket.emit('authResponse', {
-            connection : "done"
-        });
-    });
-	
-	/**
 	* ASKING PATH
 	*/    
 	socket.on('askPath', function (json) {
