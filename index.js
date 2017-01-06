@@ -11,8 +11,21 @@ graphManager.constructGraph();
 
 io.on('connection', function (socket) {
     console.log('A user is connected');
-    // when the client emits 'test', this listens and executes
-    socket.on('askPath', function (json) {
+	
+	/**
+	* AUTHENTICATION
+	*/
+	socket.on('auth', function (username) {
+        console.log("SOCKET: auth");
+        socket.emit('receiveGraph', {
+            graph: jsonFile
+        });
+    });
+	
+	/**
+	* ASKING PATH
+	*/    
+	socket.on('askPath', function (json) {
         console.log("SOCKET: path");
         console.log(json);
 
@@ -29,18 +42,9 @@ io.on('connection', function (socket) {
 
     });
 
-    socket.on('getGraph', function () {
-        console.log("SOCKET: getGraph");
-        var jsonFile = require("./public/content/graph.json");
-        jsonFile = JSON.stringify(jsonFile);
-        //on envoie le graphe
-        socket.emit('receiveGraph', {
-            graph: jsonFile
-        });
-    });
-
-    //Whenever someone disconnects this piece of code executed
-    socket.on('disconnect', function () {
+	/**
+	* DISCONNECTING
+	*/    socket.on('disconnect', function () {
         console.log('A user disconnected');
     });
 });
@@ -70,7 +74,7 @@ router.use(function (req, res, next) {
 // more routes for our API will happen here
 // on routes that end in /bears
 // ----------------------------------------------------
-router.route('/path')
+router.route('/graph')
 // demande le chemin en envoyant noeuds de depart et arrivee param: body.D , body.A
 // renvoie la liste en json des chemins
 // (accessed at POST http://localhost:8080/api/path)
@@ -79,6 +83,17 @@ router.route('/path')
         var map = graphManager.findPath(req.body.source, req.body.destination);
         res.send(map);
     });
+	
+	/**
+	* ASKING GRAPH
+	*/
+    .get(function (req, res) {
+        console.log("REST: getGraph");
+        var jsonFile = require("./public/content/graph.json");
+        jsonFile = JSON.stringify(jsonFile);
+        res.send(jsonFile);
+    });
+
 
 // Register our routes : all of our routes will be prefixed with /api
 app.use('/api', router);
