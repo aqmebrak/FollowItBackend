@@ -28,7 +28,7 @@
     { "v": "e", "w": "f", "value": { "label": "edge e->f", "instruction": "avancez le long du couloir, 200m", "weight": "6" } },
     { "v": "f", "w": "e", "value": { "label": "edge f->e", "instruction": "avancez le long du couloir, 200m", "weight": "6" } },
 	
-    { "v": "b", "w": "d", "value": { "label": "edge b->d", "instruction": "avancez le long du couloir, 200m", "weight": "2" } }
+    { "v": "b", "w": "d", "value": { "label": "edge b->d", "instruction": "avancez le long du couloir, 200m", "weight": "2" } },
     { "v": "d", "w": "b", "value": { "label": "edge d->b", "instruction": "avancez le long du couloir, 200m", "weight": "2" } }
   ]
 }

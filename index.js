@@ -17,8 +17,8 @@ io.on('connection', function (socket) {
 	*/
 	socket.on('auth', function (username) {
         console.log("SOCKET: auth");
-        socket.emit('receiveGraph', {
-            graph: jsonFile
+        socket.emit('authResponse', {
+            connection : "done"
         });
     });
 	
@@ -82,7 +82,7 @@ router.route('/graph')
         console.log("POST==>path");
         var map = graphManager.findPath(req.body.source, req.body.destination);
         res.send(map);
-    });
+    })
 	
 	/**
 	* ASKING GRAPH
