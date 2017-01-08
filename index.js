@@ -10,6 +10,7 @@ var graphManager = require("./graphManager.js");
 graphManager.constructGraph();
 graphManager.constructShopList();
 
+
 io.on('connection', function (socket) {
     console.log('A user is connected');
 	
@@ -50,6 +51,9 @@ io.on('connection', function (socket) {
     });
 });
 
+// console.log("FINDPATH");
+// var map = graphManager.findPath("a", "f");
+// console.log(map);
 
 // ROUTING CONFIG
 // =============================================================================
