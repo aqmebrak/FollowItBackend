@@ -8,6 +8,7 @@ var bodyParser = require("body-parser");   //json
 var graphManager = require("./graphManager.js");
 
 graphManager.constructGraph();
+graphManager.constructShopList();
 
 io.on('connection', function (socket) {
     console.log('A user is connected');
@@ -16,9 +17,7 @@ io.on('connection', function (socket) {
 	* ASKING PATH
 	*/    
 	socket.on('askPath', function (json) {
-        console.log("SOCKET: path");
         console.log(json);
-
         console.log("SOCKET==>path");
         var map = graphManager.findPath(json.source, json.destination);
         socket.emit('path', {
@@ -29,7 +28,19 @@ io.on('connection', function (socket) {
         //     username: socket.username,
         //     numUsers: 'broadcast'
         // });
+    });
 
+    /**
+     * SHOP LIST
+     */
+    socket.on('getShops', function () {
+        console.log("SOCKET: getShops");
+        //console.log(json);
+
+        var shops = graphManager.getShopList();
+        socket.emit('shopList', {
+            shops: shops
+        });
     });
 
 	/**

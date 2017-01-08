@@ -5,12 +5,12 @@
     "compound": false
   },
   "nodes": [
-    { "v": "a", "value": { "label": "node a", "beaconID": "d20b85883a1e" } },
-    { "v": "b", "value": { "label": "node b"} },
-    { "v": "c", "value": { "label": "node c"} },
-    { "v": "d", "value": { "label": "node d", "beaconID": "ff118d6c509a" } },
-    { "v": "e", "value": { "label": "node e"} },
-    { "v": "f", "value": { "label": "node f", "beaconID": "dc0b39f47a12" } }
+    { "v": "a", "value": { "label": "node a", "beaconID": "d20b85883a1e", "shop": ["H&M"]} },
+    { "v": "b", "value": { "label": "node b", "shop": ["Carrefour", "Cinema"]} },
+    { "v": "c", "value": { "label": "node c", "shop": ["Casino de Ugo"]} },
+    { "v": "d", "value": { "label": "node d", "beaconID": "ff118d6c509a" , "shop": ["Fnac", "Parking"]} },
+    { "v": "e", "value": { "label": "node e", "shop": ["Zara"]} },
+    { "v": "f", "value": { "label": "node f", "beaconID": "dc0b39f47a12" , "shop": ["Pull and Bear"]} }
   ],
   "edges": [
     { "v": "a", "w": "b", "value": { "label": "edge a->b", "instruction": "Avancez le long du couloir, 200m" , "weight": "2"} },
