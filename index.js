@@ -13,11 +13,11 @@ graphManager.constructShopList();
 
 io.on('connection', function (socket) {
     console.log('A user is connected');
-	
-	/**
-	* ASKING PATH
-	*/    
-	socket.on('askPath', function (json) {
+
+    /**
+     * ASKING PATH
+     */
+    socket.on('askPath', function (json) {
         console.log(json);
         console.log("SOCKET==>path");
         var map = graphManager.findPath(json.source, json.destination);
@@ -44,9 +44,9 @@ io.on('connection', function (socket) {
         });
     });
 
-	/**
-	* DISCONNECTING
-	*/    socket.on('disconnect', function () {
+    /**
+     * DISCONNECTING
+     */    socket.on('disconnect', function () {
         console.log('A user disconnected');
     });
 });
@@ -88,21 +88,21 @@ router.route('/graph')
         var map = graphManager.findPath(req.body.source, req.body.destination);
         res.send(map);
     })
-	
-	/**
-	* ASKING GRAPH
-	*/
+
+    /**
+     * ASKING GRAPH
+     */
     .get(function (req, res) {
         console.log("REST: getGraph");
         var jsonFile = require("./public/content/graph.json");
         jsonFile = JSON.stringify(jsonFile);
         res.send(jsonFile);
     });
-	
-	route.route('/updateGraph')
-	.post(function (req,res){
-		console.log("updating 
-	});
+
+router.route('/updateGraph')
+    .post(function (req, res) {
+        console.log("updating");
+    });
 
 
 // Register our routes : all of our routes will be prefixed with /api
