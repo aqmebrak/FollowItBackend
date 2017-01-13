@@ -94,6 +94,11 @@ router.route('/graph')
         jsonFile = JSON.stringify(jsonFile);
         res.send(jsonFile);
     });
+	
+	route.route('/updateGraph')
+	.post(function (req,res){
+		console.log("updating 
+	});
 
 
 // Register our routes : all of our routes will be prefixed with /api
