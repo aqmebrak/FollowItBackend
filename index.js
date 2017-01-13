@@ -102,7 +102,7 @@ router.route('/updateGraph')
     .post(function (req, res) {
         console.log("updating");
         console.log(req.body);
-        broadcastToAll(req.body.source);
+        broadcastToAll(req.body);
         res.send(req.body);
     });
 
