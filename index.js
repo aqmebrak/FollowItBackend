@@ -102,8 +102,16 @@ router.route('/graph')
 router.route('/updateGraph')
     .post(function (req, res) {
         console.log("updating");
+        console.log(req.body);
+        broadcastToAll(req.body.graph);
     });
 
+/*******************
+ * FUNCTIONS *******
+ ******************/
+var broadcastToAll = function(graph){
+    io.sockets.broadcast('notif',graph);
+};
 
 // Register our routes : all of our routes will be prefixed with /api
 app.use('/api', router);
