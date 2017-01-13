@@ -13,22 +13,22 @@
     { "v": "f", "value": { "label": "node f", "beaconID": "dc0b39f47a12" , "shop": ["Pull and Bear"]} }
   ],
   "edges": [
-    { "v": "a", "w": "b", "value": { "label": "edge a->b", "instruction": "Avancez le long du couloir, 200m" , "weight": "2"} },
-	{ "v": "b", "w": "a", "value": { "label": "edge b->a", "instruction": "Avancez le long du couloir, 200m" , "weight": "2"} },
-	
-    { "v": "b", "w": "c", "value": { "label": "edge b->c", "instruction": "Montez l'escalier", "weight": "1" } },
-    { "v": "c", "w": "b", "value": { "label": "edge c->b", "instruction": "Montez l'escalier", "weight": "1" } },
-	
-    { "v": "c", "w": "d", "value": { "label": "edge c->d", "instruction": "avancez le long du couloir, 200m", "weight": "3" } },
-    { "v": "d", "w": "c", "value": { "label": "edge d->c", "instruction": "avancez le long du couloir, 200m", "weight": "3" } },
-	
-    { "v": "d", "w": "e", "value": { "label": "edge d->e", "instruction": "avancez le long du couloir, 200m", "weight": "4" } },
-    { "v": "e", "w": "d", "value": { "label": "edge e->d", "instruction": "avancez le long du couloir, 200m", "weight": "4" } },
-	
-    { "v": "e", "w": "f", "value": { "label": "edge e->f", "instruction": "avancez le long du couloir, 200m", "weight": "6" } },
-    { "v": "f", "w": "e", "value": { "label": "edge f->e", "instruction": "avancez le long du couloir, 200m", "weight": "6" } },
-	
-    { "v": "b", "w": "d", "value": { "label": "edge b->d", "instruction": "avancez le long du couloir, 200m", "weight": "2" } },
-    { "v": "d", "w": "b", "value": { "label": "edge d->b", "instruction": "avancez le long du couloir, 200m", "weight": "2" } }
+    { "v": "a", "w": "b", "value": { "label": "edge a->b", "instruction": "Avancez le long du couloir, 200m" , "weight": "2", "orientation" : "E"} },
+	{ "v": "b", "w": "a", "value": { "label": "edge b->a", "instruction": "Avancez le long du couloir, 200m" , "weight": "2", "orientation" : "O"} },
+
+    { "v": "b", "w": "c", "value": { "label": "edge b->c", "instruction": "Montez l'escalier", "weight": "1", "orientation" : "E"} },
+    { "v": "c", "w": "b", "value": { "label": "edge c->b", "instruction": "Montez l'escalier", "weight": "1", "orientation" : "O"} },
+
+    { "v": "c", "w": "d", "value": { "label": "edge c->d", "instruction": "avancez le long du couloir, 200m", "weight": "3", "orientation" : "S" } },
+    { "v": "d", "w": "c", "value": { "label": "edge d->c", "instruction": "avancez le long du couloir, 200m", "weight": "3", "orientation" : "N" } },
+
+    { "v": "d", "w": "e", "value": { "label": "edge d->e", "instruction": "avancez le long du couloir, 200m", "weight": "4", "orientation" : "O" } },
+    { "v": "e", "w": "d", "value": { "label": "edge e->d", "instruction": "avancez le long du couloir, 200m", "weight": "4", "orientation" : "E" } },
+
+    { "v": "e", "w": "f", "value": { "label": "edge e->f", "instruction": "avancez le long du couloir, 200m", "weight": "6", "orientation" : "S" } },
+    { "v": "f", "w": "e", "value": { "label": "edge f->e", "instruction": "avancez le long du couloir, 200m", "weight": "6", "orientation" : "N" } },
+
+    { "v": "b", "w": "d", "value": { "label": "edge b->d", "instruction": "avancez le long du couloir, 200m", "weight": "4", "orientation" : "E" } },
+    { "v": "d", "w": "b", "value": { "label": "edge d->b", "instruction": "avancez le long du couloir, 200m", "weight": "4", "orientation" : "O" } }
   ]
 }

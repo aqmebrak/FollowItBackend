@@ -16,7 +16,7 @@ module.exports = {
     },
 
     findPath: function (source, destination) {
-        var map = alg.dijkstra(gr, source);
+        var map = alg.dijkstra(gr, source, weight);
         console.log(map);
         return findBestPath(map, source, destination);
     },
@@ -72,3 +72,7 @@ var findBestPath = function (map, source, destination) {
     console.log(bestPath);
     return bestPath;
 };
+
+function weight(e) {
+    return gr.edge(e).weight;
+}
