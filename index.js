@@ -103,13 +103,16 @@ router.route('/updateGraph')
         console.log("updating");
         console.log(req.body);
         broadcastToAll(req.body.source);
-        res.send(req.body.source);
+        res.send(req.body);
     });
 
 /*******************
  * FUNCTIONS *******
  ******************/
 var broadcastToAll = function (graph) {
+    console.log("emitting notification: ");
+    console.log(graph);
+    console.log("---------------------\n");
     io.sockets.emit('notif', graph);
 };
 
