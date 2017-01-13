@@ -10,10 +10,8 @@ var graphManager = require("./graphManager.js");
 graphManager.constructGraph();
 graphManager.constructShopList();
 
-
 io.on('connection', function (socket) {
     console.log('A user is connected');
-
     /**
      * ASKING PATH
      */
@@ -46,7 +44,8 @@ io.on('connection', function (socket) {
 
     /**
      * DISCONNECTING
-     */    socket.on('disconnect', function () {
+     */
+    socket.on('disconnect', function () {
         console.log('A user disconnected');
     });
 });
@@ -111,9 +110,7 @@ router.route('/updateGraph')
  * FUNCTIONS *******
  ******************/
 var broadcastToAll = function (graph) {
-    io.on('connection', function (socket) {
-        socket.emit('notif', graph);
-    });
+    io.sockets.emit('notif', graph);
 };
 
 // Register our routes : all of our routes will be prefixed with /api
