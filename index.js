@@ -8,7 +8,11 @@ var bodyParser = require("body-parser");   //json
 var graphManager = require("./graphManager.js");
 
 graphManager.constructGraph();
-graphManager.constructShopList();
+graphManager.constructPOIList();
+
+/****************
+ * SOCKET
+ **************/
 
 io.on('connection', function (socket) {
     console.log('A user is connected');
@@ -22,23 +26,18 @@ io.on('connection', function (socket) {
         socket.emit('path', {
             map: map
         });
-        // // echo globally (all clients) that a person has connected
-        // socket.broadcast.emit('user joined', {
-        //     username: socket.username,
-        //     numUsers: 'broadcast'
-        // });
     });
 
     /**
-     * SHOP LIST
+     * POI LIST
      */
-    socket.on('getShops', function () {
-        console.log("SOCKET: getShops");
+    socket.on('getPOI', function () {
+        console.log("SOCKET: getPOI");
         //console.log(json);
 
-        var shops = graphManager.getShopList();
-        socket.emit('shopList', {
-            shops: shops
+        var poi = graphManager.getPOIList();
+        socket.emit('POIList', {
+            poi: poi
         });
     });
 
@@ -50,11 +49,10 @@ io.on('connection', function (socket) {
     });
 });
 
-// console.log("FINDPATH");
-// var map = graphManager.findPath("a", "f");
-// console.log(map);
 
-// ROUTING CONFIG
+/********************
+ * ROUTING CONFIG ***
+ ********************/
 // =============================================================================
 // configure app to use bodyParser()
 // this will let us get the data from a POST
@@ -63,6 +61,7 @@ app.all('/', function(req, res, next) {
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
   next();
  });
+
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 var port = process.env.PORT || 8080;        // set our port

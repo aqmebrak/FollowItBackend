@@ -15,3 +15,9 @@ Il désactive le chemin en question et soumet le nouveau plan au serveur.
 - L'application mobile vérifie rapidement si le chemin désactivé fait partie de l'itinéraire. Si non, il continue de proposer l'itinéraire.
 Si oui, il demande à nouveau l'itinéraire en prenant pour départ la position actuelle de l'utilisateur (dernier noeud passé/validé)
 - le nouvel itinéraire est récupéré.
+
+
+
+- algo chemin avec itineraire ecrit a envoyer
+- appli mobile integrer stepper recevoir les ecrits les afficher
+- 

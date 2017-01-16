@@ -2,8 +2,9 @@ var Graph = require("graphlib").Graph;   //graph lib
 var write = require("graphlib").json.write;
 var read = require("graphlib").json.read;
 var alg = require("graphlib").alg;
+//JSON FILE OBJECT
 var gr;
-var shopList = [];
+var POIList = [];
 
 
 module.exports = {
@@ -18,30 +19,31 @@ module.exports = {
     findPath: function (source, destination) {
         var map = alg.dijkstra(gr, source, weight);
         console.log(map);
-        return findBestPath(map, source, destination);
+        var nodeArray = findBestPath(map, source, destination);
+        nodeArray = constructNavigation(nodeArray);
+        return nodeArray;
     },
 
-    constructShopList: function () {
+    constructPOIList: function () {
         var nodeList = gr.nodes();
 
         for (var n in nodeList) {
             var label = gr.node(nodeList[n]);
-            for (var i in label.shop) {
-                shopList.push(label.shop[i]);
+            for (var i in label.poi) {
+                POIList.push(label.poi[i]);
             }
         }
-        console.log(shopList);
+        console.log(POIList);
     },
 
-    getShopList: function () {
-        return shopList;
+    getPOIList: function () {
+        return POIList;
     }
 };
 
 var findBestPath = function (map, source, destination) {
 
     //on prend le noeud darrivee et on reconstruit le chemin en prenant les predecesseurs successifs
-
     //tableau des noeuds successifs a parcourir
     var bestPath = [];
     var reachedSource = false;
@@ -68,6 +70,7 @@ var findBestPath = function (map, source, destination) {
             cpt++;
         }
     }
+    bestPath.reverse();
 
     console.log(bestPath);
     return bestPath;
@@ -75,4 +78,24 @@ var findBestPath = function (map, source, destination) {
 
 function weight(e) {
     return gr.edge(e).weight;
+}
+
+
+function constructNavigation(nodeArray) {
+    //construction de l'objet de base
+    for (i in nodeArray) {
+        nodeArray[i] = {node: "" + nodeArray[i], "POIList": gr.node(nodeArray[i])['POI'] , "instruction":""}
+        //if le noeud a un beacon
+    }
+
+    //generation des instructions
+
+    //je parcours le tableau
+    // du noeud n au noeud n+1, je regarde les coordonnées
+    //si X2 - X1 > 0 et Y2 - Y1 == 0 ==>
+    //si X2 - X1 < 0 et Y2 - Y1 == 0 ==>
+    //si Y2 - Y1 > 0 et X2 - X1 == 0 ==>
+    //si Y2 - Y1 < 0 et X2 - X1 == 0 ==>
+
+    console.log(nodeArray);
 }
