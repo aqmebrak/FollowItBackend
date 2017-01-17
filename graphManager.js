@@ -84,7 +84,7 @@ function weight(e) {
 function constructNavigation(nodeArray) {
     //construction de l'objet de base
     for (i in nodeArray) {
-        nodeArray[i] = {node: "" + nodeArray[i], "POIList": gr.node(nodeArray[i])['POI'] , "instruction":""}
+        nodeArray[i] = {node: "" + nodeArray[i], "POIList": gr.node(nodeArray[i])['POI'], "instruction": ""};
         //if le noeud a un beacon
     }
 
@@ -92,10 +92,19 @@ function constructNavigation(nodeArray) {
 
     //je parcours le tableau
     // du noeud n au noeud n+1, je regarde les coordonnées
-    //si X2 - X1 > 0 et Y2 - Y1 == 0 ==>
-    //si X2 - X1 < 0 et Y2 - Y1 == 0 ==>
-    //si Y2 - Y1 > 0 et X2 - X1 == 0 ==>
-    //si Y2 - Y1 < 0 et X2 - X1 == 0 ==>
 
+    for (i in nodeArray) {
+        //ETAPE 1 : Je calcule les coord des vecteurs
+        var v1 = nodeArray[i]
+
+        //ETAPE 2: Je calcule ||v1|| et ||v2||
+
+        //ETAPE 3: Je calcule O = cos-1(||v1|| / ||v2||)
+
+        //ETAPE 4: 180 - resultat
+
+        //ETAPE 5: Si < 180 ==> gauche Sinon ==> droite
+
+    }
     console.log(nodeArray);
 }
