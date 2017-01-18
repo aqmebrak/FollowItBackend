@@ -9,8 +9,8 @@
     { "v": "b", "value": { "label": "node b", "POI": ["Carrefour", "Cinema"], "coord": {"x": "1", "y":"0"}} },
     { "v": "c", "value": { "label": "node c", "POI": ["Casino de Ugo"], "coord": {"x": "2", "y":"0"}} },
     { "v": "d", "value": { "label": "node d", "POI": ["Fnac", "Parking"], "coord": {"x": "2", "y":"1"}} },
-    { "v": "e", "value": { "label": "node e", "POI": ["Zara"], "coord": {"x": "0", "y":"0"}} },
-    { "v": "f", "value": { "label": "node f", "POI": ["Pull and Bear"], "coord": {"x": "0", "y":"0"}} }
+    { "v": "e", "value": { "label": "node e", "POI": ["Zara"], "coord": {"x": "1", "y":"1"}} },
+    { "v": "f", "value": { "label": "node f", "POI": ["Pull and Bear"], "coord": {"x": "1", "y":"2"}} }
   ],
   "edges": [
     { "v": "a", "w": "b", "value": { "label": "edge a->b", "distance": "100" , "weight": "2"} },
@@ -28,7 +28,7 @@
     { "v": "e", "w": "f", "value": { "label": "edge e->f", "distance": "20", "weight": "6"} },
     { "v": "f", "w": "e", "value": { "label": "edge f->e", "distance": "20", "weight": "6"} },
 
-    { "v": "b", "w": "d", "value": { "label": "edge b->d", "distance": "200", "weight": "4"} },
-    { "v": "d", "w": "b", "value": { "label": "edge d->b", "distance": "200", "weight": "4"} }
+    { "v": "b", "w": "d", "value": { "label": "edge b->d", "distance": "200", "weight": "1"} },
+    { "v": "d", "w": "b", "value": { "label": "edge d->b", "distance": "200", "weight": "1"} }
   ]
 }

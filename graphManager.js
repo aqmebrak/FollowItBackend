@@ -71,8 +71,10 @@ var findBestPath = function (map, source, destination) {
         }
     }
     bestPath.reverse();
-
+    console.log("BestPAth");
     console.log(bestPath);
+    console.log("-----------------------\n");
+
     return bestPath;
 };
 
@@ -93,18 +95,53 @@ function constructNavigation(nodeArray) {
     //je parcours le tableau
     // du noeud n au noeud n+1, je regarde les coordonnées
 
-    for (i in nodeArray) {
-        //ETAPE 1 : Je calcule les coord des vecteurs
-        var v1 = nodeArray[i]
+    for (var i = 0; i < nodeArray.length - 2; i++) {
+        //TODO: Cas du premier chemin ??????????
 
-        //ETAPE 2: Je calcule ||v1|| et ||v2||
+        //ETAPE 1 : Je calcule les coord des vecteurs
+        //  AB
+        console.log("/////");
+        console.log(gr.node(nodeArray[i].node));
+        console.log(gr.node(nodeArray[i + 1].node));
+        console.log(gr.node(nodeArray[i + 2].node));
+        console.log("/////\n");
+        var v1 = {
+            x: gr.node(nodeArray[i + 1].node).coord.x - gr.node(nodeArray[i].node).coord.x,
+            y: gr.node(nodeArray[i + 1].node).coord.y - gr.node(nodeArray[i].node).coord.y
+        };
+
+        // BC
+        var v2 = {
+            x: gr.node(nodeArray[i + 2].node).coord.x - gr.node(nodeArray[i + 1].node).coord.x,
+            y: gr.node(nodeArray[i + 2].node).coord.y - gr.node(nodeArray[i + 1].node).coord.y
+        };
+        console.log("/////");
+        console.log(v1);
+        console.log(v2);
+        console.log("/////");
+
+        //ETAPE 2: Je calcule ||v1|| et ||v2|| et v1*v2
+        var produit_vecteur = (v1.x * v2.x ) + ( v1.y * v2.y );
+        var norme_v1 = Math.sqrt((v1.x * v1.x) + (v1.y * v1.y));
+        var norme_v2 = Math.sqrt((v2.x * v2.x) + (v2.y * v2.y));
 
         //ETAPE 3: Je calcule O = cos-1(||v1|| / ||v2||)
-
+        var angle = Math.cos(produit_vecteur / (norme_v1 * norme_v2));
+        console.log(Math.acos(angle));
+        angle = Math.acos(angle);
         //ETAPE 4: 180 - resultat
-
+        if(angle < Math.PI && angle > 0){
+            console.log("gauche");
+        }else if (angle > - Math.PI && angle < 0){
+            console.log("droite");
+        }else{
+            console.log("ERROR CALCULATING ARCCOSINUS");
+            return null;
+        }
         //ETAPE 5: Si < 180 ==> gauche Sinon ==> droite
+        console.log("-----------------------\n");
 
     }
-    console.log(nodeArray);
+    //console.log(nodeArray);
+    console.log("-----------------------\n");
 }
