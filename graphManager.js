@@ -12,8 +12,7 @@ var POIList = [];
 module.exports = {
     constructGraph: function () {
         var jsonFile = require("./public/content/graph.json");
-        jsonFile = JSON.stringify(jsonFile);
-        gr = read(JSON.parse(jsonFile));
+        gr = read(jsonFile);
         //console.log(gr.nodes());
         //console.log(gr.edges());
     },
@@ -45,30 +44,19 @@ module.exports = {
     updateGraph: function (newJson) {
 
         console.log("updateGraphh");
-        const testFolder = './public/content/';
-        const fs = require('fs');
-        fs.readdir(testFolder, (err, files) => {
-            files.forEach(file => {
-                console.log(file);
-            });
-        });
-
-        /*
-        console.log(newJson);
+        console.log(JSON.stringify(newJson));
         //write in JSON
-        fs.writeFile("./public/content/graph.json", newJson, (err) => {
+        fs.writeFile("./public/content/graph.json", JSON.stringify(newJson), (err) => {
             if (err) throw err;
             console.log('It\'s saved!');
         });
         console.log("-------------------------");
 
-        //refresh variable
-        var jsonFile = require("./public/content/graph.json");
-        jsonFile = JSON.stringify(jsonFile);
-        gr = read(JSON.parse(jsonFile));
+        //MISE A JOUR VARIABLE GRAPH
+        gr = read(newJson);
         console.log("gr:");
         console.log(gr.nodes());
-        return "done";*/
+        return "done";
     }
 };
 
@@ -114,68 +102,68 @@ function weight(e) {
 }
 
 
-function constructNavigation(nodeArray) {
-    //construction de l'objet de base
-    for (i in nodeArray) {
-        nodeArray[i] = {node: "" + nodeArray[i], "POIList": gr.node(nodeArray[i])['POI'], "instruction": ""};
-        //if le noeud a un beacon
-    }
+/*function constructNavigation(nodeArray) {
+ //construction de l'objet de base
+ for (i in nodeArray) {
+ nodeArray[i] = {node: "" + nodeArray[i], "POIList": gr.node(nodeArray[i])['POI'], "instruction": ""};
+ //if le noeud a un beacon
+ }
 
-    //generation des instructions
+ //generation des instructions
 
-    //je parcours le tableau
-    // du noeud n au noeud n+1, je regarde les coordonnées
+ //je parcours le tableau
+ // du noeud n au noeud n+1, je regarde les coordonnées
 
-    for (var i = 0; i < nodeArray.length - 2; i++) {
-        //TODO: Cas du premier chemin ??????????
+ for (var i = 0; i < nodeArray.length - 2; i++) {
+ //TODO: Cas du premier chemin ??????????
 
-        //ETAPE 1 : Je calcule les coord des vecteurs
-        //  AB
-        console.log("/////");
-        console.log(gr.node(nodeArray[i].node));
-        console.log(gr.node(nodeArray[i + 1].node));
-        console.log(gr.node(nodeArray[i + 2].node));
-        console.log("/////\n");
-        var v1 = {
-            x: gr.node(nodeArray[i + 1].node).coord.x - gr.node(nodeArray[i].node).coord.x,
-            y: gr.node(nodeArray[i + 1].node).coord.y - gr.node(nodeArray[i].node).coord.y
-        };
+ //ETAPE 1 : Je calcule les coord des vecteurs
+ //  AB
+ console.log("/////");
+ console.log(gr.node(nodeArray[i].node));
+ console.log(gr.node(nodeArray[i + 1].node));
+ console.log(gr.node(nodeArray[i + 2].node));
+ console.log("/////\n");
+ var v1 = {
+ x: gr.node(nodeArray[i + 1].node).coord.x - gr.node(nodeArray[i].node).coord.x,
+ y: gr.node(nodeArray[i + 1].node).coord.y - gr.node(nodeArray[i].node).coord.y
+ };
 
-        // BC
-        var v2 = {
-            x: gr.node(nodeArray[i + 2].node).coord.x - gr.node(nodeArray[i + 1].node).coord.x,
-            y: gr.node(nodeArray[i + 2].node).coord.y - gr.node(nodeArray[i + 1].node).coord.y
-        };
-        console.log("/////");
-        console.log(v1);
-        console.log(v2);
-        console.log("/////");
+ // BC
+ var v2 = {
+ x: gr.node(nodeArray[i + 2].node).coord.x - gr.node(nodeArray[i + 1].node).coord.x,
+ y: gr.node(nodeArray[i + 2].node).coord.y - gr.node(nodeArray[i + 1].node).coord.y
+ };
+ console.log("/////");
+ console.log(v1);
+ console.log(v2);
+ console.log("/////");
 
-        //ETAPE 2: Je calcule ||v1|| et ||v2|| et v1*v2
-        var produit_vecteur = (v1.x * v2.x ) + ( v1.y * v2.y );
-        var norme_v1 = Math.sqrt((v1.x * v1.x) + (v1.y * v1.y));
-        var norme_v2 = Math.sqrt((v2.x * v2.x) + (v2.y * v2.y));
+ //ETAPE 2: Je calcule ||v1|| et ||v2|| et v1*v2
+ var produit_vecteur = (v1.x * v2.x ) + ( v1.y * v2.y );
+ var norme_v1 = Math.sqrt((v1.x * v1.x) + (v1.y * v1.y));
+ var norme_v2 = Math.sqrt((v2.x * v2.x) + (v2.y * v2.y));
 
-        //ETAPE 3: Je calcule O = cos-1(||v1|| / ||v2||)
-        var angle = Math.cos(produit_vecteur / (norme_v1 * norme_v2));
-        console.log(Math.acos(angle));
-        angle = Math.acos(angle);
-        //ETAPE 4: 180 - resultat
-        if (angle < Math.PI && angle > 0) {
-            console.log("gauche");
-        } else if (angle > -Math.PI && angle < 0) {
-            console.log("droite");
-        } else {
-            console.log("ERROR CALCULATING ARCCOSINUS");
-            return null;
-        }
-        //ETAPE 5: Si < 180 ==> gauche Sinon ==> droite
-        console.log("-----------------------\n");
+ //ETAPE 3: Je calcule O = cos-1(||v1|| / ||v2||)
+ var angle = Math.cos(produit_vecteur / (norme_v1 * norme_v2));
+ console.log(Math.acos(angle));
+ angle = Math.acos(angle);
+ //ETAPE 4: 180 - resultat
+ if (angle < Math.PI && angle > 0) {
+ console.log("gauche");
+ } else if (angle > -Math.PI && angle < 0) {
+ console.log("droite");
+ } else {
+ console.log("ERROR CALCULATING ARCCOSINUS");
+ return null;
+ }
+ //ETAPE 5: Si < 180 ==> gauche Sinon ==> droite
+ console.log("-----------------------\n");
 
-    }
-    //console.log(nodeArray);
-    console.log("-----------------------\n");
-}
+ }
+ //console.log(nodeArray);
+ console.log("-----------------------\n");
+ }*/
 
 
 function constructNavigationZ(nodeArray) {
@@ -190,11 +178,11 @@ function constructNavigationZ(nodeArray) {
 
         //ETAPE 1 : Je calcule les coord des vecteurs
         //  AB
-        console.log("/////");
-        console.log(gr.node(nodeArray[i].node));
-        console.log(gr.node(nodeArray[i + 1].node));
-        console.log(gr.node(nodeArray[i + 2].node));
-        console.log("/////\n");
+        //console.log("/////");
+       // console.log(gr.node(nodeArray[i].node));
+        //console.log(gr.node(nodeArray[i + 1].node));
+        //console.log(gr.node(nodeArray[i + 2].node));
+        //console.log("/////\n");
         var v1 = {
             x: gr.node(nodeArray[i + 1].node).coord.x - gr.node(nodeArray[i].node).coord.x,
             y: gr.node(nodeArray[i + 1].node).coord.y - gr.node(nodeArray[i].node).coord.y
@@ -205,10 +193,10 @@ function constructNavigationZ(nodeArray) {
             x: gr.node(nodeArray[i + 2].node).coord.x - gr.node(nodeArray[i + 1].node).coord.x,
             y: gr.node(nodeArray[i + 2].node).coord.y - gr.node(nodeArray[i + 1].node).coord.y
         };
-        console.log("/////");
-        console.log(v1);
-        console.log(v2);
-        console.log("/////");
+        //console.log("/////");
+        //console.log(v1);
+        //console.log(v2);
+        //console.log("/////");
 
         //ETAPE 2: Je calcule ||v1|| et ||v2|| et v1*v2
         var prod = (v1.x * v2.y ) - ( v1.y * v2.x );

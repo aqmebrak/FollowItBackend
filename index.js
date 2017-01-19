@@ -6,13 +6,14 @@ var server = require('http').Server(app);
 var io = require('socket.io')(server); // define our app using express
 var bodyParser = require("body-parser");   //json
 var graphManager = require("./graphManager.js");
+var fs = require('fs');
 
 graphManager.constructGraph();
 graphManager.constructPOIList();
 
 var v = '{"options": {"directed": true,"multigraph": false,"compound": false},"nodes": [{ "v": "a", "value": { "label": "node a", "POI": ["H&M"], "coord": {"x": "0", "y":"0"}} }],"edges": []}';
 
-graphManager.updateGraph(v);
+//graphManager.updateGraph(v);
 
 /****************
  * SOCKET
@@ -101,8 +102,7 @@ router.route('/graph')
      */
     .get(function (req, res) {
         console.log("REST: getGraph");
-        var jsonFile = require("./public/content/graph.json");
-        jsonFile = JSON.stringify(jsonFile);
+        var jsonFile = fs.readFileSync('./public/content/graph.json', 'utf8');
         res.send(jsonFile);
     });
 
