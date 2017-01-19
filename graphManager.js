@@ -43,13 +43,14 @@ module.exports = {
     },
 
     updateGraph: function (newJson) {
+        console.log("updateGraphh")
         console.log(newJson);
         //write in JSON
         fs.writeFile("./public/content/graph.json", newJson, (err) => {
             if (err) throw err;
             console.log('It\'s saved!');
         });
-
+        console.log("-------------------------");
 
         //refresh variable
         var jsonFile = require("./public/content/graph.json");

@@ -12,10 +12,7 @@ graphManager.constructPOIList();
 
 var v = '{"options": {"directed": true,"multigraph": false,"compound": false},"nodes": [{ "v": "a", "value": { "label": "node a", "POI": ["H&M"], "coord": {"x": "0", "y":"0"}} },'
         + '{ "v": "b", "value": { "label": "node b", "POI": ["Cinema"], "coord": {"x": "1", "y":"0"}} },'
-        + '{ "v": "c", "value": { "label": "node c", "POI": ["Casino de Ugo"], "coord": {"x": "2", "y":"0"}} },'
-        + '{ "v": "d", "value": { "label": "node d", "POI": ["Fnac", "Parking"], "coord": {"x": "2", "y":"1"}} },'
-        + '{ "v": "e", "value": { "label": "node e", "POI": ["Zara"], "coord": {"x": "1", "y":"1"}} },'
-        + '{ "v": "f", "value": { "label": "node f", "POI": ["Pull and Bear"], "coord": {"x": "1", "y":"2"}} }],'
+
     + '"edges": [{ "v": "a", "w": "b", "value": { "label": "edge a->b", "weight": "2"} },{ "v": "b", "w": "a", "value": { "label": "edge b->a", "weight": "2"} },'
        + ' { "v": "b", "w": "c", "value": { "label": "edge b->c", "weight": "1" } },{ "v": "c", "w": "b", "value": { "label": "edge c->b", "weight": "1"} },'
        + ' { "v": "c", "w": "d", "value": { "label": "edge c->d", "weight": "3"} },{ "v": "d", "w": "c", "value": { "label": "edge d->c", "weight": "3"} },'
@@ -121,7 +118,7 @@ router.route('/updateGraph')
     .post(function (req, res) {
         console.log("updating");
         console.log(req.body);
-        broadcastToAll(req.body);
+        //broadcastToAll(req.body);
         var done = graphManager.updateGraph(req.body);
         res.send(done);
     });
