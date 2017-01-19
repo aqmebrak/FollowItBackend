@@ -43,6 +43,7 @@ module.exports = {
     },
 
     updateGraph: function (newJson) {
+        console.log(newJson);
         //write in JSON
         fs.writeFile("./public/content/graph.json", newJson, (err) => {
             if (err) throw err;
