@@ -30,10 +30,12 @@ module.exports = {
 
         for (var n in nodeList) {
             var label = gr.node(nodeList[n]);
-            for (var i in label.poi) {
-                POIList.push(label.poi[i]);
+
+            for (var i in label.POI) {
+                POIList.push(label.POI[i]);
             }
         }
+        console.log("POI")
         console.log(POIList);
     },
 
