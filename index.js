@@ -122,7 +122,7 @@ router.route('/updateGraph')
         console.log("updating");
         console.log(req.body);
         broadcastToAll(req.body);
-        var done = graphManager.updateGraph();
+        var done = graphManager.updateGraph(req.body);
         res.send(done);
     });
 
