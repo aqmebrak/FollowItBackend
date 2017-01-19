@@ -2,8 +2,10 @@ var Graph = require("graphlib").Graph;   //graph lib
 var write = require("graphlib").json.write;
 var read = require("graphlib").json.read;
 var alg = require("graphlib").alg;
+var fs = require('fs');
 //JSON FILE OBJECT
 var gr;
+
 var POIList = [];
 
 
@@ -38,6 +40,16 @@ module.exports = {
 
     getPOIList: function () {
         return POIList;
+    },
+
+    updateGraph: function (newJson) {
+        //write in JSON
+        fs.writeFile("./public/content/graph.json", newJson);
+
+        //refresh variable
+        var jsonFile = require("./public/content/graph.json");
+        jsonFile = JSON.stringify(jsonFile);
+        gr = read(JSON.parse(jsonFile));
     }
 };
 

@@ -10,6 +10,7 @@ var graphManager = require("./graphManager.js");
 graphManager.constructGraph();
 graphManager.constructPOIList();
 
+
 /****************
  * SOCKET
  **************/
@@ -107,7 +108,8 @@ router.route('/updateGraph')
         console.log("updating");
         console.log(req.body);
         broadcastToAll(req.body);
-        res.send(req.body);
+        var done = graphManager.updateGraph();
+        res.send(done);
     });
 
 /*******************
