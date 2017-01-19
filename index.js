@@ -11,7 +11,6 @@ var fs = require('fs');
 graphManager.constructGraph();
 graphManager.constructPOIList();
 
-var v = '{"options": {"directed": true,"multigraph": false,"compound": false},"nodes": [{ "v": "a", "value": { "label": "node a", "POI": ["H&M"], "coord": {"x": "0", "y":"0"}} }],"edges": []}';
 
 //graphManager.updateGraph(v);
 
@@ -38,9 +37,10 @@ io.on('connection', function (socket) {
      */
     socket.on('getPOI', function () {
         console.log("SOCKET: getPOI");
-        //console.log(json);
 
         var poi = graphManager.getPOIList();
+        console.log(poi);
+
         socket.emit('POIList', {
             poi: poi
         });
