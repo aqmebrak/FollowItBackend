@@ -44,12 +44,17 @@ module.exports = {
 
     updateGraph: function (newJson) {
         //write in JSON
-        fs.writeFile("./public/content/graph.json", newJson);
+        fs.writeFile("./public/content/graph.json", newJson, (err) => {
+            if (err) throw err;
+            console.log('It\'s saved!');
+        });
+
 
         //refresh variable
         var jsonFile = require("./public/content/graph.json");
         jsonFile = JSON.stringify(jsonFile);
         gr = read(JSON.parse(jsonFile));
+        return "done";
     }
 };
 
