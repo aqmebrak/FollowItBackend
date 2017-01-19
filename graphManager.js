@@ -20,7 +20,7 @@ module.exports = {
         var map = alg.dijkstra(gr, source, weight);
         console.log(map);
         var nodeArray = findBestPath(map, source, destination);
-        nodeArray = constructNavigation(nodeArray);
+        nodeArray = constructNavigationZ(nodeArray);
         return nodeArray;
     },
 
@@ -130,11 +130,11 @@ function constructNavigation(nodeArray) {
         console.log(Math.acos(angle));
         angle = Math.acos(angle);
         //ETAPE 4: 180 - resultat
-        if(angle < Math.PI && angle > 0){
+        if (angle < Math.PI && angle > 0) {
             console.log("gauche");
-        }else if (angle > - Math.PI && angle < 0){
+        } else if (angle > -Math.PI && angle < 0) {
             console.log("droite");
-        }else{
+        } else {
             console.log("ERROR CALCULATING ARCCOSINUS");
             return null;
         }
@@ -144,4 +144,62 @@ function constructNavigation(nodeArray) {
     }
     //console.log(nodeArray);
     console.log("-----------------------\n");
+}
+
+
+function constructNavigationZ(nodeArray) {
+    //construction de l'objet de base
+    for (i in nodeArray) {
+        nodeArray[i] = {node: "" + nodeArray[i], POIList: gr.node(nodeArray[i]).POI, instruction: ""};
+        //if le noeud a un beacon
+    }
+
+    //generation des instructions
+    for (var i = 0; i < nodeArray.length - 2; i++) {
+
+        //ETAPE 1 : Je calcule les coord des vecteurs
+        //  AB
+        console.log("/////");
+        console.log(gr.node(nodeArray[i].node));
+        console.log(gr.node(nodeArray[i + 1].node));
+        console.log(gr.node(nodeArray[i + 2].node));
+        console.log("/////\n");
+        var v1 = {
+            x: gr.node(nodeArray[i + 1].node).coord.x - gr.node(nodeArray[i].node).coord.x,
+            y: gr.node(nodeArray[i + 1].node).coord.y - gr.node(nodeArray[i].node).coord.y
+        };
+
+        // BC
+        var v2 = {
+            x: gr.node(nodeArray[i + 2].node).coord.x - gr.node(nodeArray[i + 1].node).coord.x,
+            y: gr.node(nodeArray[i + 2].node).coord.y - gr.node(nodeArray[i + 1].node).coord.y
+        };
+        console.log("/////");
+        console.log(v1);
+        console.log(v2);
+        console.log("/////");
+
+        //ETAPE 2: Je calcule ||v1|| et ||v2|| et v1*v2
+        var prod = (v1.x * v2.y ) - ( v1.y * v2.x );
+        console.log(prod);
+        //ETAPE 4: 180 - resultat
+        if (prod < 0) {
+            console.log("gauche");
+            nodeArray[i + 1].instruction = "A l'intersection, tournez à gauche";
+        } else if (prod > 0) {
+            console.log("droite");
+            nodeArray[i + 1].instruction = "A l'intersection, tournez à droite";
+
+        } else {
+            console.log("TOUT DROIT");
+            nodeArray[i + 1].instruction = "A l'intersection, continuez tout droit";
+
+        }
+        //ETAPE 5: Si < 180 ==> gauche Sinon ==> droite
+        console.log("-----------------------\n");
+
+    }
+    console.log(nodeArray);
+    console.log("-----------------------\n");
+    return nodeArray;
 }

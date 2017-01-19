@@ -13,22 +13,22 @@
     { "v": "f", "value": { "label": "node f", "POI": ["Pull and Bear"], "coord": {"x": "1", "y":"2"}} }
   ],
   "edges": [
-    { "v": "a", "w": "b", "value": { "label": "edge a->b", "distance": "100" , "weight": "2"} },
-	{ "v": "b", "w": "a", "value": { "label": "edge b->a", "distance": "100" , "weight": "2"} },
+    { "v": "a", "w": "b", "value": { "label": "edge a->b", "weight": "2"} },
+	{ "v": "b", "w": "a", "value": { "label": "edge b->a", "weight": "2"} },
 
-    { "v": "b", "w": "c", "value": { "label": "edge b->c", "distance": "10", "weight": "1" } },
-    { "v": "c", "w": "b", "value": { "label": "edge c->b", "distance": "10", "weight": "1"} },
+    { "v": "b", "w": "c", "value": { "label": "edge b->c", "weight": "1" } },
+    { "v": "c", "w": "b", "value": { "label": "edge c->b", "weight": "1"} },
 
-    { "v": "c", "w": "d", "value": { "label": "edge c->d", "distance": "150", "weight": "3"} },
-    { "v": "d", "w": "c", "value": { "label": "edge d->c", "distance": "150", "weight": "3"} },
+    { "v": "c", "w": "d", "value": { "label": "edge c->d", "weight": "3"} },
+    { "v": "d", "w": "c", "value": { "label": "edge d->c", "weight": "3"} },
 
-    { "v": "d", "w": "e", "value": { "label": "edge d->e", "distance": "80", "weight": "4"} },
-    { "v": "e", "w": "d", "value": { "label": "edge e->d", "distance": "80", "weight": "4"} },
+    { "v": "d", "w": "e", "value": { "label": "edge d->e", "weight": "4"} },
+    { "v": "e", "w": "d", "value": { "label": "edge e->d", "weight": "4"} },
 
-    { "v": "e", "w": "f", "value": { "label": "edge e->f", "distance": "20", "weight": "6"} },
-    { "v": "f", "w": "e", "value": { "label": "edge f->e", "distance": "20", "weight": "6"} },
+    { "v": "e", "w": "f", "value": { "label": "edge e->f", "weight": "6"} },
+    { "v": "f", "w": "e", "value": { "label": "edge f->e", "weight": "6"} },
 
-    { "v": "b", "w": "d", "value": { "label": "edge b->d", "distance": "200", "weight": "1"} },
-    { "v": "d", "w": "b", "value": { "label": "edge d->b", "distance": "200", "weight": "1"} }
+    { "v": "b", "w": "d", "value": { "label": "edge b->d", "weight": "1"} },
+    { "v": "d", "w": "b", "value": { "label": "edge d->b", "weight": "1"} }
   ]
 }
