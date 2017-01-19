@@ -10,15 +10,7 @@ var graphManager = require("./graphManager.js");
 graphManager.constructGraph();
 graphManager.constructPOIList();
 
-var v = '{"options": {"directed": true,"multigraph": false,"compound": false},"nodes": [{ "v": "a", "value": { "label": "node a", "POI": ["H&M"], "coord": {"x": "0", "y":"0"}} },'
-        + '{ "v": "b", "value": { "label": "node b", "POI": ["Cinema"], "coord": {"x": "1", "y":"0"}} },'
-
-    + '"edges": [{ "v": "a", "w": "b", "value": { "label": "edge a->b", "weight": "2"} },{ "v": "b", "w": "a", "value": { "label": "edge b->a", "weight": "2"} },'
-       + ' { "v": "b", "w": "c", "value": { "label": "edge b->c", "weight": "1" } },{ "v": "c", "w": "b", "value": { "label": "edge c->b", "weight": "1"} },'
-       + ' { "v": "c", "w": "d", "value": { "label": "edge c->d", "weight": "3"} },{ "v": "d", "w": "c", "value": { "label": "edge d->c", "weight": "3"} },'
-        + '{ "v": "d", "w": "e", "value": { "label": "edge d->e", "weight": "4"} },{ "v": "e", "w": "d", "value": { "label": "edge e->d", "weight": "4"} },'
-        + '{ "v": "e", "w": "f", "value": { "label": "edge e->f", "weight": "6"} },{ "v": "f", "w": "e", "value": { "label": "edge f->e", "weight": "6"} },'
-       + ' { "v": "b", "w": "d", "value": { "label": "edge b->d", "weight": "1"} },{ "v": "d", "w": "b", "value": { "label": "edge d->b", "weight": "1"} }]}';
+var v = '{"options": {"directed": true,"multigraph": false,"compound": false},"nodes": [{ "v": "a", "value": { "label": "node a", "POI": ["H&M"], "coord": {"x": "0", "y":"0"}} }],"edges": []}';
 
 graphManager.updateGraph(v);
 
@@ -68,11 +60,11 @@ io.on('connection', function (socket) {
 // =============================================================================
 // configure app to use bodyParser()
 // this will let us get the data from a POST
-app.all('/', function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With");
-  next();
- });
+app.all('/', function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    next();
+});
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());

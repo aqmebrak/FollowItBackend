@@ -43,7 +43,17 @@ module.exports = {
     },
 
     updateGraph: function (newJson) {
-        console.log("updateGraphh")
+
+        console.log("updateGraphh");
+        const testFolder = './public/content/';
+        const fs = require('fs');
+        fs.readdir(testFolder, (err, files) => {
+            files.forEach(file => {
+                console.log(file);
+            });
+        });
+
+        /*
         console.log(newJson);
         //write in JSON
         fs.writeFile("./public/content/graph.json", newJson, (err) => {
@@ -56,7 +66,9 @@ module.exports = {
         var jsonFile = require("./public/content/graph.json");
         jsonFile = JSON.stringify(jsonFile);
         gr = read(JSON.parse(jsonFile));
-        return "done";
+        console.log("gr:");
+        console.log(gr.nodes());
+        return "done";*/
     }
 };
 
