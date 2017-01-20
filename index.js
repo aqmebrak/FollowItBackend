@@ -110,7 +110,7 @@ router.route('/updateGraph')
     .post(function (req, res) {
         console.log("updating");
         console.log(req.body);
-        //broadcastToAll(req.body);
+        broadcastToAll(req.body);
         var done = graphManager.updateGraph(req.body);
         res.send(done);
     });
