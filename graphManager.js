@@ -48,15 +48,15 @@ module.exports = {
         gr = read(newJson);
         console.log("gr:");
         console.log(gr.nodes());
-		generatePOI();
+        generatePOI();
         return "done";
     }
 };
 
 
-var generatePOI = function(){
+var generatePOI = function () {
     var nodeList = gr.nodes();
-
+    POIList = [];
     for (var n in nodeList) {
         var label = gr.node(nodeList[n]);
 
@@ -187,7 +187,7 @@ function constructNavigationZ(nodeArray) {
         //ETAPE 1 : Je calcule les coord des vecteurs
         //  AB
         //console.log("/////");
-       // console.log(gr.node(nodeArray[i].node));
+        // console.log(gr.node(nodeArray[i].node));
         //console.log(gr.node(nodeArray[i + 1].node));
         //console.log(gr.node(nodeArray[i + 2].node));
         //console.log("/////\n");
