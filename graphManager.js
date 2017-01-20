@@ -58,6 +58,7 @@ module.exports = {
         gr = read(newJson);
         console.log("gr:");
         console.log(gr.nodes());
+		constructPOIList();
         return "done";
     }
 };
