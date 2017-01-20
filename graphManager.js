@@ -26,17 +26,7 @@ module.exports = {
     },
 
     constructPOIList: function () {
-        var nodeList = gr.nodes();
-
-        for (var n in nodeList) {
-            var label = gr.node(nodeList[n]);
-
-            for (var i in label.POI) {
-                POIList.push({poi: label.POI[i], node: nodeList[n]});
-            }
-        }
-        console.log("POI")
-        console.log(POIList);
+        generatePOI();
     },
 
     getPOIList: function () {
@@ -58,9 +48,24 @@ module.exports = {
         gr = read(newJson);
         console.log("gr:");
         console.log(gr.nodes());
-		constructPOIList();
+		generatePOI();
         return "done";
     }
+};
+
+
+var generatePOI = function(){
+    var nodeList = gr.nodes();
+
+    for (var n in nodeList) {
+        var label = gr.node(nodeList[n]);
+
+        for (var i in label.POI) {
+            POIList.push({poi: label.POI[i], node: nodeList[n]});
+        }
+    }
+    console.log("POI")
+    console.log(POIList);
 };
 
 var findBestPath = function (map, source, destination) {
