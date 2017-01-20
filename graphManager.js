@@ -32,7 +32,7 @@ module.exports = {
             var label = gr.node(nodeList[n]);
 
             for (var i in label.POI) {
-                POIList.push(label.POI[i]);
+                POIList.push({poi: label.POI[i], node: nodeList[n]});
             }
         }
         console.log("POI")
