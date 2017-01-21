@@ -21,6 +21,8 @@ module.exports = {
         var map = alg.dijkstra(gr, source, weight);
         console.log(map);
         var nodeArray = findBestPath(map, source, destination);
+        console.log("nodeArray");
+        console.log(nodeArray);
         nodeArray = constructNavigationZ(nodeArray);
         return nodeArray;
     },
@@ -36,7 +38,6 @@ module.exports = {
     updateGraph: function (newJson) {
 
         console.log("updateGraphh");
-        console.log(JSON.stringify(newJson));
         //write in JSON
         fs.writeFile("./public/content/graph.json", JSON.stringify(newJson), (err) => {
             if (err) throw err;
@@ -47,7 +48,7 @@ module.exports = {
         //MISE A JOUR VARIABLE GRAPH
         gr = read(newJson);
         console.log("gr:");
-        console.log(gr.nodes());
+        console.log(gr);
         generatePOI();
         return "done";
     }
