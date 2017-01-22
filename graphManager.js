@@ -181,9 +181,9 @@ function constructNavigationZ(nodeArray) {
         nodeArray[i] = {
             node: "" + nodeArray[i],
             POIList: gr.node(nodeArray[i]).POI,
-            instruction: "",
-            coord: {x: gr.node(nodeArray[i].node).coord.x, y: gr.node(nodeArray[i].node).coord.y}
+            instruction: ""
         };
+        nodeArray[i].coord ={x: gr.node(nodeArray[i].node).coord.x, y: gr.node(nodeArray[i].node).coord.y};
         //if le noeud a un beacon
         //nodeArray[i].beacon = { id: "" , truc: ""}
     }
