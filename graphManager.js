@@ -54,14 +54,13 @@ module.exports = {
     },
 
     updateBeaconList: function(beaconArray){
-        var beaconArrayJson = JSON.parse(beaconArray);
 		var jsonFile = fs.readFileSync('./public/content/graph.json', 'utf8');
 		var json = JSON.parse(jsonFile);
 		console.log(json.beacons);
 		console.log("\n\n");
 
 
-		json.beacons = beaconArrayJson.beacons;
+		json.beacons = beaconArray.beacons;
         console.log(json.beacons);
 		fs.writeFile("./public/content/graph.json", JSON.stringify(json), (err) => {
 			if (err) throw err;
