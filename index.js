@@ -43,6 +43,16 @@ io.on('connection', function (socket) {
 		});
 	});
 
+	socket.on('getBeaconArray', function () {
+		console.log("SOCKET: getPOI");
+
+		var array = graphManager.getBeaconArray();
+
+		socket.emit('beaconArray', {
+			beaconArray: array
+		});
+	});
+
 	/**
 	 * DISCONNECTING
 	 */
