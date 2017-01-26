@@ -53,13 +53,13 @@ io.on('connection', function (socket) {
 		});
 	});
 
-	socket.on('getNodeFromBeacon', function (beaconName) {
-		console.log("SOCKET: getNodeFromBeacon: " + beaconName);
+	socket.on('getAllNodes', function () {
+		console.log("SOCKET: getAllNodes: ");
 
-		var node = graphManager.getNodeFromBeacon(beaconName);
+		var nodes = graphManager.getAllNodes();
 
-		socket.emit('nodeFromBeacon', {
-			node: node
+		socket.emit('allNodes', {
+			nodes: nodes
 		});
 	});
 

@@ -65,14 +65,8 @@ module.exports = {
 	},
 
 	//recupere le noeud du beacon recherché
-	getNodeFromBeacon: function (beaconName) {
-		for (var node in gr.nodes()) {
-			if (node.hasOwnProperty("beacon")) {
-				if (node.beacon.name == beaconName) {
-					return node;
-				}
-			}
-		}
+	getAllNodes: function () {
+		return gr.nodes();
 	},
 
 	updateBeaconList: function (beaconArray) {
