@@ -8,6 +8,10 @@ var gr;
 
 var POIList = [];
 
+/***
+ *
+ * EXPORTS FUNCTIONS
+ */
 
 module.exports = {
     constructGraph: function () {
@@ -53,6 +57,12 @@ module.exports = {
         return "done";
     },
 
+    getBeaconArray: function(){
+        var jsonFile = fs.readFileSync('./public/content/graph.json', 'utf8');
+        var json = JSON.parse(jsonFile);
+        return json.beacons;
+    },
+
     updateBeaconList: function (beaconArray) {
         var jsonFile = fs.readFileSync('./public/content/graph.json', 'utf8');
         var json = JSON.parse(jsonFile);
@@ -68,6 +78,7 @@ module.exports = {
         });
         return 'done';
     }
+
 };
 
 

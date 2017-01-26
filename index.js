@@ -10,10 +10,6 @@ var fs = require('fs');
 
 graphManager.constructGraph();
 graphManager.constructPOIList();
-//var b = '{"beacons": [{"name": "premier beacon","UUID": "dfhbdfhdudfdssf","major": "premier major","minor": "premier minor"},{"name": "deux beacon","UUID": "zezazzezezezze","major": "deux major","minor": "deux minor"}]}';
-//graphManager.updateBeaconList(b);
-
-//graphManager.updateGraph(v);
 
 /****************
  * SOCKET
@@ -114,6 +110,13 @@ router.route('/updateGraph')
 		broadcastToAll(req.body);
 		var done = graphManager.updateGraph(req.body);
 		res.send(done);
+	});
+
+router.route('/getBeaconArray')
+	.get(function (req, res) {
+		console.log("updating Beacon List");
+		var array = graphManager.getBeaconArray();
+		res.send(array);
 	});
 
 router.route('/updateBeacons')
