@@ -66,7 +66,9 @@ module.exports = {
 
 	//recupere le noeud du beacon recherché
 	getAllNodes: function () {
-		return gr.nodes();
+		var jsonFile = fs.readFileSync('./public/content/graph.json', 'utf8');
+		jsonFile = JSON.parse(jsonFile);
+		return JSON.stringify(jsonFile.nodes);
 	},
 
 	updateBeaconList: function (beaconArray) {
