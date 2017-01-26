@@ -53,20 +53,20 @@ module.exports = {
         return "done";
     },
 
-    updateBeaconList: function(beaconArray){
-		var jsonFile = fs.readFileSync('./public/content/graph.json', 'utf8');
-		var json = JSON.parse(jsonFile);
-		console.log(json.beacons);
-		console.log("\n\n");
-
-
-		json.beacons = beaconArray.beacons;
+    updateBeaconList: function (beaconArray) {
+        var jsonFile = fs.readFileSync('./public/content/graph.json', 'utf8');
+        var json = JSON.parse(jsonFile);
         console.log(json.beacons);
-		fs.writeFile("./public/content/graph.json", JSON.stringify(json), (err) => {
-			if (err) throw err;
-			console.log('It\'s saved!');
-		});
-		return 'done';
+        console.log("\n\n");
+
+
+        json.beacons = beaconArray.beacons;
+        console.log(json.beacons);
+        fs.writeFile("./public/content/graph.json", JSON.stringify(json), (err) => {
+            if (err) throw err;
+            console.log('It\'s saved!');
+        });
+        return 'done';
     }
 };
 
@@ -199,9 +199,12 @@ function constructNavigationZ(nodeArray) {
             POIList: gr.node(nodeArray[i]).POI,
             instruction: ""
         };
-        nodeArray[i].coord ={x: gr.node(nodeArray[i].node).coord.x, y: gr.node(nodeArray[i].node).coord.y};
+        nodeArray[i].coord = {x: gr.node(nodeArray[i].node).coord.x, y: gr.node(nodeArray[i].node).coord.y};
         //if le noeud a un beacon
-        //nodeArray[i].beacon = { id: "" , truc: ""}
+        if (gr.node(nodeArray[i].node).hasOwnProperty("beacon")) {
+            console.log("true");
+            nodeArray[i].beacon = gr.node(nodeArray[i].node).beacon;
+        }
     }
 
     //generation des instructions
