@@ -44,12 +44,22 @@ io.on('connection', function (socket) {
 	});
 
 	socket.on('getBeaconArray', function () {
-		console.log("SOCKET: getPOI");
+		console.log("SOCKET: getBeaconArray");
 
 		var array = graphManager.getBeaconArray();
 
 		socket.emit('beaconArray', {
 			beaconArray: array
+		});
+	});
+
+	socket.on('getNodeFromBeacon', function (beaconName) {
+		console.log("SOCKET: getNodeFromBeacon: " + beaconName);
+
+		var node = graphManager.getNodeFromBeacon(beaconName);
+
+		socket.emit('nodeFromBeacon', {
+			node: node
 		});
 	});
 

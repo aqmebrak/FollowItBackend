@@ -14,127 +14,139 @@ var POIList = [];
  */
 
 module.exports = {
-    constructGraph: function () {
-        var jsonFile = require("./public/content/graph.json");
-        gr = read(jsonFile);
-        //console.log(gr.nodes());
-        //console.log(gr.edges());
-    },
+	constructGraph: function () {
+		var jsonFile = require("./public/content/graph.json");
+		gr = read(jsonFile);
+		//console.log(gr.nodes());
+		//console.log(gr.edges());
+	},
 
-    findPath: function (source, destination) {
-        var map = alg.dijkstra(gr, source, weight);
-        console.log(map);
-        var nodeArray = findBestPath(map, source, destination);
-        console.log("nodeArray");
-        console.log(nodeArray);
-        nodeArray = constructNavigationZ(nodeArray);
-        return nodeArray;
-    },
+	findPath: function (source, destination) {
+		var map = alg.dijkstra(gr, source, weight);
+		console.log(map);
+		var nodeArray = findBestPath(map, source, destination);
+		console.log("nodeArray");
+		console.log(nodeArray);
+		nodeArray = constructNavigationZ(nodeArray);
+		return nodeArray;
+	},
 
-    constructPOIList: function () {
-        generatePOI();
-    },
+	constructPOIList: function () {
+		generatePOI();
+	},
 
-    getPOIList: function () {
-        return POIList;
-    },
+	getPOIList: function () {
+		return POIList;
+	},
 
-    updateGraph: function (newJson) {
+	updateGraph: function (newJson) {
 
-        console.log("updateGraphh");
-        //write in JSON
-        fs.writeFile("./public/content/graph.json", JSON.stringify(newJson), (err) => {
-            if (err) throw err;
-            console.log('It\'s saved!');
-        });
-        console.log("-------------------------");
+		console.log("updateGraphh");
+		//write in JSON
+		fs.writeFile("./public/content/graph.json", JSON.stringify(newJson), (err) => {
+			if (err) throw err;
+			console.log('It\'s saved!');
+		});
+		console.log("-------------------------");
 
-        //MISE A JOUR VARIABLE GRAPH
-        gr = read(newJson);
-        console.log("gr:");
-        console.log(gr);
-        generatePOI();
-        return "done";
-    },
+		//MISE A JOUR VARIABLE GRAPH
+		gr = read(newJson);
+		console.log("gr:");
+		console.log(gr);
+		generatePOI();
+		return "done";
+	},
 
-    getBeaconArray: function(){
-        var jsonFile = fs.readFileSync('./public/content/graph.json', 'utf8');
-        var json = JSON.parse(jsonFile);
-        return json.beacons;
-    },
+	//renvoie toute la liste des beacons
+	getBeaconArray: function () {
+		var jsonFile = fs.readFileSync('./public/content/graph.json', 'utf8');
+		var json = JSON.parse(jsonFile);
+		return json.beacons;
+	},
 
-    updateBeaconList: function (beaconArray) {
-        var jsonFile = fs.readFileSync('./public/content/graph.json', 'utf8');
-        var json = JSON.parse(jsonFile);
-        console.log(json.beacons);
-        console.log("\n\n");
+	//recupere le noeud du beacon recherché
+	getNodeFromBeacon: function (beaconName) {
+		for (var node in gr.nodes()) {
+			if (node.hasOwnProperty("beacon")) {
+				if (node.beacon.name == beaconName) {
+					return node;
+				}
+			}
+		}
+	},
+
+	updateBeaconList: function (beaconArray) {
+		var jsonFile = fs.readFileSync('./public/content/graph.json', 'utf8');
+		var json = JSON.parse(jsonFile);
+		console.log(json.beacons);
+		console.log("\n\n");
 
 
-        json.beacons = beaconArray.beacons;
-        console.log(json.beacons);
-        fs.writeFile("./public/content/graph.json", JSON.stringify(json), (err) => {
-            if (err) throw err;
-            console.log('It\'s saved!');
-        });
-        return 'done';
-    }
+		json.beacons = beaconArray.beacons;
+		console.log(json.beacons);
+		fs.writeFile("./public/content/graph.json", JSON.stringify(json), (err) => {
+			if (err) throw err;
+			console.log('It\'s saved!');
+		});
+		return 'done';
+	}
 
 };
 
 
 var generatePOI = function () {
-    var nodeList = gr.nodes();
-    POIList = [];
-    for (var n in nodeList) {
-        var label = gr.node(nodeList[n]);
+	var nodeList = gr.nodes();
+	POIList = [];
+	for (var n in nodeList) {
+		var label = gr.node(nodeList[n]);
 
-        for (var i in label.POI) {
-            POIList.push({poi: label.POI[i], node: nodeList[n]});
-        }
-    }
-    console.log("POI")
-    console.log(POIList);
+		for (var i in label.POI) {
+			POIList.push({poi: label.POI[i], node: nodeList[n]});
+		}
+	}
+	console.log("POI")
+	console.log(POIList);
 };
 
 var findBestPath = function (map, source, destination) {
 
-    //on prend le noeud darrivee et on reconstruit le chemin en prenant les predecesseurs successifs
-    //tableau des noeuds successifs a parcourir
-    var bestPath = [];
-    var reachedSource = false;
-    var lastNode;
+	//on prend le noeud darrivee et on reconstruit le chemin en prenant les predecesseurs successifs
+	//tableau des noeuds successifs a parcourir
+	var bestPath = [];
+	var reachedSource = false;
+	var lastNode;
 
-    //on met la destination en premier
-    bestPath.push(destination);
-    lastNode = destination;
-    var cpt = 0;
+	//on met la destination en premier
+	bestPath.push(destination);
+	lastNode = destination;
+	var cpt = 0;
 
-    //puis on prend le predecesseur, on push dans l'Array (duku) et on s'arrete quand on tombe sur la source
-    while (!reachedSource) {
-        console.log(cpt);
+	//puis on prend le predecesseur, on push dans l'Array (duku) et on s'arrete quand on tombe sur la source
+	while (!reachedSource) {
+		console.log(cpt);
 
-        //si le predecesseur est le noeud de fin, on l'ajoute et on arrete
-        if (lastNode == source) {
-            console.log("if");
-            reachedSource = true;
-        }//sinon, on l'ajoute au tableau et on le garde en clé "lastNode" pour la prochaine iteration
-        else {
-            console.log("lastnode predecessor:" + map[lastNode].predecessor);
-            bestPath.push(map[lastNode].predecessor);
-            lastNode = map[lastNode].predecessor;
-            cpt++;
-        }
-    }
-    bestPath.reverse();
-    console.log("BestPAth");
-    console.log(bestPath);
-    console.log("-----------------------\n");
+		//si le predecesseur est le noeud de fin, on l'ajoute et on arrete
+		if (lastNode == source) {
+			console.log("if");
+			reachedSource = true;
+		}//sinon, on l'ajoute au tableau et on le garde en clé "lastNode" pour la prochaine iteration
+		else {
+			console.log("lastnode predecessor:" + map[lastNode].predecessor);
+			bestPath.push(map[lastNode].predecessor);
+			lastNode = map[lastNode].predecessor;
+			cpt++;
+		}
+	}
+	bestPath.reverse();
+	console.log("BestPAth");
+	console.log(bestPath);
+	console.log("-----------------------\n");
 
-    return bestPath;
+	return bestPath;
 };
 
 function weight(e) {
-    return gr.edge(e).weight;
+	return gr.edge(e).weight;
 }
 
 
@@ -203,67 +215,67 @@ function weight(e) {
 
 
 function constructNavigationZ(nodeArray) {
-    //construction de l'objet de base
-    for (i in nodeArray) {
-        nodeArray[i] = {
-            node: "" + nodeArray[i],
-            POIList: gr.node(nodeArray[i]).POI,
-            instruction: ""
-        };
-        nodeArray[i].coord = {x: gr.node(nodeArray[i].node).coord.x, y: gr.node(nodeArray[i].node).coord.y};
-        //if le noeud a un beacon
-        if (gr.node(nodeArray[i].node).hasOwnProperty("beacon")) {
-            console.log("true");
-            nodeArray[i].beacon = gr.node(nodeArray[i].node).beacon;
-        }
-    }
+	//construction de l'objet de base
+	for (i in nodeArray) {
+		nodeArray[i] = {
+			node: "" + nodeArray[i],
+			POIList: gr.node(nodeArray[i]).POI,
+			instruction: ""
+		};
+		nodeArray[i].coord = {x: gr.node(nodeArray[i].node).coord.x, y: gr.node(nodeArray[i].node).coord.y};
+		//if le noeud a un beacon
+		if (gr.node(nodeArray[i].node).hasOwnProperty("beacon")) {
+			console.log("true");
+			nodeArray[i].beacon = gr.node(nodeArray[i].node).beacon;
+		}
+	}
 
-    //generation des instructions
-    for (var i = 0; i < nodeArray.length - 2; i++) {
+	//generation des instructions
+	for (var i = 0; i < nodeArray.length - 2; i++) {
 
-        //ETAPE 1 : Je calcule les coord des vecteurs
-        //  AB
-        //console.log("/////");
-        // console.log(gr.node(nodeArray[i].node));
-        //console.log(gr.node(nodeArray[i + 1].node));
-        //console.log(gr.node(nodeArray[i + 2].node));
-        //console.log("/////\n");
-        var v1 = {
-            x: gr.node(nodeArray[i + 1].node).coord.x - gr.node(nodeArray[i].node).coord.x,
-            y: gr.node(nodeArray[i + 1].node).coord.y - gr.node(nodeArray[i].node).coord.y
-        };
+		//ETAPE 1 : Je calcule les coord des vecteurs
+		//  AB
+		//console.log("/////");
+		// console.log(gr.node(nodeArray[i].node));
+		//console.log(gr.node(nodeArray[i + 1].node));
+		//console.log(gr.node(nodeArray[i + 2].node));
+		//console.log("/////\n");
+		var v1 = {
+			x: gr.node(nodeArray[i + 1].node).coord.x - gr.node(nodeArray[i].node).coord.x,
+			y: gr.node(nodeArray[i + 1].node).coord.y - gr.node(nodeArray[i].node).coord.y
+		};
 
-        // BC
-        var v2 = {
-            x: gr.node(nodeArray[i + 2].node).coord.x - gr.node(nodeArray[i + 1].node).coord.x,
-            y: gr.node(nodeArray[i + 2].node).coord.y - gr.node(nodeArray[i + 1].node).coord.y
-        };
-        //console.log("/////");
-        //console.log(v1);
-        //console.log(v2);
-        //console.log("/////");
+		// BC
+		var v2 = {
+			x: gr.node(nodeArray[i + 2].node).coord.x - gr.node(nodeArray[i + 1].node).coord.x,
+			y: gr.node(nodeArray[i + 2].node).coord.y - gr.node(nodeArray[i + 1].node).coord.y
+		};
+		//console.log("/////");
+		//console.log(v1);
+		//console.log(v2);
+		//console.log("/////");
 
-        //ETAPE 2: Je calcule ||v1|| et ||v2|| et v1*v2
-        var prod = (v1.x * v2.y ) - ( v1.y * v2.x );
-        console.log(prod);
-        //ETAPE 4: 180 - resultat
-        if (prod < 0) {
-            console.log("gauche");
-            nodeArray[i + 1].instruction = "A l'intersection, tournez à gauche";
-        } else if (prod > 0) {
-            console.log("droite");
-            nodeArray[i + 1].instruction = "A l'intersection, tournez à droite";
+		//ETAPE 2: Je calcule ||v1|| et ||v2|| et v1*v2
+		var prod = (v1.x * v2.y ) - ( v1.y * v2.x );
+		console.log(prod);
+		//ETAPE 4: 180 - resultat
+		if (prod < 0) {
+			console.log("gauche");
+			nodeArray[i + 1].instruction = "A l'intersection, tournez à gauche";
+		} else if (prod > 0) {
+			console.log("droite");
+			nodeArray[i + 1].instruction = "A l'intersection, tournez à droite";
 
-        } else {
-            console.log("TOUT DROIT");
-            nodeArray[i + 1].instruction = "A l'intersection, continuez tout droit";
+		} else {
+			console.log("TOUT DROIT");
+			nodeArray[i + 1].instruction = "A l'intersection, continuez tout droit";
 
-        }
-        //ETAPE 5: Si < 180 ==> gauche Sinon ==> droite
-        console.log("-----------------------\n");
+		}
+		//ETAPE 5: Si < 180 ==> gauche Sinon ==> droite
+		console.log("-----------------------\n");
 
-    }
-    console.log(nodeArray);
-    console.log("-----------------------\n");
-    return nodeArray;
+	}
+	console.log(nodeArray);
+	console.log("-----------------------\n");
+	return nodeArray;
 }
