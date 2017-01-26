@@ -68,7 +68,7 @@ module.exports = {
 	getAllNodes: function () {
 		var jsonFile = fs.readFileSync('./public/content/graph.json', 'utf8');
 		jsonFile = JSON.parse(jsonFile);
-		return JSON.stringify(jsonFile.nodes);
+		return jsonFile.nodes;
 	},
 
 	updateBeaconList: function (beaconArray) {
