@@ -1,575 +1,518 @@
 {
   "options": {
-    "directed": true,
+    "directed": false,
     "multigraph": false,
     "compound": false
   },
-  "nodes": [{
-    "v": "a",
-    "value": {
-      "label": "node a",
-      "POI": [
-        "Bat forum"
-      ],
-      "coord": {
-        "x": 201.9206422018348,
-        "y": 512.8070336391438
-      }
-    }
-  }, {
-    "v": "b",
-    "value": {
-      "label": "node b",
-      "POI": [
-        "RDC Bat Ouest"
-      ],
-      "coord": {
-        "x": 394.246636085627,
-        "y": 348.5137614678899
-      }
-    }
-  }, {
-    "v": "c",
-    "value": {
-      "label": "node c",
-      "POI": [
-        "Intersection c"
-      ],
-      "coord": {
-        "x": 579.6860856269114,
-        "y": 196.02599388379207
-      }
-    }
-  }, {
-    "v": "d",
-    "value": {
-      "label": "node d",
-      "POI": [
-        "Parking prof"
-      ],
-      "beacon": {
-        "name": "Ice",
-        "UUID": "B9407F30-F5F8-466E-AFF9-25556B57FE6D",
-        "major": "31250",
-        "minor": "14836"
-      },
-      "coord": {
-        "x": 705.1142201834864,
-        "y": 100.59816513761476
-      }
-    }
-  }, {
-    "v": "e",
-    "value": {
-      "label": "node e",
-      "POI": [
-        "Foyer côté est"
-      ],
-      "coord": {
-        "x": 780.3689602446483,
-        "y": 181.269113149847
-      }
-    }
-  }, {
-    "v": "f",
-    "value": {
-      "label": "node f",
-      "POI": [
-        "Foyer côté ouest"
-      ],
-      "coord": {
-        "x": 658.8652905198775,
-        "y": 295.38899082568815
-      }
-    }
-  }, {
-    "v": "e2b82c33-5293-4692-a010-7c479f5bfb3a",
-    "value": {
-      "label": "node e2b82c33-5293-4692-a010-7c479f5bfb3a",
-      "POI": [
-        "LearningCenter"
-      ],
-      "coord": {
-        "x": 290.2025993883776,
-        "y": 620.894495412845
-      }
-    }
-  }, {
-    "v": "8f158ded-53d8-4df0-bf76-e105fe734dfa",
-    "value": {
-      "label": "node 8f158ded-53d8-4df0-bf76-e105fe734dfa",
-      "POI": [
-        "Haut escalier IUT"
-      ],
-      "beacon": {
-        "name": "Mint",
-        "UUID": "B9407F30-F5F8-466E-AFF9-25556B57FE6D",
-        "major": "14878",
-        "minor": "34184"
-      },
-      "coord": {
-        "x": 459.41483180427974,
-        "y": 57.18165137614801
-      }
-    }
-  }],
-  "edges": [{
-    "v": "a",
-    "w": "b",
-    "value": {
-      "label": "edge a->b",
-      "weight": 2
-    }
-  }, {
-    "v": "b",
-    "w": "a",
-    "value": {
-      "label": "edge b->a",
-      "weight": 2
-    }
-  }, {
-    "v": "b",
-    "w": "c",
-    "value": {
-      "label": "edge b->c",
-      "weight": 2
-    }
-  }, {
-    "v": "c",
-    "w": "b",
-    "value": {
-      "label": "edge c->b",
-      "weight": 2
-    }
-  }, {
-    "v": "c",
-    "w": "d",
-    "value": {
-      "label": "edge c->d",
-      "weight": 2
-    }
-  }, {
-    "v": "d",
-    "w": "c",
-    "value": {
-      "label": "edge d->c",
-      "weight": 2
-    }
-  }, {
-    "v": "d",
-    "w": "e",
-    "value": {
-      "label": "edge d->e",
-      "weight": 2
-    }
-  }, {
-    "v": "e",
-    "w": "d",
-    "value": {
-      "label": "edge e->d",
-      "weight": 2
-    }
-  }, {
-    "v": "e",
-    "w": "f",
-    "value": {
-      "label": "edge e->f",
-      "weight": 2
-    }
-  }, {
-    "v": "f",
-    "w": "e",
-    "value": {
-      "label": "edge f->e",
-      "weight": 2
-    }
-  }, {
-    "v": "c",
-    "w": "f",
-    "value": {
-      "label": "edge c->f",
-      "weight": 2
-    }
-  }, {
-    "v": "e2b82c33-5293-4692-a010-7c479f5bfb3a",
-    "w": "a",
-    "value": {
-      "label": "edge e2b82c33-5293-4692-a010-7c479f5bfb3a->a",
-      "weight": 2
-    }
-  }, {
-    "v": "c",
-    "w": "8f158ded-53d8-4df0-bf76-e105fe734dfa",
-    "value": {
-      "label": "edge c->8f158ded-53d8-4df0-bf76-e105fe734dfa",
-      "weight": 2
-    }
-  }],
-  "temp": {
-    "elements": {
-      "nodes": [{
-        "data": {
-          "id": "a",
-          "label": "newName",
-          "POI": [
-            "Bat forum"
-          ]
-        },
-        "position": {
+  "nodes": [
+    {
+      "v": "a",
+      "value": {
+        "label": "node a",
+        "POI": [
+          "Bat forum"
+        ],
+        "coord": {
           "x": 201.9206422018348,
           "y": 512.8070336391438
-        },
-        "group": "nodes",
-        "removed": false,
-        "selected": false,
-        "selectable": true,
-        "locked": false,
-        "grabbable": true,
-        "classes": ""
-      }, {
-        "data": {
-          "id": "b",
-          "POI": [
-            "RDC Bat Ouest"
-          ]
-        },
-        "position": {
+        }
+      }
+    },
+    {
+      "v": "b",
+      "value": {
+        "label": "node b",
+        "POI": [
+          "RDC Bat Ouest"
+        ],
+        "coord": {
           "x": 394.246636085627,
           "y": 348.5137614678899
-        },
-        "group": "nodes",
-        "removed": false,
-        "selected": false,
-        "selectable": true,
-        "locked": false,
-        "grabbable": true,
-        "classes": ""
-      }, {
-        "data": {
-          "id": "c",
-          "POI": [
-            "Intersection c"
-          ]
-        },
-        "position": {
+        }
+      }
+    },
+    {
+      "v": "c",
+      "value": {
+        "label": "node c",
+        "POI": [
+          "Intersection c"
+        ],
+        "coord": {
           "x": 579.6860856269114,
           "y": 196.02599388379207
+        }
+      }
+    },
+    {
+      "v": "d",
+      "value": {
+        "label": "node d",
+        "POI": [
+          "Parking prof"
+        ],
+        "beacon": {
+          "name": "Ice",
+          "UUID": "B9407F30-F5F8-466E-AFF9-25556B57FE6D",
+          "major": "31250",
+          "minor": "14836"
         },
-        "group": "nodes",
-        "removed": false,
-        "selected": false,
-        "selectable": true,
-        "locked": false,
-        "grabbable": true,
-        "classes": ""
-      }, {
-        "data": {
-          "id": "d",
-          "POI": [
-            "Parking prof"
-          ],
-          "beacon": {
-            "name": "Ice",
-            "UUID": "B9407F30-F5F8-466E-AFF9-25556B57FE6D",
-            "major": "31250",
-            "minor": "14836"
-          }
-        },
-        "position": {
+        "coord": {
           "x": 705.1142201834864,
           "y": 100.59816513761476
-        },
-        "group": "nodes",
-        "removed": false,
-        "selected": false,
-        "selectable": true,
-        "locked": false,
-        "grabbable": true,
-        "classes": ""
-      }, {
-        "data": {
-          "id": "e",
-          "POI": [
-            "Foyer côté est"
-          ]
-        },
-        "position": {
+        }
+      }
+    },
+    {
+      "v": "e",
+      "value": {
+        "label": "node e",
+        "POI": [
+          "Foyer côté est"
+        ],
+        "coord": {
           "x": 780.3689602446483,
           "y": 181.269113149847
-        },
-        "group": "nodes",
-        "removed": false,
-        "selected": false,
-        "selectable": true,
-        "locked": false,
-        "grabbable": true,
-        "classes": ""
-      }, {
-        "data": {
-          "id": "f",
-          "POI": [
-            "Foyer côté ouest"
-          ]
-        },
-        "position": {
+        }
+      }
+    },
+    {
+      "v": "f",
+      "value": {
+        "label": "node f",
+        "POI": [
+          "Foyer côté ouest"
+        ],
+        "coord": {
           "x": 658.8652905198775,
           "y": 295.38899082568815
-        },
-        "group": "nodes",
-        "removed": false,
-        "selected": false,
-        "selectable": true,
-        "locked": false,
-        "grabbable": true,
-        "classes": ""
-      }, {
-        "data": {
-          "group": "nodes",
-          "id": "e2b82c33-5293-4692-a010-7c479f5bfb3a",
-          "POI": [
-            "LearningCenter"
-          ]
-        },
-        "position": {
+        }
+      }
+    },
+    {
+      "v": "e2b82c33-5293-4692-a010-7c479f5bfb3a",
+      "value": {
+        "label": "node e2b82c33-5293-4692-a010-7c479f5bfb3a",
+        "POI": [
+          "LearningCenter"
+        ],
+        "coord": {
           "x": 290.2025993883776,
           "y": 620.894495412845
+        }
+      }
+    },
+    {
+      "v": "8f158ded-53d8-4df0-bf76-e105fe734dfa",
+      "value": {
+        "label": "node 8f158ded-53d8-4df0-bf76-e105fe734dfa",
+        "POI": [
+          "Haut escalier IUT"
+        ],
+        "beacon": {
+          "name": "Mint",
+          "UUID": "B9407F30-F5F8-466E-AFF9-25556B57FE6D",
+          "major": "14878",
+          "minor": "34184"
         },
-        "group": "nodes",
-        "removed": false,
-        "selected": false,
-        "selectable": true,
-        "locked": false,
-        "grabbable": true,
-        "classes": ""
-      }, {
-        "data": {
-          "group": "nodes",
-          "id": "8f158ded-53d8-4df0-bf76-e105fe734dfa",
-          "POI": [
-            "Haut escalier IUT"
-          ],
-          "beacon": {
-            "name": "Mint",
-            "UUID": "B9407F30-F5F8-466E-AFF9-25556B57FE6D",
-            "major": "14878",
-            "minor": "34184"
-          }
-        },
-        "position": {
+        "coord": {
           "x": 459.41483180427974,
           "y": 57.18165137614801
-        },
-        "group": "nodes",
-        "removed": false,
-        "selected": false,
-        "selectable": true,
-        "locked": false,
-        "grabbable": true,
-        "classes": ""
-      }],
-      "edges": [{
-        "data": {
-          "id": "ab",
-          "source": "a",
-          "target": "b"
-        },
-        "position": {},
-        "group": "edges",
-        "removed": false,
-        "selected": false,
-        "selectable": true,
-        "locked": false,
-        "grabbable": true,
-        "classes": ""
-      }, {
-        "data": {
-          "id": "ba",
-          "source": "b",
-          "target": "a"
-        },
-        "position": {},
-        "group": "edges",
-        "removed": false,
-        "selected": false,
-        "selectable": true,
-        "locked": false,
-        "grabbable": true,
-        "classes": ""
-      }, {
-        "data": {
-          "id": "bc",
-          "source": "b",
-          "target": "c"
-        },
-        "position": {},
-        "group": "edges",
-        "removed": false,
-        "selected": false,
-        "selectable": true,
-        "locked": false,
-        "grabbable": true,
-        "classes": ""
-      }, {
-        "data": {
-          "id": "cb",
-          "source": "c",
-          "target": "b"
-        },
-        "position": {},
-        "group": "edges",
-        "removed": false,
-        "selected": false,
-        "selectable": true,
-        "locked": false,
-        "grabbable": true,
-        "classes": ""
-      }, {
-        "data": {
-          "id": "cd",
-          "source": "c",
-          "target": "d"
-        },
-        "position": {},
-        "group": "edges",
-        "removed": false,
-        "selected": true,
-        "selectable": true,
-        "locked": false,
-        "grabbable": true,
-        "classes": ""
-      }, {
-        "data": {
-          "id": "dc",
-          "source": "d",
-          "target": "c"
-        },
-        "position": {},
-        "group": "edges",
-        "removed": false,
-        "selected": false,
-        "selectable": true,
-        "locked": false,
-        "grabbable": true,
-        "classes": ""
-      }, {
-        "data": {
-          "id": "de",
-          "source": "d",
-          "target": "e"
-        },
-        "position": {},
-        "group": "edges",
-        "removed": false,
-        "selected": false,
-        "selectable": true,
-        "locked": false,
-        "grabbable": true,
-        "classes": ""
-      }, {
-        "data": {
-          "id": "ed",
-          "source": "e",
-          "target": "d"
-        },
-        "position": {},
-        "group": "edges",
-        "removed": false,
-        "selected": false,
-        "selectable": true,
-        "locked": false,
-        "grabbable": true,
-        "classes": ""
-      }, {
-        "data": {
-          "id": "ef",
-          "source": "e",
-          "target": "f"
-        },
-        "position": {},
-        "group": "edges",
-        "removed": false,
-        "selected": false,
-        "selectable": true,
-        "locked": false,
-        "grabbable": true,
-        "classes": ""
-      }, {
-        "data": {
-          "id": "fe",
-          "source": "f",
-          "target": "e"
-        },
-        "position": {},
-        "group": "edges",
-        "removed": false,
-        "selected": false,
-        "selectable": true,
-        "locked": false,
-        "grabbable": true,
-        "classes": ""
-      }, {
-        "data": {
-          "source": "c",
-          "target": "f",
-          "id": "5daa9c51-62bf-4fa5-a797-97503c1ea346"
-        },
-        "position": {},
-        "group": "edges",
-        "removed": false,
-        "selected": false,
-        "selectable": true,
-        "locked": false,
-        "grabbable": true,
-        "classes": ""
-      }, {
-        "data": {
-          "source": "e2b82c33-5293-4692-a010-7c479f5bfb3a",
-          "target": "a",
-          "id": "6ba47b15-b9af-4d9e-be66-eee28de97060"
-        },
-        "position": {},
-        "group": "edges",
-        "removed": false,
-        "selected": false,
-        "selectable": true,
-        "locked": false,
-        "grabbable": true,
-        "classes": ""
-      }, {
-        "data": {
-          "source": "c",
-          "target": "8f158ded-53d8-4df0-bf76-e105fe734dfa",
-          "id": "4a1bd67f-ed50-46fd-84d3-3f87abb38dad"
-        },
-        "position": {},
-        "group": "edges",
-        "removed": false,
-        "selected": false,
-        "selectable": true,
-        "locked": false,
-        "grabbable": true,
-        "classes": ""
-      }]
+        }
+      }
+    }
+  ],
+  "edges": [
+    {
+      "v": "a",
+      "w": "b",
+      "value": {
+        "label": "edge a->b",
+        "weight": 2
+      }
     },
-    "style": [{
-      "selector": "node",
-      "style": {
-        "label": "data(POI)",
-        "background-color": "#ea981e",
-        "text-background-color": "white",
-        "text-background-shape": "roundrectangle",
-        "text-background-opacity": 1.0
+    {
+      "v": "b",
+      "w": "c",
+      "value": {
+        "label": "edge b->c",
+        "weight": 2
       }
-    }, {
-      "selector": "edge",
-      "style": {
-        "target-arrow-shape": "triangle",
-        "line-color": "red"
+    },
+    {
+      "v": "c",
+      "w": "d",
+      "value": {
+        "label": "edge c->d",
+        "weight": 2
       }
-    }, {
-      "selector": ":selected",
-      "style": {}
-    }],
+    },
+    {
+      "v": "d",
+      "w": "c",
+      "value": {
+        "label": "edge d->c",
+        "weight": 2
+      }
+    },
+    {
+      "v": "e",
+      "w": "d",
+      "value": {
+        "label": "edge e->d",
+        "weight": 2
+      }
+    },
+    {
+      "v": "e",
+      "w": "f",
+      "value": {
+        "label": "edge e->f",
+        "weight": 2
+      }
+    },
+    {
+      "v": "c",
+      "w": "f",
+      "value": {
+        "label": "edge c->f",
+        "weight": 2
+      }
+    },
+    {
+      "v": "e2b82c33-5293-4692-a010-7c479f5bfb3a",
+      "w": "a",
+      "value": {
+        "label": "edge e2b82c33-5293-4692-a010-7c479f5bfb3a->a",
+        "weight": 2
+      }
+    },
+    {
+      "v": "c",
+      "w": "8f158ded-53d8-4df0-bf76-e105fe734dfa",
+      "value": {
+        "label": "edge c->8f158ded-53d8-4df0-bf76-e105fe734dfa",
+        "weight": 2
+      }
+    }
+  ],
+  "temp": {
+    "elements": {
+      "nodes": [
+        {
+          "data": {
+            "id": "a",
+            "label": "newName",
+            "POI": [
+              "Bat forum"
+            ]
+          },
+          "position": {
+            "x": 201.9206422018348,
+            "y": 512.8070336391438
+          },
+          "group": "nodes",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "classes": ""
+        },
+        {
+          "data": {
+            "id": "b",
+            "POI": [
+              "RDC Bat Ouest"
+            ]
+          },
+          "position": {
+            "x": 394.246636085627,
+            "y": 348.5137614678899
+          },
+          "group": "nodes",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "classes": ""
+        },
+        {
+          "data": {
+            "id": "c",
+            "POI": [
+              "Intersection c"
+            ]
+          },
+          "position": {
+            "x": 579.6860856269114,
+            "y": 196.02599388379207
+          },
+          "group": "nodes",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "classes": ""
+        },
+        {
+          "data": {
+            "id": "d",
+            "POI": [
+              "Parking prof"
+            ],
+            "beacon": {
+              "name": "Ice",
+              "UUID": "B9407F30-F5F8-466E-AFF9-25556B57FE6D",
+              "major": "31250",
+              "minor": "14836"
+            }
+          },
+          "position": {
+            "x": 705.1142201834864,
+            "y": 100.59816513761476
+          },
+          "group": "nodes",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "classes": ""
+        },
+        {
+          "data": {
+            "id": "e",
+            "POI": [
+              "Foyer côté est"
+            ]
+          },
+          "position": {
+            "x": 780.3689602446483,
+            "y": 181.269113149847
+          },
+          "group": "nodes",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "classes": ""
+        },
+        {
+          "data": {
+            "id": "f",
+            "POI": [
+              "Foyer côté ouest"
+            ]
+          },
+          "position": {
+            "x": 658.8652905198775,
+            "y": 295.38899082568815
+          },
+          "group": "nodes",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "classes": ""
+        },
+        {
+          "data": {
+            "group": "nodes",
+            "id": "e2b82c33-5293-4692-a010-7c479f5bfb3a",
+            "POI": [
+              "LearningCenter"
+            ]
+          },
+          "position": {
+            "x": 290.2025993883776,
+            "y": 620.894495412845
+          },
+          "group": "nodes",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "classes": ""
+        },
+        {
+          "data": {
+            "group": "nodes",
+            "id": "8f158ded-53d8-4df0-bf76-e105fe734dfa",
+            "POI": [
+              "Haut escalier IUT"
+            ],
+            "beacon": {
+              "name": "Mint",
+              "UUID": "B9407F30-F5F8-466E-AFF9-25556B57FE6D",
+              "major": "14878",
+              "minor": "34184"
+            }
+          },
+          "position": {
+            "x": 459.41483180427974,
+            "y": 57.18165137614801
+          },
+          "group": "nodes",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "classes": ""
+        }
+      ],
+      "edges": [
+        {
+          "data": {
+            "id": "ab",
+            "source": "a",
+            "target": "b"
+          },
+          "position": {},
+          "group": "edges",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "classes": ""
+        },
+        {
+          "data": {
+            "id": "bc",
+            "source": "b",
+            "target": "c"
+          },
+          "position": {},
+          "group": "edges",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "classes": ""
+        },
+        {
+          "data": {
+            "id": "cd",
+            "source": "c",
+            "target": "d"
+          },
+          "position": {},
+          "group": "edges",
+          "removed": false,
+          "selected": true,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "classes": ""
+        },
+        {
+          "data": {
+            "id": "de",
+            "source": "d",
+            "target": "e"
+          },
+          "position": {},
+          "group": "edges",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "classes": ""
+        },
+        {
+          "data": {
+            "id": "ef",
+            "source": "e",
+            "target": "f"
+          },
+          "position": {},
+          "group": "edges",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "classes": ""
+        },
+        {
+          "data": {
+            "source": "c",
+            "target": "f",
+            "id": "5daa9c51-62bf-4fa5-a797-97503c1ea346"
+          },
+          "position": {},
+          "group": "edges",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "classes": ""
+        },
+        {
+          "data": {
+            "source": "e2b82c33-5293-4692-a010-7c479f5bfb3a",
+            "target": "a",
+            "id": "6ba47b15-b9af-4d9e-be66-eee28de97060"
+          },
+          "position": {},
+          "group": "edges",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "classes": ""
+        },
+        {
+          "data": {
+            "source": "c",
+            "target": "8f158ded-53d8-4df0-bf76-e105fe734dfa",
+            "id": "4a1bd67f-ed50-46fd-84d3-3f87abb38dad"
+          },
+          "position": {},
+          "group": "edges",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "classes": ""
+        }
+      ]
+    },
+    "style": [
+      {
+        "selector": "node",
+        "style": {
+          "label": "data(POI)",
+          "background-color": "#ea981e",
+          "text-background-color": "white",
+          "text-background-shape": "roundrectangle",
+          "text-background-opacity": 1.0
+        }
+      },
+      {
+        "selector": "edge",
+        "style": {
+          "target-arrow-shape": "triangle",
+          "line-color": "red"
+        }
+      },
+      {
+        "selector": ":selected",
+        "style": {}
+      }
+    ],
     "zoomingEnabled": true,
     "userZoomingEnabled": true,
     "zoom": 1.016474976686354,
@@ -586,15 +529,18 @@
       "name": "canvas"
     }
   },
-  "beacons": [{
-    "name": "Mint",
-    "UUID": "B9407F30-F5F8-466E-AFF9-25556B57FE6D",
-    "major": "14878",
-    "minor": "34184"
-  }, {
-    "name": "Ice",
-    "UUID": "B9407F30-F5F8-466E-AFF9-25556B57FE6D",
-    "major": "31250",
-    "minor": "14836"
-  }]
+  "beacons": [
+    {
+      "name": "Mint",
+      "UUID": "B9407F30-F5F8-466E-AFF9-25556B57FE6D",
+      "major": "14878",
+      "minor": "34184"
+    },
+    {
+      "name": "Ice",
+      "UUID": "B9407F30-F5F8-466E-AFF9-25556B57FE6D",
+      "major": "31250",
+      "minor": "14836"
+    }
+  ]
 }

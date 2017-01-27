@@ -15,7 +15,6 @@ L'utilisateur devant passer par ce chemin, l'application recoit une notification
 
 BUGS:
 - 
-- les noeuds chelou avec distance Infinity
 - le service qui doit redemander un chemin
 - application plante quand on ferme
 - pas possible de redemander un chemin
