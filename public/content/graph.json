@@ -148,14 +148,6 @@
       }
     },
     {
-      "v": "d",
-      "w": "c",
-      "value": {
-        "label": "edge d->c",
-        "weight": 2
-      }
-    },
-    {
       "v": "e",
       "w": "d",
       "value": {
@@ -528,19 +520,5 @@
     "renderer": {
       "name": "canvas"
     }
-  },
-  "beacons": [
-    {
-      "name": "Mint",
-      "UUID": "B9407F30-F5F8-466E-AFF9-25556B57FE6D",
-      "major": "14878",
-      "minor": "34184"
-    },
-    {
-      "name": "Ice",
-      "UUID": "B9407F30-F5F8-466E-AFF9-25556B57FE6D",
-      "major": "31250",
-      "minor": "14836"
-    }
-  ]
+  }
 }

@@ -1,6 +1,6 @@
 {
   "options": {
-    "directed": true,
+    "directed": false,
     "multigraph": false,
     "compound": false
   },
@@ -13,14 +13,8 @@
           "Bat forum"
         ],
         "coord": {
-          "x": 180.2772171253822,
-          "y": 508.87186544342507
-        },
-        "beacon": {
-          "name": "premier beacon",
-          "UUID": "dfhbdfhdudfdssf",
-          "major": "premier major",
-          "minor": "premier minor"
+          "x": 201.9206422018348,
+          "y": 512.8070336391438
         }
       }
     },
@@ -32,8 +26,8 @@
           "RDC Bat Ouest"
         ],
         "coord": {
-          "x": 343.08944954128447,
-          "y": 385.89785932721713
+          "x": 394.246636085627,
+          "y": 348.5137614678899
         }
       }
     },
@@ -45,8 +39,8 @@
           "Intersection c"
         ],
         "coord": {
-          "x": 491.1448012232416,
-          "y": 262.9238532110092
+          "x": 579.6860856269114,
+          "y": 196.02599388379207
         }
       }
     },
@@ -57,9 +51,15 @@
         "POI": [
           "Parking prof"
         ],
+        "beacon": {
+          "name": "Ice",
+          "UUID": "B9407F30-F5F8-466E-AFF9-25556B57FE6D",
+          "major": "31250",
+          "minor": "14836"
+        },
         "coord": {
-          "x": 579.1888379204894,
-          "y": 183.23669724770647
+          "x": 705.1142201834864,
+          "y": 100.59816513761476
         }
       }
     },
@@ -71,8 +71,8 @@
           "Foyer côté est"
         ],
         "coord": {
-          "x": 644.6056574923547,
-          "y": 254.0697247706421
+          "x": 780.3689602446483,
+          "y": 181.269113149847
         }
       }
     },
@@ -84,8 +84,40 @@
           "Foyer côté ouest"
         ],
         "coord": {
-          "x": 551.6319571865442,
-          "y": 336.70825688073404
+          "x": 658.8652905198775,
+          "y": 295.38899082568815
+        }
+      }
+    },
+    {
+      "v": "e2b82c33-5293-4692-a010-7c479f5bfb3a",
+      "value": {
+        "label": "node e2b82c33-5293-4692-a010-7c479f5bfb3a",
+        "POI": [
+          "LearningCenter"
+        ],
+        "coord": {
+          "x": 290.2025993883776,
+          "y": 620.894495412845
+        }
+      }
+    },
+    {
+      "v": "8f158ded-53d8-4df0-bf76-e105fe734dfa",
+      "value": {
+        "label": "node 8f158ded-53d8-4df0-bf76-e105fe734dfa",
+        "POI": [
+          "Haut escalier IUT"
+        ],
+        "beacon": {
+          "name": "Mint",
+          "UUID": "B9407F30-F5F8-466E-AFF9-25556B57FE6D",
+          "major": "14878",
+          "minor": "34184"
+        },
+        "coord": {
+          "x": 459.41483180427974,
+          "y": 57.18165137614801
         }
       }
     }
@@ -101,14 +133,6 @@
     },
     {
       "v": "b",
-      "w": "a",
-      "value": {
-        "label": "edge b->a",
-        "weight": 2
-      }
-    },
-    {
-      "v": "b",
       "w": "c",
       "value": {
         "label": "edge b->c",
@@ -117,33 +141,9 @@
     },
     {
       "v": "c",
-      "w": "b",
-      "value": {
-        "label": "edge c->b",
-        "weight": 2
-      }
-    },
-    {
-      "v": "c",
       "w": "d",
       "value": {
         "label": "edge c->d",
-        "weight": 2
-      }
-    },
-    {
-      "v": "d",
-      "w": "c",
-      "value": {
-        "label": "edge d->c",
-        "weight": 2
-      }
-    },
-    {
-      "v": "d",
-      "w": "e",
-      "value": {
-        "label": "edge d->e",
         "weight": 2
       }
     },
@@ -164,355 +164,28 @@
       }
     },
     {
-      "v": "f",
-      "w": "e",
-      "value": {
-        "label": "edge f->e",
-        "weight": 2
-      }
-    },
-    {
       "v": "c",
       "w": "f",
       "value": {
         "label": "edge c->f",
         "weight": 2
       }
-    }
-  ],
-  "temp": {
-    "elements": {
-      "nodes": [
-        {
-          "data": {
-            "id": "a",
-            "label": "newName",
-            "POI": [
-              "Bat forum"
-            ]
-          },
-          "position": {
-            "x": 180.2772171253822,
-            "y": 508.87186544342507
-          },
-          "group": "nodes",
-          "removed": false,
-          "selected": false,
-          "selectable": true,
-          "locked": false,
-          "grabbable": true,
-          "classes": ""
-        },
-        {
-          "data": {
-            "id": "b",
-            "POI": [
-              "RDC Bat Ouest"
-            ]
-          },
-          "position": {
-            "x": 343.08944954128447,
-            "y": 385.89785932721713
-          },
-          "group": "nodes",
-          "removed": false,
-          "selected": false,
-          "selectable": true,
-          "locked": false,
-          "grabbable": true,
-          "classes": ""
-        },
-        {
-          "data": {
-            "id": "c",
-            "POI": [
-              "Intersection c"
-            ]
-          },
-          "position": {
-            "x": 491.1448012232416,
-            "y": 262.9238532110092
-          },
-          "group": "nodes",
-          "removed": false,
-          "selected": false,
-          "selectable": true,
-          "locked": false,
-          "grabbable": true,
-          "classes": ""
-        },
-        {
-          "data": {
-            "id": "d",
-            "POI": [
-              "Parking prof"
-            ]
-          },
-          "position": {
-            "x": 579.1888379204894,
-            "y": 183.23669724770647
-          },
-          "group": "nodes",
-          "removed": false,
-          "selected": false,
-          "selectable": true,
-          "locked": false,
-          "grabbable": true,
-          "classes": ""
-        },
-        {
-          "data": {
-            "id": "e",
-            "POI": [
-              "Foyer côté est"
-            ]
-          },
-          "position": {
-            "x": 644.6056574923547,
-            "y": 254.0697247706421
-          },
-          "group": "nodes",
-          "removed": false,
-          "selected": false,
-          "selectable": true,
-          "locked": false,
-          "grabbable": true,
-          "classes": ""
-        },
-        {
-          "data": {
-            "id": "f",
-            "POI": [
-              "Foyer côté ouest"
-            ]
-          },
-          "position": {
-            "x": 551.6319571865442,
-            "y": 336.70825688073404
-          },
-          "group": "nodes",
-          "removed": false,
-          "selected": false,
-          "selectable": true,
-          "locked": false,
-          "grabbable": true,
-          "classes": ""
-        }
-      ],
-      "edges": [
-        {
-          "data": {
-            "id": "ab",
-            "source": "a",
-            "target": "b"
-          },
-          "position": {},
-          "group": "edges",
-          "removed": false,
-          "selected": false,
-          "selectable": true,
-          "locked": false,
-          "grabbable": true,
-          "classes": ""
-        },
-        {
-          "data": {
-            "id": "ba",
-            "source": "b",
-            "target": "a"
-          },
-          "position": {},
-          "group": "edges",
-          "removed": false,
-          "selected": false,
-          "selectable": true,
-          "locked": false,
-          "grabbable": true,
-          "classes": ""
-        },
-        {
-          "data": {
-            "id": "bc",
-            "source": "b",
-            "target": "c"
-          },
-          "position": {},
-          "group": "edges",
-          "removed": false,
-          "selected": false,
-          "selectable": true,
-          "locked": false,
-          "grabbable": true,
-          "classes": ""
-        },
-        {
-          "data": {
-            "id": "cb",
-            "source": "c",
-            "target": "b"
-          },
-          "position": {},
-          "group": "edges",
-          "removed": false,
-          "selected": false,
-          "selectable": true,
-          "locked": false,
-          "grabbable": true,
-          "classes": ""
-        },
-        {
-          "data": {
-            "id": "cd",
-            "source": "c",
-            "target": "d"
-          },
-          "position": {},
-          "group": "edges",
-          "removed": false,
-          "selected": false,
-          "selectable": true,
-          "locked": false,
-          "grabbable": true,
-          "classes": ""
-        },
-        {
-          "data": {
-            "id": "dc",
-            "source": "d",
-            "target": "c"
-          },
-          "position": {},
-          "group": "edges",
-          "removed": false,
-          "selected": false,
-          "selectable": true,
-          "locked": false,
-          "grabbable": true,
-          "classes": ""
-        },
-        {
-          "data": {
-            "id": "de",
-            "source": "d",
-            "target": "e"
-          },
-          "position": {},
-          "group": "edges",
-          "removed": false,
-          "selected": false,
-          "selectable": true,
-          "locked": false,
-          "grabbable": true,
-          "classes": ""
-        },
-        {
-          "data": {
-            "id": "ed",
-            "source": "e",
-            "target": "d"
-          },
-          "position": {},
-          "group": "edges",
-          "removed": false,
-          "selected": false,
-          "selectable": true,
-          "locked": false,
-          "grabbable": true,
-          "classes": ""
-        },
-        {
-          "data": {
-            "id": "ef",
-            "source": "e",
-            "target": "f"
-          },
-          "position": {},
-          "group": "edges",
-          "removed": false,
-          "selected": false,
-          "selectable": true,
-          "locked": false,
-          "grabbable": true,
-          "classes": ""
-        },
-        {
-          "data": {
-            "id": "fe",
-            "source": "f",
-            "target": "e"
-          },
-          "position": {},
-          "group": "edges",
-          "removed": false,
-          "selected": false,
-          "selectable": true,
-          "locked": false,
-          "grabbable": true,
-          "classes": ""
-        },
-        {
-          "data": {
-            "source": "c",
-            "target": "f",
-            "id": "5daa9c51-62bf-4fa5-a797-97503c1ea346"
-          },
-          "position": {},
-          "group": "edges",
-          "removed": false,
-          "selected": false,
-          "selectable": true,
-          "locked": false,
-          "grabbable": true,
-          "classes": ""
-        }
-      ]
     },
-    "style": [
-      {
-        "selector": "node",
-        "style": {
-          "label": "data(POI)"
-        }
-      },
-      {
-        "selector": "edge",
-        "style": {
-          "target-arrow-shape": "triangle"
-        }
-      },
-      {
-        "selector": ":selected",
-        "style": {}
+    {
+      "v": "e2b82c33-5293-4692-a010-7c479f5bfb3a",
+      "w": "a",
+      "value": {
+        "label": "edge e2b82c33-5293-4692-a010-7c479f5bfb3a->a",
+        "weight": 2
       }
-    ],
-    "zoomingEnabled": true,
-    "userZoomingEnabled": true,
-    "zoom": 1.016474976686354,
-    "minZoom": 0,
-    "maxZoom": 1e+50,
-    "panningEnabled": true,
-    "userPanningEnabled": true,
-    "pan": {
-      "x": -68.98368044762044,
-      "y": -17.123717749457242
-    },
-    "boxSelectionEnabled": true,
-    "renderer": {
-      "name": "canvas"
-    }
-  },
-  "beacons": [
-    {
-      "name": "premier beacon",
-      "UUID": "dfhbdfhdudfdssf",
-      "major": "premier major",
-      "minor": "premier minor"
     },
     {
-      "name": "deux beacon",
-      "UUID": "zezazzezezezze",
-      "major": "deux major",
-      "minor": "deux minor"
+      "v": "c",
+      "w": "8f158ded-53d8-4df0-bf76-e105fe734dfa",
+      "value": {
+        "label": "edge c->8f158ded-53d8-4df0-bf76-e105fe734dfa",
+        "weight": 2
+      }
     }
   ]
 }
