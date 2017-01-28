@@ -69,7 +69,7 @@ module.exports = {
         var temp = {};
         temp.temp = newJson.temp;
 
-        database.updateGraphDocument(_graphe, function (result) {
+        database.updateGraphDocument(graphe, function (result) {
             database.updateTempDocument(temp, function (result) {
                 console.log("-------------------------");
                 gr = read(newJson);
