@@ -7,6 +7,7 @@ var io = require('socket.io')(server); // define our app using express
 var bodyParser = require("body-parser");   //json
 var graphManager = require("./graphManager.js");
 var fs = require('fs');
+var cors = require('cors');
 
 graphManager.constructGraph(function () {
     graphManager.constructPOIList();
@@ -84,6 +85,7 @@ app.all('/', function (req, res, next) {
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+app.use(cors());
 var port = process.env.PORT || 8080;
 
 // ROUTES FOR OUR API
