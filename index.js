@@ -79,13 +79,14 @@ io.on('connection', function (socket) {
 // this will let us get the data from a POST
 app.all('/', function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+      res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(cors());
+
 var port = process.env.PORT || 8080;
 
 // ROUTES FOR OUR API
