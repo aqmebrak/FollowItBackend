@@ -132,7 +132,7 @@ router.route('/updateGraph')
 
 router.route('/getAllBeacons')
     .get(function (req, res) {
-        console.log("updating Beacon List");
+        console.log("get Beacon List");
         graphManager.getAllBeacons(function (array) {
             res.send(array);
         });

@@ -62,10 +62,10 @@ module.exports = {
 
         console.log("updateGraphh");
         //console.log(newJson);
-        var _graphe = {}
-        _graphe.options = newJson.options;
-        _graphe.nodes = newJson.nodes;
-        _graphe.edges = newJson.edges;
+        graphe = {}
+        graphe.options = newJson.options;
+        graphe.nodes = newJson.nodes;
+        graphe.edges = newJson.edges;
         var temp = {};
         temp.temp = newJson.temp;
 
@@ -77,7 +77,9 @@ module.exports = {
                 generatePOI();
             });
         });
+        graphe.temp = temp.temp;
         console.log("-------------------------");
+        console.log(graphe);
         callback('done');
     },
 
