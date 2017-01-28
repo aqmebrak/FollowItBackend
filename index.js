@@ -30,9 +30,6 @@ io.on('connection', function (socket) {
         });
     });
 
-    /**
-     * POI LIST
-     */
     socket.on('getPOI', function () {
         console.log("SOCKET: getPOI");
 
@@ -44,11 +41,11 @@ io.on('connection', function (socket) {
         });
     });
 
-    socket.on('getBeaconArray', function () {
-        console.log("SOCKET: getBeaconArray");
+    socket.on('getAllBeacons', function () {
+        console.log("SOCKET: getAllBeacons");
 
         graphManager.getAllBeacons(function (array) {
-            socket.emit('beaconArray', {
+            socket.emit('beaconList', {
                 beaconArray: array
             });
         });
@@ -58,7 +55,7 @@ io.on('connection', function (socket) {
         console.log("SOCKET: getAllNodes: ");
 
         graphManager.getAllNodes(function (nodes) {
-            socket.emit('allNodes', {
+            socket.emit('nodeList', {
                 nodes: nodes
             });
         });
@@ -106,6 +103,9 @@ router.use(function (req, res, next) {
 router.route('/graph')
 // demande le chemin
 // (accessed at POST http://localhost:8080/api/path)
+    /**
+       DEMANDE CHEMIN
+     **/
     .post(function (req, res) {
         console.log("POST==>path");
         var map = graphManager.findPath(req.body.source, req.body.destination);

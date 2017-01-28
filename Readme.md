@@ -1,5 +1,24 @@
+API REST
+-------
+- POST ==> /graph == renvoie le chemin
+- GET ==> /graph == renvoie le graphe total
+- POST ==> /updateGraph == met à jour le graphe
+- GET ==> /getAllBeacons == renvoie la liste des beacons dispo
+- POST ==> /updateBeancons == met à jour la liste des beacons passés en parametre
+
+
+API SOCKETIO
+------------
+- askPath ==> emit('path')
+- getPOI ==> emit('POIList')
+- getAllBeancons ==> emit('beaconList')
+- getAllNodes ==> emit('nodeList')
+
+
+
+
 SCENARIO:
--
+--------
 Un utilisateur veut se rendre à un magasin le plus vite possible. 
 Le beacon à proximité le détecte, et lui propose un point de départ, mais il a le choix
 de rentrer son point de départ en sélectionnant un magasin à proximité de lui.
@@ -14,12 +33,12 @@ L'utilisateur devant passer par ce chemin, l'application recoit une notification
 L'utilisateur arrive à destination.
 
 MINIMAL:
--
+-------
 SANS POINT DE DEPART AUTO,
 SANS PARAMETRAGE PROFIL
 
 BUGS:
-- 
+-----
 - le service qui doit redemander un chemin
 - application plante quand on ferme
 - pas possible de redemander un chemin
@@ -27,22 +46,21 @@ BUGS:
 - CORS
 
 MONTRE:
-- 
+------
 - notifs quand chemin changé
 - tuiles persistantes
 - synchro données
 
 MOBILE:
-- 
+-------
 - changer automatique étape quand beacon rencontré
 
 WEB:
--
+-----
 - Editer un noeud
 
-
 BDD
--
+---
 Tables :
 
 |   Collection  | attribut | attribut      | attribut     |         |

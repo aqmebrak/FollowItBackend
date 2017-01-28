@@ -107,17 +107,16 @@ module.exports = {
             var collection = database.collection('Beacon');
             // Update document where a is 2, set b equal to 1
             collection.deleteMany({}, function (err, docs) {
-                for(var b in beanconArray) {
+                for (var b in beanconArray.beacons) {
                     console.log(b);
-                   /* collection.insertOne(b, function (err, result) {
+                    collection.insertOne(b, function (err, result) {
                         assert.equal(err, null);
                         callback(result);
-                    });*/
+                    });
                 }
             })
         });
     },
-
 
 
 };
