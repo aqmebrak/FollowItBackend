@@ -188,7 +188,6 @@ function constructNavigation(nodeArray) {
     }
 
     //generation des instructions
-
     //je parcours le tableau
     // du noeud n au noeud n+1, je regarde les coordonnées
 
@@ -240,17 +239,7 @@ function constructNavigation(nodeArray) {
         var aAngleDegr = aAngle / (Math.PI / 180);
         console.log("ANGLE DEGRE " + aAngleDegr);
 
-        //equation de droite
-        var coeffA = (intermY - depY) / (intermX - depX);
-        console.log("COEFF A : " + coeffA);
-        var coeffB = (intermY - coeffA * intermX);
-        console.log("COEFF B : " + coeffB);
-        var Ydroite = coeffA * arrX + coeffB;
-        console.log("YDROITE A : " + Ydroite)
-
-        var calcul = Ydroite - arrY;
-        console.log("CALCUL : " + calcul);
-
+        var prod = (v1.x * v2.y ) - ( v1.y * v2.x );
 
         if (aAngleDegr < 45) {
             console.log("haut");
@@ -258,33 +247,17 @@ function constructNavigation(nodeArray) {
         } else if (aAngleDegr > 135) {
             console.log("bas");
             nodeArray[i + 1].instruction = "A l'intersection, faites demi-tour";
+        } else if (prod < 0) {
+            console.log("gauche");
+            nodeArray[i + 1].instruction = "A l'intersection, tournez à gauche";
 
-        } else if (coeffA < 0) {
-            if (calcul > 0) {
-                console.log("gauche");
-                nodeArray[i + 1].instruction = "A l'intersection, tournez à gauche";
-
-            } else {
-                console.log("droite");
-                nodeArray[i + 1].instruction = "A l'intersection, tournez à droite";
-
-            }
         } else {
-            if (calcul > 0) {
-                console.log("droite");
-                nodeArray[i + 1].instruction = "A l'intersection, tournez à droite";
-
-            } else {
-                console.log("gauche");
-                nodeArray[i + 1].instruction = "A l'intersection, tournez à gauche";
-
-            }
+            console.log("droite");
+            nodeArray[i + 1].instruction = "A l'intersection, tournez à droite";
         }
-        //ETAPE 5: Si < 180 ==> gauche Sinon ==> droite
-        console.log("-----------------------\n");
-
     }
-    //console.log(nodeArray);
+
+//console.log(nodeArray);
     console.log("-----------------------\n");
 }
 
