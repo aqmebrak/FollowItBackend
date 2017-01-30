@@ -32,10 +32,11 @@ module.exports = {
             //on ajoute la partie Temp
             database.getTempDocument(function (result) {
                 graphe.temp = result[0].temp;
-                console.log(graphe);
+                console.log(JSON.stringify(graphe));
             });
             //on genere la graphe pour la LIB
             gr = read(json);
+            console.log(JSON.stringify(gr));
             callback(gr);
         });
     },
@@ -50,11 +51,14 @@ module.exports = {
 
     findPath: function (source, destination) {
         var map = alg.dijkstra(gr, source, weight);
+        console.log("MAP ==>");
         console.log(map);
+        console.log(gr.edge('a', 'b'));
+        console.log(gr.edge('b', 'a'));
         var nodeArray = findBestPath(map, source, destination);
         console.log("nodeArray");
         console.log(nodeArray);
-        nodeArray = constructNavigationZ(nodeArray);
+        nodeArray = constructNavigation(nodeArray);
         return nodeArray;
     },
 
@@ -115,7 +119,6 @@ var generatePOI = function () {
     POIList = [];
     for (var n in nodeList) {
         var label = gr.node(nodeList[n]);
-
         for (var i in label.POI) {
             POIList.push({poi: label.POI[i], node: nodeList[n]});
         }
@@ -168,67 +171,103 @@ function weight(e) {
 }
 
 
-/*function constructNavigation(nodeArray) {
- //construction de l'objet de base
- for (i in nodeArray) {
- nodeArray[i] = {node: "" + nodeArray[i], "POIList": gr.node(nodeArray[i])['POI'], "instruction": ""};
- //if le noeud a un beacon
- }
+function constructNavigation(nodeArray) {
+    //construction de l'objet de base
+    for (i in nodeArray) {
+        nodeArray[i] = {node: "" + nodeArray[i], "POIList": gr.node(nodeArray[i])['POI'], "instruction": ""};
+        //if le noeud a un beacon
+    }
 
- //generation des instructions
+    //generation des instructions
 
- //je parcours le tableau
- // du noeud n au noeud n+1, je regarde les coordonnées
+    //je parcours le tableau
+    // du noeud n au noeud n+1, je regarde les coordonnées
 
- for (var i = 0; i < nodeArray.length - 2; i++) {
+    for (var i = 0; i < nodeArray.length - 2; i++) {
 
- //ETAPE 1 : Je calcule les coord des vecteurs
- //  AB
- console.log("/////");
- console.log(gr.node(nodeArray[i].node));
- console.log(gr.node(nodeArray[i + 1].node));
- console.log(gr.node(nodeArray[i + 2].node));
- console.log("/////\n");
- var v1 = {
- x: gr.node(nodeArray[i + 1].node).coord.x - gr.node(nodeArray[i].node).coord.x,
- y: gr.node(nodeArray[i + 1].node).coord.y - gr.node(nodeArray[i].node).coord.y
- };
+        //ETAPE 1 : Je calcule les coord des vecteurs
+        //  AB
+        console.log("/////");
+        //console.log(gr.node(nodeArray[i].node));
+        //console.log(gr.node(nodeArray[i + 1].node));
+        //console.log(gr.node(nodeArray[i + 2].node));
+        console.log("/////\n");
 
- // BC
- var v2 = {
- x: gr.node(nodeArray[i + 2].node).coord.x - gr.node(nodeArray[i + 1].node).coord.x,
- y: gr.node(nodeArray[i + 2].node).coord.y - gr.node(nodeArray[i + 1].node).coord.y
- };
- console.log("/////");
- console.log(v1);
- console.log(v2);
- console.log("/////");
+        var depX = gr.node(nodeArray[i].node).coord.x;
+        var depY = gr.node(nodeArray[i].node).coord.y;
 
- //ETAPE 2: Je calcule ||v1|| et ||v2|| et v1*v2
- var produit_vecteur = (v1.x * v2.x ) + ( v1.y * v2.y );
- var norme_v1 = Math.sqrt((v1.x * v1.x) + (v1.y * v1.y));
- var norme_v2 = Math.sqrt((v2.x * v2.x) + (v2.y * v2.y));
+        var intermX = gr.node(nodeArray[i + 1].node).coord.x;
+        var intermY = gr.node(nodeArray[i + 1].node).coord.y;
 
- //ETAPE 3: Je calcule O = cos-1(||v1|| / ||v2||)
- var angle = Math.cos(produit_vecteur / (norme_v1 * norme_v2));
- console.log(Math.acos(angle));
- angle = Math.acos(angle);
- //ETAPE 4: 180 - resultat
- if (angle < Math.PI && angle > 0) {
- console.log("gauche");
- } else if (angle > -Math.PI && angle < 0) {
- console.log("droite");
- } else {
- console.log("ERROR CALCULATING ARCCOSINUS");
- return null;
- }
- //ETAPE 5: Si < 180 ==> gauche Sinon ==> droite
- console.log("-----------------------\n");
+        var arrX = gr.node(nodeArray[i + 2].node).coord.x;
+        var arrY = gr.node(nodeArray[i + 2].node).coord.y;
 
- }
- //console.log(nodeArray);
- console.log("-----------------------\n");
- }*/
+        var v1 = {
+            x: intermX - depX,
+            y: intermY - depY
+        };
+
+        // BC
+        var v2 = {
+            x: arrX - intermX,
+            y: arrY - intermY
+        };
+        console.log("/////");
+        console.log(v1);
+        console.log(v2);
+        console.log("/////");
+
+        //ETAPE 2: Je calcule ||v1|| et ||v2|| et v1*v2
+        var produit_vecteur = (v1.x * v2.x ) + ( v1.y * v2.y );
+        var norme_v1 = Math.sqrt((v1.x * v1.x) + (v1.y * v1.y));
+        var norme_v2 = Math.sqrt((v2.x * v2.x) + (v2.y * v2.y));
+
+        //ETAPE 3: Je calcule O = cos-1(||v1|| / ||v2||)
+        var angle = produit_vecteur / (norme_v1 * norme_v2);
+        console.log(angle);
+        var aAngle = Math.acos(angle);
+        console.log("ARCOS");
+        console.log(aAngle);
+        var aAngleDegr = aAngle / (Math.PI / 180);
+        console.log("ANGLE DEGRE " + aAngleDegr);
+
+        //equation de droite
+        var coeffA = (intermY - depY) / (intermX - depX);
+        console.log("COEFF A : " + coeffA);
+        var coeffB = (intermY - coeffA * intermX);
+        console.log("COEFF B : " + coeffB);
+        var Ydroite = coeffA * arrX + coeffB;
+        console.log("YDROITE A : " + Ydroite)
+
+        var calcul = Ydroite - arrY;
+        console.log("CALCUL : " + calcul);
+
+
+        if (aAngleDegr < 45) {
+            console.log("haut");
+        } else if (aAngleDegr > 135) {
+            console.log("bas");
+
+        } else if (coeffA < 0) {
+            if (calcul > 0) {
+                console.log("gauche");
+            } else {
+                console.log("droite");
+            }
+        } else {
+            if (calcul > 0) {
+                console.log("droite");
+            } else {
+                console.log("gauche");
+            }
+        }
+        //ETAPE 5: Si < 180 ==> gauche Sinon ==> droite
+        console.log("-----------------------\n");
+
+    }
+    //console.log(nodeArray);
+    console.log("-----------------------\n");
+}
 
 
 function constructNavigationZ(nodeArray) {

@@ -43,83 +43,6 @@
           "y": 196.02599388379207
         }
       }
-    },
-    {
-      "v": "d",
-      "value": {
-        "label": "node d",
-        "POI": [
-          "Parking prof"
-        ],
-        "beacon": {
-          "name": "Ice",
-          "UUID": "B9407F30-F5F8-466E-AFF9-25556B57FE6D",
-          "major": "31250",
-          "minor": "14836"
-        },
-        "coord": {
-          "x": 705.1142201834864,
-          "y": 100.59816513761476
-        }
-      }
-    },
-    {
-      "v": "e",
-      "value": {
-        "label": "node e",
-        "POI": [
-          "Foyer côté est"
-        ],
-        "coord": {
-          "x": 780.3689602446483,
-          "y": 181.269113149847
-        }
-      }
-    },
-    {
-      "v": "f",
-      "value": {
-        "label": "node f",
-        "POI": [
-          "Foyer côté ouest"
-        ],
-        "coord": {
-          "x": 658.8652905198775,
-          "y": 295.38899082568815
-        }
-      }
-    },
-    {
-      "v": "e2b82c33-5293-4692-a010-7c479f5bfb3a",
-      "value": {
-        "label": "node e2b82c33-5293-4692-a010-7c479f5bfb3a",
-        "POI": [
-          "LearningCenter"
-        ],
-        "coord": {
-          "x": 290.2025993883776,
-          "y": 620.894495412845
-        }
-      }
-    },
-    {
-      "v": "8f158ded-53d8-4df0-bf76-e105fe734dfa",
-      "value": {
-        "label": "node 8f158ded-53d8-4df0-bf76-e105fe734dfa",
-        "POI": [
-          "Haut escalier IUT"
-        ],
-        "beacon": {
-          "name": "Mint",
-          "UUID": "B9407F30-F5F8-466E-AFF9-25556B57FE6D",
-          "major": "14878",
-          "minor": "34184"
-        },
-        "coord": {
-          "x": 459.41483180427974,
-          "y": 57.18165137614801
-        }
-      }
     }
   ],
   "edges": [
@@ -144,46 +67,6 @@
       "w": "d",
       "value": {
         "label": "edge c->d",
-        "weight": 2
-      }
-    },
-    {
-      "v": "e",
-      "w": "d",
-      "value": {
-        "label": "edge e->d",
-        "weight": 2
-      }
-    },
-    {
-      "v": "e",
-      "w": "f",
-      "value": {
-        "label": "edge e->f",
-        "weight": 2
-      }
-    },
-    {
-      "v": "c",
-      "w": "f",
-      "value": {
-        "label": "edge c->f",
-        "weight": 2
-      }
-    },
-    {
-      "v": "e2b82c33-5293-4692-a010-7c479f5bfb3a",
-      "w": "a",
-      "value": {
-        "label": "edge e2b82c33-5293-4692-a010-7c479f5bfb3a->a",
-        "weight": 2
-      }
-    },
-    {
-      "v": "c",
-      "w": "8f158ded-53d8-4df0-bf76-e105fe734dfa",
-      "value": {
-        "label": "edge c->8f158ded-53d8-4df0-bf76-e105fe734dfa",
         "weight": 2
       }
     }
