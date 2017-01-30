@@ -174,8 +174,17 @@ function weight(e) {
 function constructNavigation(nodeArray) {
     //construction de l'objet de base
     for (i in nodeArray) {
-        nodeArray[i] = {node: "" + nodeArray[i], "POIList": gr.node(nodeArray[i])['POI'], "instruction": ""};
+        nodeArray[i] = {
+            node: "" + nodeArray[i],
+            POIList: gr.node(nodeArray[i]).POI,
+            instruction: ""
+        };
+        nodeArray[i].coord = {x: gr.node(nodeArray[i].node).coord.x, y: gr.node(nodeArray[i].node).coord.y};
         //if le noeud a un beacon
+        if (gr.node(nodeArray[i].node).hasOwnProperty("beacon")) {
+            console.log("true");
+            nodeArray[i].beacon = gr.node(nodeArray[i].node).beacon;
+        }
     }
 
     //generation des instructions
@@ -245,20 +254,30 @@ function constructNavigation(nodeArray) {
 
         if (aAngleDegr < 45) {
             console.log("haut");
+            nodeArray[i + 1].instruction = "A l'intersection, allez tout droit";
         } else if (aAngleDegr > 135) {
             console.log("bas");
+            nodeArray[i + 1].instruction = "A l'intersection, faites demi-tour";
 
         } else if (coeffA < 0) {
             if (calcul > 0) {
                 console.log("gauche");
+                nodeArray[i + 1].instruction = "A l'intersection, tournez à gauche";
+
             } else {
                 console.log("droite");
+                nodeArray[i + 1].instruction = "A l'intersection, tournez à droite";
+
             }
         } else {
             if (calcul > 0) {
                 console.log("droite");
+                nodeArray[i + 1].instruction = "A l'intersection, tournez à droite";
+
             } else {
                 console.log("gauche");
+                nodeArray[i + 1].instruction = "A l'intersection, tournez à gauche";
+
             }
         }
         //ETAPE 5: Si < 180 ==> gauche Sinon ==> droite
