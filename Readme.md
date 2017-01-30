@@ -42,8 +42,6 @@ BUGS:
 - le service qui doit redemander un chemin
 - application plante quand on ferme
 - pas possible de redemander un chemin
-- mettre offset pour determiner si cest tout droit ou pas 
-- CORS
 
 MONTRE:
 ------
