@@ -37,11 +37,8 @@ io.on('connection', function (socket) {
 	socket.on('getPOI', function () {
 		console.log("SOCKET: getPOI");
 
-		graphManager.getAllPOI(function (poi) {
-			console.log(poi);
-			socket.emit('POIList', {
-				poi: poi
-			});
+		socket.emit('POIList', {
+			poi: graphManager.getAllPOI()
 		});
 	});
 
@@ -183,9 +180,7 @@ router.route('/getAllNodes')
 router.route('/getAllPOI')
 	.get(function (req, res) {
 		console.log("get Nodes List");
-		graphManager.getAllPOI(function (poi) {
-			res.send(poi);
-		});
+		res.send(graphManager.getAllPOI());
 	});
 
 /**
