@@ -4,15 +4,16 @@ API REST
 - GET ==> /graph == renvoie le graphe total
 - POST ==> /updateGraph == met à jour le graphe
 - GET ==> /getAllBeacons == renvoie la liste des beacons dispo
+- GET ==> /getAllNodes == renvoie la liste des nodes
 - POST ==> /updateBeancons == met à jour la liste des beacons passés en parametre
 
 
 API SOCKETIO
 ------------
-- askPath ==> emit('path')
-- getPOI ==> emit('POIList')
-- getAllBeancons ==> emit('beaconList')
-- getAllNodes ==> emit('nodeList')
+- (client)askPath ==> (server)emit('path')
+- (client)getPOI ==> (server)emit('POIList')
+- (client)getAllBeancons ==> (server)emit('beaconList')
+- (client)getAllNodes ==> (server)emit('nodeList')
 
 
 
