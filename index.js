@@ -64,10 +64,8 @@ io.on('connection', function (socket) {
 	socket.on('getAllNodes', function () {
 		console.log("SOCKET: getAllNodes: ");
 
-		graphManager.getAllNodes(function (nodes) {
-			socket.emit('nodeList', {
-				nodes: nodes
-			});
+		socket.emit('nodeList', {
+			nodes: graphManager.getAllNodes()
 		});
 	});
 
@@ -176,9 +174,7 @@ router.route('/getAllBeacons')
 router.route('/getAllNodes')
 	.get(function (req, res) {
 		console.log("get Nodes List");
-		graphManager.getAllNodes(function (nodes) {
-			res.send(nodes);
-		});
+		res.send(graphManager.getAllNodes());
 	});
 
 /**
