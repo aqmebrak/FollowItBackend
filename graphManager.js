@@ -207,7 +207,7 @@ function constructNavigation(nodeArray) {
 
 		//ETAPE 1 : Je calcule les coord des vecteurs
 		//  AB
-		console.log("/////");
+		//console.log("/////");
 		//console.log(gr.node(nodeArray[i].node));
 		//console.log(gr.node(nodeArray[i + 1].node));
 		//console.log(gr.node(nodeArray[i + 2].node));
@@ -232,10 +232,10 @@ function constructNavigation(nodeArray) {
 			x: arrX - intermX,
 			y: arrY - intermY
 		};
-		console.log("/////");
-		console.log(v1);
-		console.log(v2);
-		console.log("/////");
+		//console.log("/////");
+		//console.log(v1);
+		//console.log(v2);
+		//console.log("/////");
 
 		//ETAPE 2: Je calcule ||v1|| et ||v2|| et v1*v2
 		var produit_vecteur = (v1.x * v2.x ) + ( v1.y * v2.y );
@@ -244,33 +244,35 @@ function constructNavigation(nodeArray) {
 
 		//ETAPE 3: Je calcule O = cos-1(||v1|| / ||v2||)
 		var angle = produit_vecteur / (norme_v1 * norme_v2);
-		console.log(angle);
+		//console.log(angle);
 		var aAngle = Math.acos(angle);
-		console.log("ARCOS");
-		console.log(aAngle);
+		//console.log("ARCOS");
+		//console.log(aAngle);
 		var aAngleDegr = aAngle / (Math.PI / 180);
 		console.log("ANGLE DEGRE " + aAngleDegr);
 
 		var prod = (v1.x * v2.y ) - ( v1.y * v2.x );
 
 		if (aAngleDegr < 45) {
-			console.log("haut");
+			//console.log("haut");
 			nodeArray[i + 1].instruction = "A l'intersection, allez tout droit";
 		} else if (aAngleDegr > 135) {
-			console.log("bas");
+			//console.log("bas");
 			nodeArray[i + 1].instruction = "A l'intersection, faites demi-tour";
 		} else if (prod < 0) {
-			console.log("gauche");
+			//console.log("gauche");
 			nodeArray[i + 1].instruction = "A l'intersection, tournez à gauche";
 
 		} else {
-			console.log("droite");
+			//console.log("droite");
 			nodeArray[i + 1].instruction = "A l'intersection, tournez à droite";
 		}
 	}
 
-//console.log(nodeArray);
+	//console.log(nodeArray);
 	console.log("-----------------------\n");
+	return nodeArray;
+
 }
 
 
