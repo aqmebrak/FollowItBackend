@@ -159,13 +159,36 @@ router.route('/updateGraph')
 	});
 
 /**
- * Recupere tous les Beacons existants
+ * Recupere tous les BEACONS existants
  **/
 router.route('/getAllBeacons')
 	.get(function (req, res) {
 		console.log("get Beacon List");
 		graphManager.getAllBeacons(function (array) {
 			res.send(array);
+		});
+	});
+
+
+/**
+ * Recupere tous les NODES existants
+ **/
+router.route('/getAllNodes')
+	.get(function (req, res) {
+		console.log("get Nodes List");
+		graphManager.getAllNodes(function (nodes) {
+			res.send(nodes);
+		});
+	});
+
+/**
+ * Recupere tous les POI existants
+ **/
+router.route('/getAllPOI')
+	.get(function (req, res) {
+		console.log("get Nodes List");
+		graphManager.getAllPOI(function (poi) {
+			res.send(poi);
 		});
 	});
 
