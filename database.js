@@ -5,9 +5,6 @@ var MongoClient = require('mongodb').MongoClient, assert = require('assert');
  - return temp json  ---OK---
  - write new graph json ---OK---
  - write new temp json ---OK---
- - return all nodes ---
- - return all POI ---
- - envoyer un nouveau Beacon ---
  */
 
 
@@ -64,7 +61,6 @@ module.exports = {
             assert.equal(null, err);
             // Get the documents collection
             var collection = database.collection('Temp');
-            // Update document where a is 2, set b equal to 1
             collection.deleteMany({}, function (err, docs) {
                 collection.insertOne(temp, function (err, result) {
                     assert.equal(err, null);
@@ -87,13 +83,13 @@ module.exports = {
         });
     },
 
-    getPromoDocuments: function (callback) {
+    getDiscountDocument: function (poi,callback) {
         MongoClient.connect(url, function (err, database) {
             assert.equal(null, err);
             // Get the documents collection
-            var collection = database.collection('Temp');
+            var collection = database.collection('Discount');
             // Find some documents
-            collection.find({}).toArray(function (err, docs) {
+            collection.find({poi: poi}).toArray(function (err, docs) {
                 assert.equal(err, null);
                 callback(docs);
             });
@@ -105,7 +101,6 @@ module.exports = {
             assert.equal(null, err);
             // Get the documents collection
             var collection = database.collection('Beacon');
-            // Update document where a is 2, set b equal to 1
             collection.deleteMany({}, function (err, docs) {
                 for (var b in beanconArray.beacons) {
                     collection.insertOne(beanconArray.beacons[b], function (err, result) {
@@ -116,6 +111,24 @@ module.exports = {
             })
         });
     },
+
+	populatePOIDocuments: function (POIList, callback) {
+		MongoClient.connect(url, function (err, database) {
+			assert.equal(null, err);
+			// Get the documents collection
+			var collection = database.collection('POI');
+			// On supprime tout
+			collection.deleteMany({}, function (err, docs) {
+				for (var b in POIList) {
+					console.log(POIList[b]);
+					collection.insertOne(POIList[b], function (err, result) {
+						assert.equal(err, null);
+					});
+				}
+				callback('done');
+			})
+		});
+	}
 
 
 };

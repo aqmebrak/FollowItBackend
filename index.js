@@ -10,7 +10,7 @@ var fs = require('fs');
 var cors = require('cors');
 
 graphManager.constructGraph(function () {
-    graphManager.constructPOIList();
+	graphManager.constructPOIList();
 });
 
 /****************
@@ -18,56 +18,79 @@ graphManager.constructGraph(function () {
  **************/
 
 io.on('connection', function (socket) {
-    console.log('A user is connected');
-    /**
-     * ASKING PATH
-     */
-    socket.on('askPath', function (json) {
-        console.log(json);
-        console.log("SOCKET==>path");
-        var map = graphManager.findPath(json.source, json.destination);
-        socket.emit('path', {
-            map: map
-        });
-    });
+	console.log('A user is connected');
+	/**
+	 * DEmande le chemin
+	 */
+	socket.on('askPath', function (json) {
+		console.log(json);
+		console.log("SOCKET==>path");
+		var map = graphManager.findPath(json.source, json.destination);
+		socket.emit('path', {
+			map: map
+		});
+	});
 
-    socket.on('getPOI', function () {
-        console.log("SOCKET: getPOI");
+	/**
+	 * Renvoie la liste des POints of interest du graphe
+	 */
+	socket.on('getPOI', function () {
+		console.log("SOCKET: getPOI");
 
-        graphManager.getAllPOI(function (poi) {
-            console.log(poi);
-            socket.emit('POIList', {
-                poi: poi
-            });
-        });
-    });
+		graphManager.getAllPOI(function (poi) {
+			console.log(poi);
+			socket.emit('POIList', {
+				poi: poi
+			});
+		});
+	});
 
-    socket.on('getAllBeacons', function () {
-        console.log("SOCKET: getAllBeacons");
+	/**
+	 * Renvoie tous les beacons
+	 */
+	socket.on('getAllBeacons', function () {
+		console.log("SOCKET: getAllBeacons");
 
-        graphManager.getAllBeacons(function (array) {
-            socket.emit('beaconList', {
-                beaconArray: array
-            });
-        });
-    });
+		graphManager.getAllBeacons(function (array) {
+			socket.emit('beaconList', {
+				beaconArray: array
+			});
+		});
+	});
 
-    socket.on('getAllNodes', function () {
-        console.log("SOCKET: getAllNodes: ");
+	/**
+	 * Renvoie tous les noeuds du graphe
+	 */
+	socket.on('getAllNodes', function () {
+		console.log("SOCKET: getAllNodes: ");
 
-        graphManager.getAllNodes(function (nodes) {
-            socket.emit('nodeList', {
-                nodes: nodes
-            });
-        });
-    });
+		graphManager.getAllNodes(function (nodes) {
+			socket.emit('nodeList', {
+				nodes: nodes
+			});
+		});
+	});
 
-    /**
-     * DISCONNECTING
-     */
-    socket.on('disconnect', function () {
-        console.log('A user disconnected');
-    });
+
+	/**
+	 * Renvoie la promotion du magasin associé
+	 */
+	socket.on('getPOIDiscount', function (poi) {
+		console.log("SOCKET: getPOIDiscount: ");
+
+		graphManager.getPOIDiscount(poi, function (discount) {
+			socket.emit('POIDiscount', {
+				discount: discount
+			});
+		});
+	});
+
+	/**
+	 * DISCONNECTING
+	 */
+	socket.on('disconnect', function () {
+		console.log('A user disconnected');
+	});
 });
 
 
@@ -78,9 +101,9 @@ io.on('connection', function (socket) {
 // configure app to use bodyParser()
 // this will let us get the data from a POST
 app.all('/', function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-      res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	next();
 });
 
 app.use(bodyParser.urlencoded({extended: true}));
@@ -95,68 +118,76 @@ var router = express.Router();
 
 // middleware to use for all requests
 router.use(function (req, res, next) {
-    // do logging
-    console.log('Something is happening.');
-    //console.log(req.body);
-    next();
+	// do logging
+	console.log('Something is happening.');
+	//console.log(req.body);
+	next();
 });
 
 
 // ----------------------------------------------------
 router.route('/graph')
-// demande le chemin
-// (accessed at POST http://localhost:8080/api/path)
-    /**
-       DEMANDE CHEMIN
-     **/
-    .post(function (req, res) {
-        console.log("POST==>path");
-        var map = graphManager.findPath(req.body.source, req.body.destination);
-        res.send(map);
-    })
 
-    /**
-     * Renvoie GRAPH
-     */
-    .get(function (req, res) {
-        console.log("REST: getGraph");
-        res.send(graphManager.getGraph());
-    });
+/**
+ DEMANDE CHEMIN
+ **/
+	.post(function (req, res) {
+		console.log("POST==>path");
+		var map = graphManager.findPath(req.body.source, req.body.destination);
+		res.send(map);
+	})
 
+	/**
+	 * Renvoie GRAPH
+	 */
+	.get(function (req, res) {
+		console.log("REST: getGraph");
+		res.send(graphManager.getGraph());
+	});
+
+/**
+ * Met a jour le graphe
+ */
 router.route('/updateGraph')
-    .post(function (req, res) {
-        console.log("updating Graph");
-        console.log(req.body);
-        graphManager.updateGraph(req.body, function (value) {
-            res.send(value);
-            broadcastToAll(req.body);
-        });
-    });
+	.post(function (req, res) {
+		console.log("updating Graph");
+		console.log(req.body);
+		graphManager.updateGraph(req.body, function (value) {
+			res.send(value);
+			broadcastToAll(req.body);
+		});
+	});
 
+/**
+ * Recupere tous les Beacons existants
+ **/
 router.route('/getAllBeacons')
-    .get(function (req, res) {
-        console.log("get Beacon List");
-        graphManager.getAllBeacons(function (array) {
-            res.send(array);
-        });
-    });
+	.get(function (req, res) {
+		console.log("get Beacon List");
+		graphManager.getAllBeacons(function (array) {
+			res.send(array);
+		});
+	});
 
+/**
+ * Met a jour les beacons
+ */
 router.route('/updateBeacons')
-    .post(function (req, res) {
-        console.log("updating Beacon List");
-        graphManager.updateBeaconList(req.body, function (value) {
-            res.send(value);
-        });
-    });
+	.post(function (req, res) {
+		console.log("updating Beacon List");
+		graphManager.updateBeaconList(req.body, function (value) {
+			res.send(value);
+		});
+	});
 
 /*******************
- * FUNCTIONS *******
+ * BROADCAST TO ALL USERS
  ******************/
 var broadcastToAll = function (graph) {
-    console.log("emitting notification: ");
-    console.log(graph);
-    console.log("---------------------\n");
-    io.sockets.emit('notif', graph);
+	console.log("emitting notification: ");
+	console.log(graph);
+	console.log("---------------------\n");
+	io.sockets.emit('notif', graph);
 };
 
 // Register our routes : all of our routes will be prefixed with /api
