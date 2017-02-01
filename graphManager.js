@@ -189,11 +189,11 @@ function constructNavigation(nodeArray) {
 		/**
 		 * add POI
 		 */
-		for( var i in gr.node(nodeArray[i].node).POI) {
+		for( var i in gr.node(nodeArray[i].node).poiID) {
 			console.log("construct poi")
-			console.log(gr.node(nodeArray[i].node).POI[i]);
-			database.getPOIDocument(gr.node(nodeArray[i].node).POI[i], function (list) {
-				nodeArray[i].POIList = list;
+			console.log(gr.node(nodeArray[i].node).poiID[i]);
+			database.getPOIDocument(gr.node(nodeArray[i].node).poiID[i], function (poiElement) {
+				nodeArray[i].POIList.push(poiElement);
 			});
 		}
 		console.log("---------- end poi")
@@ -204,9 +204,12 @@ function constructNavigation(nodeArray) {
 		 */
 		//if le noeud a un beacon
 		if (gr.node(nodeArray[i].node).hasOwnProperty("beacon")) {
-			database.getBeaconDocument(gr.node(nodeArray[i].node).beaconID, function (beacon) {
-				nodeArray[i].beacon = beacon;
-			});
+			for( var i in gr.node(nodeArray[i].node).beaconID) {
+
+				database.getBeaconDocument(gr.node(nodeArray[i].node).beaconID[i], function (beacon) {
+					nodeArray[i].beacon.push(beacon);
+				});
+			}
 			console.log("-------- end beacon");
 		}
 	}
