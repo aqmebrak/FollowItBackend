@@ -71,6 +71,19 @@ module.exports = {
         });
     },
 
+	getPOIDocuments: function (callback) {
+		MongoClient.connect(url, function (err, database) {
+			assert.equal(null, err);
+			// Get the documents collection
+			var collection = database.collection('POI');
+			// Find some documents
+			collection.find({}).toArray(function (err, docs) {
+				assert.equal(err, null);
+				callback(docs);
+			});
+		});
+	},
+
     /**
      * UPDATERS
      *

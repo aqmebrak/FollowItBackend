@@ -58,17 +58,18 @@ module.exports = {
 		return nodeArray;
 	},
 
-    getGraph: function () {
-        return graphe;
-    },
+	getGraph: function () {
+		return graphe;
+	},
 
-	getAllPOI: function () {
-		return POIList;
+	getAllPOI: function (callback) {
+		database.getPOIDocuments(function (result) {
+			callback(result);
+		})
 	},
 
 	//renvoie toute la liste des beacons
 	getAllBeacons: function (callback) {
-
 		database.getBeaconDocuments(function (result) {
 			callback(result);
 		})
@@ -79,42 +80,43 @@ module.exports = {
 		return graphe.nodes;
 	},
 
-    getPOIDiscount: function (poi, callback) {
-        database.getDiscountDocument(poi, function (discount) {
-            callback(discount);
-        })
-    },
+	getPOIDiscount: function (poi, callback) {
+		database.getDiscountDocument(poi, function (discount) {
+			callback(discount);
+		})
+	},
 
-    updatePOIList : function(poiList, callback){
-	  database.updatePOIDocuments(poiList,function (res) {
-          callback(res);
-      })
-    },
+	updatePOIList: function (poiList, callback) {
+		database.updatePOIDocuments(poiList, function (res) {
+			generatePOI();
+			callback(res);
+		})
+	},
 
-    updateGraph: function (newJson, callback) {
+	updateGraph: function (newJson, callback) {
 
-        console.log("updateGraphh");
-        //console.log(newJson);
-        graphe = {}
-        graphe.options = newJson.options;
-        graphe.nodes = newJson.nodes;
-        graphe.edges = newJson.edges;
-        var temp = {};
-        temp.temp = newJson.temp;
+		console.log("updateGraphh");
+		//console.log(newJson);
+		graphe = {}
+		graphe.options = newJson.options;
+		graphe.nodes = newJson.nodes;
+		graphe.edges = newJson.edges;
+		var temp = {};
+		temp.temp = newJson.temp;
 
-        database.updateGraphDocument(graphe, function (result) {
-            database.updateTempDocument(temp, function (result) {
-                console.log("-------------------------");
-                gr = read(newJson);
-                console.log("gr:");
-                generatePOI();
-            });
-        });
-        graphe.temp = temp.temp;
-        console.log("-------------------------");
-        console.log(graphe);
-        callback('done');
-    },
+		database.updateGraphDocument(graphe, function (result) {
+			database.updateTempDocument(temp, function (result) {
+				console.log("-------------------------");
+				gr = read(newJson);
+				console.log("gr:");
+				generatePOI();
+			});
+		});
+		graphe.temp = temp.temp;
+		console.log("-------------------------");
+		console.log(graphe);
+		callback('done');
+	},
 
 	updateBeaconList: function (beaconArray, callback) {
 		database.updateBeaconDocuments(beaconArray, function (result) {
@@ -126,23 +128,9 @@ module.exports = {
 
 
 var generatePOI = function () {
-	var nodeList = gr.nodes();
-	POIList = [];
-	for (var n in nodeList) {
-		var label = gr.node(nodeList[n]);
-		for (var i in label.POI) {
-			POIList.push({poi: label.POI[i], node: nodeList[n]});
-		}
-	}
-	console.log("POI")
-	//console.log(POIList);
-
-	/**
-	 * On envoie la liste de poi sur Mongodb ici car le plus à jour est dans le graphe json
-	 */
-	database.populatePOIDocuments(POIList, function (result) {
-		console.log(result);
-	});
+	database.getPOIDocuments(function (list) {
+		POIList = list
+	})
 };
 
 

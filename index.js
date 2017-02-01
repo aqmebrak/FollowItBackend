@@ -180,7 +180,9 @@ router.route('/getAllNodes')
 router.route('/getAllPOI')
 	.get(function (req, res) {
 		console.log("get Nodes List");
-		res.send(graphManager.getAllPOI());
+		graphManager.getAllPOI(function (list) {
+			res.send(list);
+		});
 	});
 
 /**
@@ -195,12 +197,12 @@ router.route('/updateBeacons')
 	});
 
 router.route('/updatePOIs')
-    .post(function (req, res) {
-        console.log("updating POI List");
-        graphManager.updatePOIList(req.body, function (value) {
-            res.send(value);
-        });
-    });
+	.post(function (req, res) {
+		console.log("updating POI List");
+		graphManager.updatePOIList(req.body, function (value) {
+			res.send(value);
+		});
+	});
 
 /*******************
  * BROADCAST TO ALL USERS
