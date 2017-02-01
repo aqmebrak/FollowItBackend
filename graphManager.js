@@ -41,10 +41,6 @@ module.exports = {
 		});
 	},
 
-	getGraph: function () {
-		return graphe;
-	},
-
 	constructPOIList: function () {
 		generatePOI();
 	},
@@ -62,30 +58,9 @@ module.exports = {
 		return nodeArray;
 	},
 
-	updateGraph: function (newJson, callback) {
-
-		console.log("updateGraphh");
-		//console.log(newJson);
-		graphe = {}
-		graphe.options = newJson.options;
-		graphe.nodes = newJson.nodes;
-		graphe.edges = newJson.edges;
-		var temp = {};
-		temp.temp = newJson.temp;
-
-		database.updateGraphDocument(graphe, function (result) {
-			database.updateTempDocument(temp, function (result) {
-				console.log("-------------------------");
-				gr = read(newJson);
-				console.log("gr:");
-				generatePOI();
-			});
-		});
-		graphe.temp = temp.temp;
-		console.log("-------------------------");
-		console.log(graphe);
-		callback('done');
-	},
+    getGraph: function () {
+        return graphe;
+    },
 
 	getAllPOI: function () {
 		return POIList;
@@ -104,16 +79,47 @@ module.exports = {
 		return graphe.nodes;
 	},
 
+    getPOIDiscount: function (poi, callback) {
+        database.getDiscountDocument(poi, function (discount) {
+            callback(discount);
+        })
+    },
+
+    updatePOIList : function(poiList, callback){
+	  database.updatePOIDocuments(poiList,function (res) {
+          callback(res);
+      })
+    },
+
+    updateGraph: function (newJson, callback) {
+
+        console.log("updateGraphh");
+        //console.log(newJson);
+        graphe = {}
+        graphe.options = newJson.options;
+        graphe.nodes = newJson.nodes;
+        graphe.edges = newJson.edges;
+        var temp = {};
+        temp.temp = newJson.temp;
+
+        database.updateGraphDocument(graphe, function (result) {
+            database.updateTempDocument(temp, function (result) {
+                console.log("-------------------------");
+                gr = read(newJson);
+                console.log("gr:");
+                generatePOI();
+            });
+        });
+        graphe.temp = temp.temp;
+        console.log("-------------------------");
+        console.log(graphe);
+        callback('done');
+    },
+
 	updateBeaconList: function (beaconArray, callback) {
 		database.updateBeaconDocuments(beaconArray, function (result) {
 			callback('done');
 		});
-	},
-
-	getPOIDiscount: function (poi, callback) {
-		database.getDiscountDocument(poi, function (discount) {
-			callback(discount);
-		})
 	}
 	//tODO: ajouter addPromo, qui supprimera la promo du magasin en question pour la remplacer pâr la nouvelle
 };

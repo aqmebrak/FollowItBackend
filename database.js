@@ -12,6 +12,11 @@ var MongoClient = require('mongodb').MongoClient, assert = require('assert');
 var url = 'mongodb://root:Catchouball06@ds135798.mlab.com:35798/followit';
 module.exports = {
 
+
+    /**
+     * GETTER
+     *
+     */
     //get Graph JSON
     getGraphDocument: function (callback) {
         MongoClient.connect(url, function (err, database) {
@@ -39,6 +44,37 @@ module.exports = {
             });
         });
     },
+
+    getBeaconDocuments: function (callback) {
+        MongoClient.connect(url, function (err, database) {
+            assert.equal(null, err);
+            // Get the documents collection
+            var collection = database.collection('Beacon');
+            // Find some documents
+            collection.find({}).toArray(function (err, docs) {
+                assert.equal(err, null);
+                callback(docs);
+            });
+        });
+    },
+
+    getDiscountDocument: function (poi,callback) {
+        MongoClient.connect(url, function (err, database) {
+            assert.equal(null, err);
+            // Get the documents collection
+            var collection = database.collection('Discount');
+            // Find some documents
+            collection.find({poi: poi}).toArray(function (err, docs) {
+                assert.equal(err, null);
+                callback(docs);
+            });
+        });
+    },
+
+    /**
+     * UPDATERS
+     *
+     */
 
     //update Graph
     updateGraphDocument: function (graph, callback) {
@@ -70,32 +106,6 @@ module.exports = {
         });
     },
 
-    getBeaconDocuments: function (callback) {
-        MongoClient.connect(url, function (err, database) {
-            assert.equal(null, err);
-            // Get the documents collection
-            var collection = database.collection('Beacon');
-            // Find some documents
-            collection.find({}).toArray(function (err, docs) {
-                assert.equal(err, null);
-                callback(docs);
-            });
-        });
-    },
-
-    getDiscountDocument: function (poi,callback) {
-        MongoClient.connect(url, function (err, database) {
-            assert.equal(null, err);
-            // Get the documents collection
-            var collection = database.collection('Discount');
-            // Find some documents
-            collection.find({poi: poi}).toArray(function (err, docs) {
-                assert.equal(err, null);
-                callback(docs);
-            });
-        });
-    },
-
     updateBeaconDocuments: function (beanconArray, callback) {
         MongoClient.connect(url, function (err, database) {
             assert.equal(null, err);
@@ -104,6 +114,22 @@ module.exports = {
             collection.deleteMany({}, function (err, docs) {
                 for (var b in beanconArray.beacons) {
                     collection.insertOne(beanconArray.beacons[b], function (err, result) {
+                        assert.equal(err, null);
+                    });
+                }
+                callback('done');
+            })
+        });
+    },
+
+    updatePOIDocuments: function (poiArray, callback) {
+        MongoClient.connect(url, function (err, database) {
+            assert.equal(null, err);
+            // Get the documents collection
+            var collection = database.collection('POI');
+            collection.deleteMany({}, function (err, docs) {
+                for (var p in poiArray.poi) {
+                    collection.insertOne(poiArray.poi[p], function (err, result) {
                         assert.equal(err, null);
                     });
                 }

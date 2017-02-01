@@ -194,6 +194,14 @@ router.route('/updateBeacons')
 		});
 	});
 
+router.route('/updatePOIs')
+    .post(function (req, res) {
+        console.log("updating Beacon List");
+        graphManager.updatePOIList(req.body, function (value) {
+            res.send(value);
+        });
+    });
+
 /*******************
  * BROADCAST TO ALL USERS
  ******************/
