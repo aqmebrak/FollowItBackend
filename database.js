@@ -123,14 +123,14 @@ module.exports = {
     },
 
     updatePOIDocuments: function (poiArray, callback) {
-        console.log("updatePOIDocuments" + poiArray);
+        console.log(poiArray.pois[0]);
         MongoClient.connect(url, function (err, database) {
             assert.equal(null, err);
             // Get the documents collection
             var collection = database.collection('POI');
             collection.deleteMany({}, function (err, docs) {
                 for (var p in poiArray.pois) {
-                    collection.insertOne(poiArray.poi[p], function (err, result) {
+                    collection.insertOne(poiArray.pois[p], function (err, result) {
                         assert.equal(err, null);
                     });
                 }
