@@ -182,21 +182,39 @@ function constructNavigation(nodeArray) {
 	for (i in nodeArray) {
 		nodeArray[i] = {
 			node: "" + nodeArray[i],
-			POIList: gr.node(nodeArray[i]).POI,
 			instruction: ""
 		};
 		nodeArray[i].coord = {x: gr.node(nodeArray[i].node).coord.x, y: gr.node(nodeArray[i].node).coord.y};
+
+		/**
+		 * add POI
+		 */
+		for( var i in gr.node(nodeArray[i].node).POI) {
+			console.log("construct poi")
+			console.log(gr.node(nodeArray[i].node).POI[i]);
+			database.getPOIDocument(gr.node(nodeArray[i].node).POI[i], function (list) {
+				nodeArray[i].POIList = list;
+			});
+		}
+		console.log("---------- end poi")
+
+
+		/**
+		 * Add Beacon
+		 */
 		//if le noeud a un beacon
 		if (gr.node(nodeArray[i].node).hasOwnProperty("beacon")) {
-			console.log("true");
-			nodeArray[i].beacon = gr.node(nodeArray[i].node).beacon;
+			database.getBeaconDocument(gr.node(nodeArray[i].node).beaconID, function (beacon) {
+				nodeArray[i].beacon = beacon;
+			});
+			console.log("-------- end beacon");
 		}
 	}
+
 
 	//generation des instructions
 	//je parcours le tableau
 	// du noeud n au noeud n+1, je regarde les coordonnées
-
 	for (var i = 0; i < nodeArray.length - 2; i++) {
 
 		//ETAPE 1 : Je calcule les coord des vecteurs
