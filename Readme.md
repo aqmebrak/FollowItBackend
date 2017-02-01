@@ -6,7 +6,7 @@ API REST
 - GET ==> /getAllBeacons == renvoie la liste des beacons dispo
 - GET ==> /getAllNodes == renvoie la liste des nodes
 - POST ==> /updateBeancons == met à jour la liste des beacons passés en parametre
-
+- GET ==> /getAllPOI == renvoie tous les points of interest du graphe
 
 API SOCKETIO
 ------------
