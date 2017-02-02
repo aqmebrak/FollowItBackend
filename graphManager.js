@@ -214,11 +214,12 @@ function constructPOINavigation(nodeArray, callback) {
 		 */
 		nodeArray[i].POIList = [];
 		asyncLoop(gr.node(item.node).poiID, function (itempoi, next) {
-			console.log("construct poi");
-			console.log(itempoi);
+			//console.log("construct poi");
+			//console.log(itempoi);
 			database.getPOIDocument(itempoi, function (poiElement) {
-				delete poiElement[0]._id
-				console.log(poiElement);
+				//console.log(poiElement);
+				delete poiElement[0]._id;
+				//console.log(poiElement);
 				nodeArray[i].POIList.push(poiElement[0]);
 				next();
 			});
@@ -296,21 +297,40 @@ function constructNavigation(nodeArray, callback) {
 		var prod = (v1.x * v2.y ) - ( v1.y * v2.x );
 
 		if (aAngleDegr < 45) {
-			//console.log("haut");
+			console.log("haut");
+			console.log(aAngleDegr);
 			nodeArray[i + 1].instruction = "A l'intersection, allez tout droit";
-			nodeArray[i + 1].orientation = "N";
+			nodeArray[i + 1].orientation = aAngleDegr;
 		} else if (aAngleDegr > 135) {
-			//console.log("bas");
+			console.log("bas");
+			console.log(aAngleDegr);
 			nodeArray[i + 1].instruction = "A l'intersection, faites demi-tour";
-			nodeArray[i + 1].orientation = "S";
+			nodeArray[i + 1].orientation = aAngleDegr;
 		} else if (prod < 0) {
-			//console.log("gauche");
+			console.log("gauche");
+			//quand cest à gauche l'angle est celui de l'autre coté, du coup 180 - aAngleDegr
 			nodeArray[i + 1].instruction = "A l'intersection, tournez à gauche";
-			nodeArray[i + 1].orientation = "O";
+			if ((180 - aAngleDegr) > 22 && (180 - aAngleDegr) < 67) {
+				nodeArray[i + 1].orientation = "NO";
+			} else if ((180 - aAngleDegr) > 112 && (180 - aAngleDegr) < 157) {
+
+				nodeArray[i + 1].orientation = "sO";
+			} else {
+				nodeArray[i + 1].orientation = "O";
+			}
 		} else {
-			//console.log("droite");
+			console.log("droite");
+			console.log(aAngleDegr);
 			nodeArray[i + 1].instruction = "A l'intersection, tournez à droite";
-			nodeArray[i + 1].orientation = "E";
+			if ((180 - aAngleDegr) > 22 && (180 - aAngleDegr) < 67) {
+				nodeArray[i + 1].orientation = "NE";
+			} else if ((180 - aAngleDegr) > 22 && (180 - aAngleDegr) < 67) {
+
+				nodeArray[i + 1].orientation = "SE";
+			} else {
+				nodeArray[i + 1].orientation = "E";
+
+			}
 		}
 	}
 
@@ -321,71 +341,71 @@ function constructNavigation(nodeArray, callback) {
 
 
 /*function constructNavigationZ(nodeArray) {
-	//construction de l'objet de base
-	for (i in nodeArray) {
-		nodeArray[i] = {
-			node: "" + nodeArray[i],
-			POIList: gr.node(nodeArray[i]).POI,
-			instruction: ""
-		};
-		nodeArray[i].coord = {x: gr.node(nodeArray[i].node).coord.x, y: gr.node(nodeArray[i].node).coord.y};
-		//if le noeud a un beacon
-		if (gr.node(nodeArray[i].node).hasOwnProperty("beacon")) {
-			console.log("true");
-			nodeArray[i].beacon = gr.node(nodeArray[i].node).beacon;
-		}
-	}
+ //construction de l'objet de base
+ for (i in nodeArray) {
+ nodeArray[i] = {
+ node: "" + nodeArray[i],
+ POIList: gr.node(nodeArray[i]).POI,
+ instruction: ""
+ };
+ nodeArray[i].coord = {x: gr.node(nodeArray[i].node).coord.x, y: gr.node(nodeArray[i].node).coord.y};
+ //if le noeud a un beacon
+ if (gr.node(nodeArray[i].node).hasOwnProperty("beacon")) {
+ console.log("true");
+ nodeArray[i].beacon = gr.node(nodeArray[i].node).beacon;
+ }
+ }
 
-	//generation des instructions
-	for (var i = 0; i < nodeArray.length - 2; i++) {
+ //generation des instructions
+ for (var i = 0; i < nodeArray.length - 2; i++) {
 
-		//ETAPE 1 : Je calcule les coord des vecteurs
-		//  AB
-		//console.log("/////");
-		// console.log(gr.node(nodeArray[i].node));
-		//console.log(gr.node(nodeArray[i + 1].node));
-		//console.log(gr.node(nodeArray[i + 2].node));
-		//console.log("/////\n");
-		var v1 = {
-			x: gr.node(nodeArray[i + 1].node).coord.x - gr.node(nodeArray[i].node).coord.x,
-			y: gr.node(nodeArray[i + 1].node).coord.y - gr.node(nodeArray[i].node).coord.y
-		};
+ //ETAPE 1 : Je calcule les coord des vecteurs
+ //  AB
+ //console.log("/////");
+ // console.log(gr.node(nodeArray[i].node));
+ //console.log(gr.node(nodeArray[i + 1].node));
+ //console.log(gr.node(nodeArray[i + 2].node));
+ //console.log("/////\n");
+ var v1 = {
+ x: gr.node(nodeArray[i + 1].node).coord.x - gr.node(nodeArray[i].node).coord.x,
+ y: gr.node(nodeArray[i + 1].node).coord.y - gr.node(nodeArray[i].node).coord.y
+ };
 
-		// BC
-		var v2 = {
-			x: gr.node(nodeArray[i + 2].node).coord.x - gr.node(nodeArray[i + 1].node).coord.x,
-			y: gr.node(nodeArray[i + 2].node).coord.y - gr.node(nodeArray[i + 1].node).coord.y
-		};
-		//console.log("/////");
-		//console.log(v1);
-		//console.log(v2);
-		//console.log("/////");
-
-
-		var norme_v1 = Math.sqrt((v1.x * v1.x) + (v1.y * v1.y));
-		var norme_v2 = Math.sqrt((v2.x * v2.x) + (v2.y * v2.y));
+ // BC
+ var v2 = {
+ x: gr.node(nodeArray[i + 2].node).coord.x - gr.node(nodeArray[i + 1].node).coord.x,
+ y: gr.node(nodeArray[i + 2].node).coord.y - gr.node(nodeArray[i + 1].node).coord.y
+ };
+ //console.log("/////");
+ //console.log(v1);
+ //console.log(v2);
+ //console.log("/////");
 
 
-		//ETAPE 2: Je calcule ||v1|| et ||v2|| et v1*v2
-		var prod = (v1.x * v2.y ) - ( v1.y * v2.x );
-		console.log(prod);
-		//ETAPE 4: 180 - resultat
-		if (prod < 0) {
-			console.log("gauche");
-			nodeArray[i + 1].instruction = "A l'intersection, tournez à gauche";
-		} else if (prod > 0) {
-			console.log("droite");
-			nodeArray[i + 1].instruction = "A l'intersection, tournez à droite";
-		} else {
-			console.log("TOUT DROIT");
-			nodeArray[i + 1].instruction = "A l'intersection, continuez tout droit";
+ var norme_v1 = Math.sqrt((v1.x * v1.x) + (v1.y * v1.y));
+ var norme_v2 = Math.sqrt((v2.x * v2.x) + (v2.y * v2.y));
 
-		}
-		//ETAPE 5: Si < 180 ==> gauche Sinon ==> droite
-		console.log("-----------------------\n");
 
-	}
-	console.log(nodeArray);
-	console.log("-----------------------\n");
-	return nodeArray;
-}*/
+ //ETAPE 2: Je calcule ||v1|| et ||v2|| et v1*v2
+ var prod = (v1.x * v2.y ) - ( v1.y * v2.x );
+ console.log(prod);
+ //ETAPE 4: 180 - resultat
+ if (prod < 0) {
+ console.log("gauche");
+ nodeArray[i + 1].instruction = "A l'intersection, tournez à gauche";
+ } else if (prod > 0) {
+ console.log("droite");
+ nodeArray[i + 1].instruction = "A l'intersection, tournez à droite";
+ } else {
+ console.log("TOUT DROIT");
+ nodeArray[i + 1].instruction = "A l'intersection, continuez tout droit";
+
+ }
+ //ETAPE 5: Si < 180 ==> gauche Sinon ==> droite
+ console.log("-----------------------\n");
+
+ }
+ console.log(nodeArray);
+ console.log("-----------------------\n");
+ return nodeArray;
+ }*/
