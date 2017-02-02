@@ -300,35 +300,35 @@ function constructNavigation(nodeArray, callback) {
 			console.log("haut");
 			console.log(aAngleDegr);
 			nodeArray[i + 1].instruction = "A l'intersection, allez tout droit";
-			nodeArray[i + 1].orientation = aAngleDegr;
+			nodeArray[i + 1].orientation = "NORTH";
 		} else if (aAngleDegr > 135) {
 			console.log("bas");
 			console.log(aAngleDegr);
 			nodeArray[i + 1].instruction = "A l'intersection, faites demi-tour";
-			nodeArray[i + 1].orientation = aAngleDegr;
+			nodeArray[i + 1].orientation = "SOUTH";
 		} else if (prod < 0) {
 			console.log("gauche");
 			//quand cest à gauche l'angle est celui de l'autre coté, du coup 180 - aAngleDegr
 			nodeArray[i + 1].instruction = "A l'intersection, tournez à gauche";
 			if ((180 - aAngleDegr) > 22 && (180 - aAngleDegr) < 67) {
-				nodeArray[i + 1].orientation = "NO";
+				nodeArray[i + 1].orientation = "NORTH_WEST";
 			} else if ((180 - aAngleDegr) > 112 && (180 - aAngleDegr) < 157) {
 
-				nodeArray[i + 1].orientation = "sO";
+				nodeArray[i + 1].orientation = "SOUTH_WEST";
 			} else {
-				nodeArray[i + 1].orientation = "O";
+				nodeArray[i + 1].orientation = "WEST";
 			}
 		} else {
 			console.log("droite");
 			console.log(aAngleDegr);
 			nodeArray[i + 1].instruction = "A l'intersection, tournez à droite";
 			if ((180 - aAngleDegr) > 22 && (180 - aAngleDegr) < 67) {
-				nodeArray[i + 1].orientation = "NE";
+				nodeArray[i + 1].orientation = "NORTH_EAST";
 			} else if ((180 - aAngleDegr) > 22 && (180 - aAngleDegr) < 67) {
 
-				nodeArray[i + 1].orientation = "SE";
+				nodeArray[i + 1].orientation = "SOUTH_EAST";
 			} else {
-				nodeArray[i + 1].orientation = "E";
+				nodeArray[i + 1].orientation = "EAST";
 
 			}
 		}
