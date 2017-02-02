@@ -38,10 +38,11 @@ io.on('connection', function (socket) {
 	 */
 	socket.on('getPOI', function () {
 		console.log("SOCKET: getPOI");
-
-		socket.emit('POIList', {
-			poi: graphManager.getAllPOI()
-		});
+		graphManager.getAllPOI(function (list) {
+			socket.emit('POIList', {
+				poi: list
+			});
+		})
 	});
 
 	/**
@@ -199,6 +200,9 @@ router.route('/updateBeacons')
 		});
 	});
 
+/**
+ * Mets à jour les POI
+ */
 router.route('/updatePOIs')
 	.post(function (req, res) {
 		console.log("updating POI List");
