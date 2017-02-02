@@ -25,10 +25,12 @@ io.on('connection', function (socket) {
 	socket.on('askPath', function (json) {
 		console.log(json);
 		console.log("SOCKET==>path");
-		var map = graphManager.findPath(json.source, json.destination);
-		socket.emit('path', {
-			map: map
+		graphManager.findPath(json.source, json.destination, function (map) {
+			socket.emit('path', {
+				map: map
+			});
 		});
+
 	});
 
 	/**
@@ -128,8 +130,9 @@ router.route('/graph')
  **/
 	.post(function (req, res) {
 		console.log("POST==>path");
-		var map = graphManager.findPath(req.body.source, req.body.destination);
-		res.send(map);
+		graphManager.findPath(req.body.source, req.body.destination, function (map) {
+			res.send(map);
+		});
 	})
 
 	/**

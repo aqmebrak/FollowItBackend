@@ -3,6 +3,7 @@ var write = require("graphlib").json.write;
 var read = require("graphlib").json.read;
 var alg = require("graphlib").alg;
 var fs = require('fs');
+var asyncLoop = require('node-async-loop');
 var database = require("./database.js");
 
 //GRAPH LIB OBJECT
@@ -45,17 +46,22 @@ module.exports = {
 		generatePOI();
 	},
 
-	findPath: function (source, destination) {
+	findPath: function (source, destination, callback) {
 		var map = alg.dijkstra(gr, source, weight);
 		console.log("MAP ==>");
 		console.log(map);
-		console.log(gr.edge('a', 'b'));
-		console.log(gr.edge('b', 'a'));
 		var nodeArray = findBestPath(map, source, destination);
-		console.log("nodeArray");
-		console.log(nodeArray);
-		nodeArray = constructNavigation(nodeArray);
-		return nodeArray;
+
+		constructNavigation(nodeArray, function (array) {
+			nodeArray = array
+			constructBeaconNavigation(nodeArray, function (array) {
+				nodeArray = array;
+				constructPOINavigation(nodeArray, function (array) {
+					nodeArray = array;
+					callback(nodeArray);
+				});
+			});
+		});
 	},
 
 	getGraph: function () {
@@ -112,6 +118,7 @@ module.exports = {
 				generatePOI();
 			});
 		});
+
 		graphe.temp = temp.temp;
 		console.log("-------------------------");
 		console.log(graphe);
@@ -176,8 +183,55 @@ function weight(e) {
 	return gr.edge(e).weight;
 }
 
+function constructBeaconNavigation(nodeArray, callback) {
+	/**
+	 * Add Beacon
+	 */
+	var index = 0;
+	asyncLoop(nodeArray, function (item, next) {
+		if (gr.node(item.node).hasOwnProperty("beaconID")) {
+			database.getBeaconDocument(gr.node(item.node).beaconID, function (beacon) {
+				delete beacon[0]._id;
+				nodeArray[index].beacon = beacon[0];
+				index++;
+				next();
+			});
+		} else {
+			index++;
+			next();
+		}
+	}, function (err) {
+		callback(nodeArray);
+	});
+}
 
-function constructNavigation(nodeArray) {
+function constructPOINavigation(nodeArray, callback) {
+
+	var i = 0;
+	asyncLoop(nodeArray, function (item, next) {
+		/**
+		 * add POI
+		 */
+		nodeArray[i].POIList = [];
+		asyncLoop(gr.node(item.node).poiID, function (itempoi, next) {
+			console.log("construct poi");
+			console.log(itempoi);
+			database.getPOIDocument(itempoi, function (poiElement) {
+				delete poiElement[0]._id
+				console.log(poiElement);
+				nodeArray[i].POIList.push(poiElement[0]);
+				next();
+			});
+		}, function () {
+			i++;
+			next();
+		});
+	}, function () {
+		callback(nodeArray);
+	});
+}
+
+function constructNavigation(nodeArray, callback) {
 	//construction de l'objet de base
 	for (i in nodeArray) {
 		nodeArray[i] = {
@@ -185,33 +239,6 @@ function constructNavigation(nodeArray) {
 			instruction: ""
 		};
 		nodeArray[i].coord = {x: gr.node(nodeArray[i].node).coord.x, y: gr.node(nodeArray[i].node).coord.y};
-
-		/**
-		 * add POI
-		 */
-		for( var i in gr.node(nodeArray[i].node).poiID) {
-			console.log("construct poi")
-			console.log(gr.node(nodeArray[i].node).poiID[i]);
-			database.getPOIDocument(gr.node(nodeArray[i].node).poiID[i], function (poiElement) {
-				nodeArray[i].POIList.push(poiElement);
-			});
-		}
-		console.log("---------- end poi")
-
-
-		/**
-		 * Add Beacon
-		 */
-		//if le noeud a un beacon
-		if (gr.node(nodeArray[i].node).hasOwnProperty("beacon")) {
-			for( var i in gr.node(nodeArray[i].node).beaconID) {
-
-				database.getBeaconDocument(gr.node(nodeArray[i].node).beaconID[i], function (beacon) {
-					nodeArray[i].beacon.push(beacon);
-				});
-			}
-			console.log("-------- end beacon");
-		}
 	}
 
 
@@ -226,7 +253,7 @@ function constructNavigation(nodeArray) {
 		//console.log(gr.node(nodeArray[i].node));
 		//console.log(gr.node(nodeArray[i + 1].node));
 		//console.log(gr.node(nodeArray[i + 2].node));
-		console.log("/////\n");
+		//console.log("/////\n");
 
 		var depX = gr.node(nodeArray[i].node).coord.x;
 		var depY = gr.node(nodeArray[i].node).coord.y;
@@ -264,34 +291,36 @@ function constructNavigation(nodeArray) {
 		//console.log("ARCOS");
 		//console.log(aAngle);
 		var aAngleDegr = aAngle / (Math.PI / 180);
-		console.log("ANGLE DEGRE " + aAngleDegr);
+		//console.log("ANGLE DEGRE " + aAngleDegr);
 
 		var prod = (v1.x * v2.y ) - ( v1.y * v2.x );
 
 		if (aAngleDegr < 45) {
 			//console.log("haut");
 			nodeArray[i + 1].instruction = "A l'intersection, allez tout droit";
+			nodeArray[i + 1].orientation = "N";
 		} else if (aAngleDegr > 135) {
 			//console.log("bas");
 			nodeArray[i + 1].instruction = "A l'intersection, faites demi-tour";
+			nodeArray[i + 1].orientation = "S";
 		} else if (prod < 0) {
 			//console.log("gauche");
 			nodeArray[i + 1].instruction = "A l'intersection, tournez à gauche";
-
+			nodeArray[i + 1].orientation = "O";
 		} else {
 			//console.log("droite");
 			nodeArray[i + 1].instruction = "A l'intersection, tournez à droite";
+			nodeArray[i + 1].orientation = "E";
 		}
 	}
 
 	//console.log(nodeArray);
 	console.log("-----------------------\n");
-	return nodeArray;
-
+	callback(nodeArray);
 }
 
 
-function constructNavigationZ(nodeArray) {
+/*function constructNavigationZ(nodeArray) {
 	//construction de l'objet de base
 	for (i in nodeArray) {
 		nodeArray[i] = {
@@ -359,4 +388,4 @@ function constructNavigationZ(nodeArray) {
 	console.log(nodeArray);
 	console.log("-----------------------\n");
 	return nodeArray;
-}
+}*/
