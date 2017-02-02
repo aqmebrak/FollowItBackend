@@ -220,7 +220,7 @@ function constructPOINavigation(nodeArray, callback) {
 				//console.log(poiElement);
 				delete poiElement[0]._id;
 				//console.log(poiElement);
-				nodeArray[i].POIList.push(poiElement[0]);
+				nodeArray[i].POIList.push(poiElement[0].poi);
 				next();
 			});
 		}, function () {
