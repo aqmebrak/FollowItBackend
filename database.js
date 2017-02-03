@@ -71,7 +71,7 @@ module.exports = {
 		});
 	},
 
-	getDiscountDocument: function (poi, callback) {
+	/*getDiscountDocument: function (poi, callback) {
 		MongoClient.connect(url, function (err, database) {
 			assert.equal(null, err);
 			// Get the documents collection
@@ -82,7 +82,7 @@ module.exports = {
 				callback(docs);
 			});
 		});
-	},
+	},*/
 
 	getPOIDocuments: function (callback) {
 		MongoClient.connect(url, function (err, database) {
