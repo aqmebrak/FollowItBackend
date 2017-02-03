@@ -183,7 +183,7 @@ router.route('/getAllNodes')
  **/
 router.route('/getAllPOI')
 	.get(function (req, res) {
-		console.log("get Nodes List");
+		console.log("get POI List");
 		graphManager.getAllPOI(function (list) {
 			res.send(list);
 		});
