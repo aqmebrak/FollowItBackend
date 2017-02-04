@@ -103,12 +103,6 @@ module.exports = {
         return graphe.nodes;
     },
 
-    getPOIDiscount: function (poi, callback) {
-        database.getDiscountDocument(poi, function (discount) {
-            callback(discount);
-        })
-    },
-
     updatePOIList: function (poiList, callback) {
         database.updatePOIDocuments(poiList, function (res) {
             generatePOI();
@@ -237,7 +231,7 @@ function constructPOINavigation(nodeArray, callback) {
                 //console.log(poiElement);
                 delete poiElement[0]._id;
                 //console.log(poiElement);
-                nodeArray[i].POIList.push(poiElement[0].poi);
+                nodeArray[i].POIList.push({ poi: poiElement[0].poi, discount: poiElement[0].discount});
                 next();
             });
         }, function () {

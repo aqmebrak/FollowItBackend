@@ -71,19 +71,6 @@ module.exports = {
 		});
 	},
 
-	/*getDiscountDocument: function (poi, callback) {
-		MongoClient.connect(url, function (err, database) {
-			assert.equal(null, err);
-			// Get the documents collection
-			var collection = database.collection('Discount');
-			// Find some documents
-			collection.find({poi: poi}).toArray(function (err, docs) {
-				assert.equal(err, null);
-				callback(docs);
-			});
-		});
-	},*/
-
 	getPOIDocuments: function (callback) {
 		MongoClient.connect(url, function (err, database) {
 			assert.equal(null, err);
