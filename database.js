@@ -149,7 +149,6 @@ module.exports = {
 	},
 
 	updatePOIDocuments: function (poiArray, callback) {
-		console.log(poiArray.pois[0]);
 		MongoClient.connect(url, function (err, database) {
 			assert.equal(null, err);
 			// Get the documents collection
