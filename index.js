@@ -38,7 +38,7 @@ io.on('connection', function (socket) {
 	 */
 	socket.on('getPOI', function () {
 		console.log("SOCKET: getPOI");
-		graphManager.getAllPOI(function (list) {
+		graphManager.getAllAvailablePOI(function (list) {
 			socket.emit('POIList', {
 				poi: list
 			});

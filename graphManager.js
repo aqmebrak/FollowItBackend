@@ -76,6 +76,29 @@ module.exports = {
 				for (var j in graphe.nodes) {
 					for (var k in graphe.nodes[j].value.poiID) {
 						if (!graphe.nodes[j].value.hasOwnProperty('poiID')) {
+							result.push(list[i]);
+							break;
+						} else if (graphe.nodes[j].value.poiID[k] == list[i].poiID) {
+							list[i].node = graphe.nodes[j].v;
+							result.push(list[i]);
+							break;
+						}
+					}
+				}
+			}
+			//console.log(result);
+			callback(result);
+		})
+	},
+
+	getAllAvailablePOI: function (callback) {
+		var result = [];
+		database.getPOIDocuments(function (list) {
+			//on ajoute les noeud pour chaque POI
+			for (var i in list) {
+				for (var j in graphe.nodes) {
+					for (var k in graphe.nodes[j].value.poiID) {
+						if (!graphe.nodes[j].value.hasOwnProperty('poiID')) {
 							delete list[i];
 							break;
 						} else if (graphe.nodes[j].value.poiID[k] == list[i].poiID) {
