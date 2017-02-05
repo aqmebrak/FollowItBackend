@@ -10,7 +10,6 @@ var fs = require('fs');
 var cors = require('cors');
 
 graphManager.constructGraph(function () {
-	graphManager.constructPOIList();
 });
 
 /****************
@@ -83,6 +82,7 @@ io.on('connection', function (socket) {
 		});
 	});
 
+
 	/**
 	 * DISCONNECTING
 	 */
@@ -103,9 +103,8 @@ app.all('/', function (req, res, next) {
 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	next();
 });
-
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '5mb'}));
+app.use(bodyParser.urlencoded({extended: true,limit: '5mb'}));
 app.use(cors());
 
 var port = process.env.PORT || 8080;
@@ -185,6 +184,17 @@ router.route('/getAllPOI')
 	.get(function (req, res) {
 		console.log("get POI List");
 		graphManager.getAllPOI(function (list) {
+			res.send(list);
+		});
+	});
+
+/**
+ * Recupere tous les POI disponibles (= sur un noeud)
+ **/
+router.route('/getAllAvailablePOI')
+	.get(function (req, res) {
+		console.log("get POI List");
+		graphManager.getAllAvailablePOI(function (list) {
 			res.send(list);
 		});
 	});

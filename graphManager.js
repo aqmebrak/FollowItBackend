@@ -42,10 +42,6 @@ module.exports = {
 		});
 	},
 
-	constructPOIList: function () {
-		generatePOI();
-	},
-
 	findPath: function (source, destination, callback) {
 		var map = alg.dijkstra(gr, source, weight);
 		console.log("MAP ==>");
@@ -155,12 +151,6 @@ module.exports = {
 };
 
 
-var generatePOI = function () {
-	database.getPOIDocuments(function (list) {
-		POIList = list
-	})
-};
-
 
 var findBestPath = function (map, source, destination) {
 
@@ -238,10 +228,11 @@ function constructPOINavigation(nodeArray, callback) {
 			//console.log("construct poi");
 			//console.log(itempoi);
 			database.getPOIDocument(itempoi, function (poiElement) {
-				//console.log(poiElement);
-				delete poiElement[0]._id;
-				//console.log(poiElement);
-				nodeArray[i].POIList.push({poi: poiElement[0].poi, discount: poiElement[0].discount});
+				console.log(poiElement);
+				if(poiElement.length != 0) {
+					delete poiElement[0]._id;
+					nodeArray[i].POIList.push({poi: poiElement[0].poi, discount: poiElement[0].discount});
+				}
 				next();
 			});
 		}, function () {
