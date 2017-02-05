@@ -131,7 +131,6 @@ module.exports = {
 				console.log("-------------------------");
 				gr = read(newJson);
 				console.log("gr:");
-				generatePOI();
 			});
 		});
 
