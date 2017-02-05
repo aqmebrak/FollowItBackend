@@ -111,7 +111,6 @@ module.exports = {
 
 	updatePOIList: function (poiList, callback) {
 		database.updatePOIDocuments(poiList, function (res) {
-			generatePOI();
 			callback(res);
 		})
 	},
