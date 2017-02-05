@@ -229,7 +229,7 @@ function constructPOINavigation(nodeArray, callback) {
 				console.log(poiElement);
 				if(poiElement.length != 0) {
 					delete poiElement[0]._id;
-					nodeArray[i].POIList.push({poi: poiElement[0].poi, discount: poiElement[0].discount});
+					nodeArray[i].POIList.push({poi: poiElement[0].poi, discount: poiElement[0].discount, image: poiElement[0].image});
 				}
 				next();
 			});
