@@ -44,20 +44,28 @@ module.exports = {
 
 	findPath: function (source, destination, callback) {
 		var map = alg.dijkstra(gr, source, weight);
-		console.log("MAP ==>");
-		console.log(map);
-		var nodeArray = findBestPath(map, source, destination);
+		//console.log("MAP ==>");
+		//console.log(map);
+		console.log(map[destination].distance);
+		if (map[destination].distance === Number.POSITIVE_INFINITY) {
+			console.log("no PATH found");
+			callback("");
+		} else {
+			var nodeArray = findBestPath(map, source, destination);
 
-		constructNavigation(nodeArray, function (array) {
-			nodeArray = array
-			constructBeaconNavigation(nodeArray, function (array) {
+			constructNavigation(nodeArray, function (array) {
 				nodeArray = array;
-				constructPOINavigation(nodeArray, function (array) {
+				constructBeaconNavigation(nodeArray, function (array) {
 					nodeArray = array;
-					callback(nodeArray);
+					constructPOINavigation(nodeArray, function (array) {
+						nodeArray = array;
+						callback(nodeArray);
+					});
 				});
 			});
-		});
+		}
+
+
 	},
 
 	getGraph: function () {
@@ -149,7 +157,6 @@ module.exports = {
 };
 
 
-
 var findBestPath = function (map, source, destination) {
 
 	//on prend le noeud darrivee et on reconstruit le chemin en prenant les predecesseurs successifs
@@ -226,8 +233,8 @@ function constructPOINavigation(nodeArray, callback) {
 			//console.log("construct poi");
 			//console.log(itempoi);
 			database.getPOIDocument(itempoi, function (poiElement) {
-				console.log(poiElement);
-				if(poiElement.length != 0) {
+				//console.log(poiElement);
+				if (poiElement.length != 0) {
 					delete poiElement[0]._id;
 					nodeArray[i].POIList.push({poi: poiElement[0].poi, discount: poiElement[0].discount, image: poiElement[0].image});
 				}
