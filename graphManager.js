@@ -108,6 +108,16 @@ module.exports = {
 	//renvoie toute la liste des beacons
 	getAllBeacons: function (callback) {
 		database.getBeaconDocuments(function (result) {
+			for (var j in graphe.nodes) {
+				if (graphe.nodes[j].value.hasOwnProperty('beaconID')) {
+					console.log("dans if");
+					for (var i in result) {
+						if (graphe.nodes[j].value.beaconID == result[i].beaconID) {
+							result[i].node = graphe.nodes[j].v;
+						}
+					}
+				}
+			}
 			callback(result);
 		})
 	},
