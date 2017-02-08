@@ -259,7 +259,7 @@ function constructNavigation(nodeArray, callback) {
 		nodeArray[i].coord = {x: gr.node(nodeArray[i].node).coord.x, y: gr.node(nodeArray[i].node).coord.y};
 
 		if (i == 0) {
-			nodeArray[i].instruction = "Déplacez vous vers le magasin le plus proche";
+			nodeArray[i].instruction = "Déplacez vous en direction de l'un des points ci-dessous:";
 		}
 		if (i == nodeArray.length - 1) {
 			nodeArray[i].instruction = "Vous êtes arrivé !";
