@@ -25,9 +25,13 @@ io.on('connection', function (socket) {
 		console.log(json);
 		console.log("SOCKET==>path");
 		graphManager.findPath(json.source, json.destination, function (map) {
-			socket.emit('path', {
-				map: map
-			});
+			if (map.hasOwnProperty('error')) {
+				socket.emit('path', map);
+			} else {
+				socket.emit('path', {
+					map: map
+				});
+			}
 		});
 
 	});
@@ -104,7 +108,7 @@ app.all('/', function (req, res, next) {
 	next();
 });
 app.use(bodyParser.json({limit: '5mb'}));
-app.use(bodyParser.urlencoded({extended: true,limit: '5mb'}));
+app.use(bodyParser.urlencoded({extended: true, limit: '5mb'}));
 app.use(cors());
 
 var port = process.env.PORT || 8080;
