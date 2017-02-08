@@ -49,7 +49,7 @@ module.exports = {
 		console.log(map[destination].distance);
 		if (map[destination].distance === Number.POSITIVE_INFINITY) {
 			console.log("no PATH found");
-			callback("");
+			callback({error: "no valid path could be found"});
 		} else {
 			var nodeArray = findBestPath(map, source, destination);
 
