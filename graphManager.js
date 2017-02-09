@@ -149,13 +149,14 @@ module.exports = {
 				console.log("-------------------------");
 				gr = read(newJson);
 				console.log("gr:");
+                graphe.temp = temp.temp;
+                console.log("-------------------------");
+                console.log(graphe);
+                callback('done');
 			});
 		});
 
-		graphe.temp = temp.temp;
-		console.log("-------------------------");
-		console.log(graphe);
-		callback('done');
+
 	},
 
 	updateBeaconList: function (beaconArray, callback) {
